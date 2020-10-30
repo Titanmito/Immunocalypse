@@ -6,5 +6,6 @@ public class Can_Move : MonoBehaviour {
 	public float move_speed = 2.5f;
 	public Vector3 spawn_point = new Vector3(-8.5f, 0.0f);
 	public Vector3 target;
+	public bool arrived = false;
 
 }

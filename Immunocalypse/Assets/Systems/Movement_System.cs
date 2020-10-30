@@ -26,16 +26,17 @@ public class Movement_System : FSystem {
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
 
-			if (cm.target.Equals(go.transform.position))
+			if (cm.target.Equals(go.transform.position)) 
 			{
 				go.transform.position = new Vector3(-20.0f, -20.0f);
-				GameObjectManager.unbind(go);
-				//Object.Destroy(go);
+				cm.arrived = true;
 
 			}
 			else
 			{
-				go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+				if (! cm.arrived) {
+					go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+				}
 			}
 		}
 	}
