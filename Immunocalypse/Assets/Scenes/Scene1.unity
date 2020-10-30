@@ -286,7 +286,7 @@ Transform:
   m_LocalScale: {x: 2.0246162, y: 1.6812578, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1119025656
 GameObject:
@@ -298,8 +298,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1119025658}
   - component: {fileID: 1119025657}
+  - component: {fileID: 1119025659}
   m_Layer: 0
-  m_Name: virus 1
+  m_Name: virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,12 +365,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119025656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.64, y: -0.57, z: 0}
+  m_LocalPosition: {x: -2.51, y: 3.95, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119025659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119025656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a52a6fbb6b19940ae7b800bf86abe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_speed: 2.5
+  spawn_point: {x: -8.5, y: 0, z: 0}
+  target: {x: 9, y: 0, z: 0}
 --- !u!1 &1513247932
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +397,7 @@ GameObject:
   - component: {fileID: 1513247935}
   - component: {fileID: 1513247934}
   - component: {fileID: 1513247933}
+  - component: {fileID: 1513247936}
   m_Layer: 0
   m_Name: Main_Loop
   m_TagString: Untagged
@@ -413,7 +430,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fixedUpdateSystemDescriptions: []
-  _updateSystemDescriptions: []
+  _updateSystemDescriptions:
+  - _typeAssemblyQualifiedName: Movement_System, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _typeFullName: Movement_System
+    _pause: 0
   _lateUpdateSystemDescriptions: []
   _forceUpdateInspector: 0
   _loadingState: 0
@@ -442,3 +463,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1513247936
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513247932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09035c6e84a55734cbb577b9b28f4d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
