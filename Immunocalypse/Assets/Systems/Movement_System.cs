@@ -26,7 +26,7 @@ public class Movement_System : FSystem {
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
 
-			if (cm.target.Equals(go.transform.position)) 
+			if (Vector3.Distance(cm.target, go.transform.position) < 0.1f)
 			{
 				go.transform.position = new Vector3(-20.0f, -20.0f);
 				cm.arrived = true;
