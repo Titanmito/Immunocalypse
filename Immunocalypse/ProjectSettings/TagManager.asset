@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Button
   - Tower_Macro
+  - Background
   layers:
   - Default
   - TransparentFX
