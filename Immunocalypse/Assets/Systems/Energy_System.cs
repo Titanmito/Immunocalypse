@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using FYFY;
 using System;
+using System.Collections;
 
 public class Energy_System : FSystem {
 	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
@@ -10,17 +12,21 @@ public class Energy_System : FSystem {
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"));
 	private Family _Macrophage = FamilyManager.getFamily(new AnyOfTags("Tower_Macro"));
+	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"));
 	private Family _Inactive = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT));
 
 	private Spawn spawn;
 	private Price price;
 	private Bank bank;
+	private Text energy_nb;
 
 	public Energy_System()
 	{
 		spawn = _Spawn.First().GetComponent<Spawn>();
 		price = _Macrophage.First().GetComponent<Price>();
 		bank = _Joueur.First().GetComponent<Bank>();
+		energy_nb = _Energy_nb.First().GetComponent<Text>();
+
 	}
 
 	// Used to control the button for the buying of Macrophage towers.
@@ -38,6 +44,9 @@ public class Energy_System : FSystem {
 
 			bank.energy -= price.energy_cost;
 			bank.used = true;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
 	}
 
@@ -64,9 +73,8 @@ public class Energy_System : FSystem {
 
 				bank.used = false;
 			}
-
-
         }
-
+		// Actualizes the energy display to the player.
+		energy_nb.text = "energy: " + bank.energy.ToString();
 	}
 }
