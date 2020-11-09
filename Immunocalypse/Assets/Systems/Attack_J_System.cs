@@ -2,6 +2,8 @@
 using FYFY;
 
 public class Attack_J_System : FSystem {
+	// This system manages the attack of enemies to the player. It actualizes the health of the Joueur entity by going thru each enemy and testing if it can attack or not.
+	// For each enemy that can attack it recalculates the health of the Joueur entity and marks the enemy as having attacked. 
 
 	private Family _AttackingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Attack_J), typeof(Can_Move), typeof(Has_Health)));
 
@@ -16,7 +18,6 @@ public class Attack_J_System : FSystem {
 		joueur = _Joueur.First();
 	}
 
-	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount)
 	{
 		foreach (GameObject go in _AttackingGO)

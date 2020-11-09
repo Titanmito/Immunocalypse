@@ -3,6 +3,10 @@ using FYFY;
 using System;
 
 public class Energy_System : FSystem {
+	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
+	// We use buttons to implement tower and special power buy.
+	// Special powers aren't implemented yet.
+
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"));
 	private Family _Macrophage = FamilyManager.getFamily(new AnyOfTags("Tower_Macro"));
@@ -19,6 +23,10 @@ public class Energy_System : FSystem {
 		bank = _Joueur.First().GetComponent<Bank>();
 	}
 
+	// Used to control the button for the buying of Macrophage towers.
+	// The idea is of having one function per button.
+	// A player can only buy a tower if the bank isn't used aka if there aren't any other tower waiting to be placed.
+	// The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
 	public void Macro_Button(int amount)
 	{
 		if (bank.energy >= price.energy_cost && !bank.used)
@@ -33,7 +41,6 @@ public class Energy_System : FSystem {
 		}
 	}
 
-	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		spawn.energy_prog += Time.deltaTime;
 
@@ -41,6 +48,8 @@ public class Energy_System : FSystem {
 		bank.energy += spawn.energy_sec * secs;
 		spawn.energy_prog -= secs;
 
+		// This part places the last tower bought and not placed, when the player clicks on the screen (in the position the player clicks).
+		// It reactivates the tower so that it's taken in consideration elsewhere. 
 		if (bank.used)
         {
 			if (Input.GetMouseButton(0) && _Inactive.First())

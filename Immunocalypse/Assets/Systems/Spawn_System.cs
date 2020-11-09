@@ -2,8 +2,9 @@
 using FYFY;
 
 public class Spawn_System : FSystem {
-	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
+	// This system manages the creation of new enemies.
 
+	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 	private Spawn spawn;
 
 	public Spawn_System()
@@ -17,6 +18,8 @@ public class Spawn_System : FSystem {
 
 		if (spawn.spawn_prog >= spawn.wait_time && spawn.nb_waves > 0)
 		{
+			// nb_enemies[0] -> virus
+			// nb_enemies[1] -> bacterie
 			for (int i = 0; i < spawn.nb_enemies[0]; i++)
             {
 				GameObject go = Object.Instantiate<GameObject>(spawn.virus_prefab);
