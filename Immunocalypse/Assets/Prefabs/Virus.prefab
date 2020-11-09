@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5016142956108054114}
   - component: {fileID: -1471192959495930137}
   m_Layer: 0
-  m_Name: Virus
+  m_Name: virus
   m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  max_health: 30
 --- !u!114 &8149925029586573217
 MonoBehaviour:
   m_ObjectHideFlags: 0
