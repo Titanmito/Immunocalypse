@@ -5,10 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
-  - Tower_Macro
   - Background
   - Health_Bar
   - Energy
+  - Anticorps
+  - Tower
   layers:
   - Default
   - TransparentFX

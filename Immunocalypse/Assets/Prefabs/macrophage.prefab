@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3657951906875850266}
   m_Layer: 0
   m_Name: macrophage
-  m_TagString: Tower_Macro
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080403286c79d09409431ea40b1a1085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
+  energy_cost: 50
 --- !u!114 &3657951906875850271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 4.1, y: 2.75}
+  m_Size: {x: 5, y: 3.75}
   m_Direction: 1
 --- !u!114 &3657951906875850266
 MonoBehaviour:

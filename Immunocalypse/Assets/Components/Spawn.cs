@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour {
 	// How many energy the player gains each second.
 	public int energy_sec = 1;
 
-	// How many second between each wave.
+	// How many seconds between each wave.
 	public float wait_time = 10f;
 	// How many seconds since the last wave.
 	public float spawn_prog = 8f;
@@ -25,5 +25,6 @@ public class Spawn : MonoBehaviour {
 	public GameObject virus_prefab;
 	public GameObject bacterie_prefab;
 	public GameObject macro_prefab;
+	public GameObject lymp_prefab;
 
 }

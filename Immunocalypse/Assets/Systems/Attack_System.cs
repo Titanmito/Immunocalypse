@@ -35,6 +35,13 @@ public class Attack_System : FSystem
 				{
 					target.GetComponent<Has_Health>().health -= ca.strength;
 					ca.last_attack = 0f;
+
+					// We want to put the anticorps health to zero if it has attacked so it's destroyed just after.
+					Has_Health health = go.GetComponent<Has_Health>();
+					if (health != null)
+                    {
+						health.health = -1;
+                    }
 				}
 			}
 

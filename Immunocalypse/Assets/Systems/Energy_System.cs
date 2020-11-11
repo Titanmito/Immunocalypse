@@ -11,22 +11,24 @@ public class Energy_System : FSystem {
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"));
-	private Family _Macrophage = FamilyManager.getFamily(new AnyOfTags("Tower_Macro"));
 	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"));
 	private Family _Inactive = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT));
 
 	private Spawn spawn;
-	private Price price;
 	private Bank bank;
 	private Text energy_nb;
+
+	private Price macro_price;
+	private Price lymp_price;
 
 	public Energy_System()
 	{
 		spawn = _Spawn.First().GetComponent<Spawn>();
-		price = _Macrophage.First().GetComponent<Price>();
 		bank = _Joueur.First().GetComponent<Bank>();
 		energy_nb = _Energy_nb.First().GetComponent<Text>();
 
+		macro_price = spawn.macro_prefab.GetComponent<Price>();
+		lymp_price = spawn.lymp_prefab.GetComponent<Price>();
 	}
 
 	// Used to control the button for the buying of Macrophage towers.
@@ -35,14 +37,31 @@ public class Energy_System : FSystem {
 	// The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
 	public void Macro_Button(int amount)
 	{
-		if (bank.energy >= price.energy_cost && !bank.used)
+		if (bank.energy >= macro_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_prefab);
 			go.transform.position = new Vector3(20.0f, 20.0f);
 			GameObjectManager.bind(go);
 			go.SetActive(false);
 
-			bank.energy -= price.energy_cost;
+			bank.energy -= macro_price.energy_cost;
+			bank.used = true;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
+		}
+	}
+
+	public void Lymp_Button(int amount)
+	{
+		if (bank.energy >= lymp_price.energy_cost && !bank.used)
+		{
+			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp_prefab);
+			go.transform.position = new Vector3(20.0f, 20.0f);
+			GameObjectManager.bind(go);
+			go.SetActive(false);
+
+			bank.energy -= lymp_price.energy_cost;
 			bank.used = true;
 
 			// Actualizes the energy display to the player.

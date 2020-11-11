@@ -1,17 +1,28 @@
 ﻿using UnityEngine;
 using FYFY;
+using FYFY_plugins.TriggerManager;
 
 public class Movement_System : FSystem {
 	// This system manages the movement of entities that can move. It also put each new entity that can move in their right spawn place when they are created. 
-	private Family _MovingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move)));
+	
+	// Enemies
+	private Family _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move)), new AnyOfTags("Respawn"));
+	// Allies 
+	private Family _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move)), new AnyOfTags("Tower"));
 
 	// Constructeur
 	public Movement_System()
 	{
-		foreach (GameObject go in _MovingGO)
+		foreach (GameObject go in _TargetGO)
+		{
 			onGOEnter(go);
-
-		_MovingGO.addEntryCallback(onGOEnter);
+		}
+		foreach (GameObject go in _TargetingGO)
+		{
+			onGOEnter(go);
+		}
+		_TargetGO.addEntryCallback(onGOEnter);
+		_TargetingGO.addEntryCallback(onGOEnter);
 	}
 
 	private void onGOEnter(GameObject go)
@@ -21,10 +32,28 @@ public class Movement_System : FSystem {
 
 	protected override void onProcess(int familiesUpdateCount)
 	{
-		foreach (GameObject go in _MovingGO)
+		// We recalculated where each ally that can move (now, only anticorps) should go.
+		foreach (GameObject go in _TargetingGO)
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
-			// If the entity has reached it's taret, we remove it from the visible screen.
+			float distance = 100000f;
+
+			foreach (GameObject target in _TargetGO)
+			{
+				if (Vector3.Distance(go.transform.position, target.transform.position) < distance)
+				{
+					cm.target = new Vector3(target.transform.position.x, target.transform.position.y);
+					distance = Vector3.Distance(go.transform.position, target.transform.position);
+				}
+			}
+		}
+
+		// Moving enemies
+		foreach (GameObject go in _TargetGO)
+		{
+			Can_Move cm = go.GetComponent<Can_Move>();
+
+			// If the entity has reached it's target and it's not an ally, we remove it from the visible screen.
 			if (Vector3.Distance(cm.target, go.transform.position) < 0.1f)
 			{
 				go.transform.position = new Vector3(-20.0f, -20.0f);
@@ -37,6 +66,12 @@ public class Movement_System : FSystem {
 				}
 			}
 		}
-	}
 
+		// Moving allies
+		foreach (GameObject go in _TargetingGO)
+		{
+			Can_Move cm = go.GetComponent<Can_Move>();
+			go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+		}
+	}
 }
