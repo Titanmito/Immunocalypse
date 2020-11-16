@@ -10,6 +10,7 @@ TagManager:
   - Energy
   - Anticorps
   - Tower
+  - Wave
   layers:
   - Default
   - TransparentFX
