@@ -132,8 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf87a5dc5231c044089f5835565f7223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wait_time: 10
-  spawn_prog: 10
+  lifespan: 8
 --- !u!114 &4454730478194372727
 MonoBehaviour:
   m_ObjectHideFlags: 0
