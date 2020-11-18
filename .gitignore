@@ -5,6 +5,13 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/Immunocalypse/[Ll]ibrary/
+/Immunocalypse/[Tt]emp/
+/Immunocalypse/[Oo]bj/
+/Immunocalypse/[Bb]uild/
+/Immunocalypse/[Bb]uilds/
+/Immunocalypse/[Ll]ogs/
+/Immunocalypse/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
