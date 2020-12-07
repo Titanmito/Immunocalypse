@@ -5,9 +5,9 @@ public class Destruction_System : FSystem {
 	// This system manages the destruction of enemies and ends the level if the Joueur has negative or equal to zero health.
 	// The part controling the end of the level is not yet implemented.
 
-	private Family _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"));
-	private Family _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health)), new AllOfComponents(typeof(Lifespan)));
-    private Family _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)));
+	private Family _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Attack_J), typeof(Create_Particles_After_Death)));
+	private Family _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health), typeof(Lifespan)));
+    private Family _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
     private float _DestroyParticlesProgress = 0.0f, _DestroyParticlesReload = 0.05f;
 
 	protected override void onProcess(int familiesUpdateCount)

@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: -5016142956108054114}
   - component: {fileID: -1471192959495930137}
   - component: {fileID: -1489260657317707301}
+  - component: {fileID: 5844678060163777598}
   m_Layer: 0
-  m_Name: Virus
+  m_Name: virus
   m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,3 +185,15 @@ MonoBehaviour:
   particles_number: 10
   particles_prefab: {fileID: 2979870392557784899, guid: de15f25674f921c449c452c4d818abd4, type: 3}
   explosion_force: 100
+--- !u!114 &5844678060163777598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149925029586573221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c7552b30ad6244f94a3392587310c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

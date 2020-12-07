@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3418025003341482243}
   - component: {fileID: 8123339955383295739}
   - component: {fileID: -2450777152108114012}
+  - component: {fileID: -7891707636753044654}
   m_Layer: 0
   m_Name: bacterie
   m_TagString: Respawn
@@ -184,3 +185,15 @@ MonoBehaviour:
   particles_number: 30
   particles_prefab: {fileID: 6828220705360723892, guid: d48ea79db4cfd404e89df47db404dbfe, type: 3}
   explosion_force: 100
+--- !u!114 &-7891707636753044654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961487623211551741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1d77e0484b86f418d72ba696b93561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

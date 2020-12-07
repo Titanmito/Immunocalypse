@@ -10,8 +10,9 @@ public class Spawn_System : FSystem {
 	// This system manages the creation of new enemies.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
-	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"));
-	private Family _Spawn_nb = FamilyManager.getFamily(new AnyOfTags("Wave"));
+	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Link_Prefab)));
+	private Family _Spawn_nb = FamilyManager.getFamily(new AnyOfTags("Wave"), new AllOfComponents(typeof(Text)));
+
 	private Spawn spawn;
 	private Text spawn_nb;
 
@@ -31,6 +32,7 @@ public class Spawn_System : FSystem {
 		// buttons must be named as *same start as the name of the respective prefab*_button.
 		foreach (GameObject button in _Buttons)
         {
+			/*
 			string name = button.name;
 			int index = name.IndexOf("_");
 			name = name.Substring(0, index + 1) + "prefab";
@@ -38,6 +40,9 @@ public class Spawn_System : FSystem {
 			GameObject fab = (GameObject)typeof(Spawn).GetField(name).GetValue(spawn);
 			Text t = button.transform.GetChild(0).GetComponent<Text>();
 			t.text = fab.GetComponent<Price>().energy_cost.ToString();
+			*/
+			Text t = button.transform.GetChild(0).GetComponent<Text>();
+			t.text = button.GetComponent<Link_Prefab>().prefab.GetComponent<Price>().energy_cost.ToString();
 		}
 	}
 

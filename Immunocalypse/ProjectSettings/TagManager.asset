@@ -12,6 +12,7 @@ TagManager:
   - Tower
   - Wave
   - Particle
+  - Special
   layers:
   - Default
   - TransparentFX

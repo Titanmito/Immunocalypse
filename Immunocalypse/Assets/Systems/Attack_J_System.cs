@@ -9,13 +9,11 @@ public class Attack_J_System : FSystem {
 	// For each enemy that can attack it recalculates the health of the Joueur entity and marks the enemy as having attacked. 
 
 	private Family _AttackingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Attack_J), typeof(Can_Move), typeof(Has_Health)));
-	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"));
-	private Family _HealthBar = FamilyManager.getFamily(new AnyOfTags("Health_Bar"));
+	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health)));
+	private Family _HealthBar = FamilyManager.getFamily(new AnyOfTags("Health_Bar"), new AllOfComponents(typeof(Slider)));
 
 	private GameObject joueur;
 	private Slider healthBar;
-
-	//joueur = GameObject.FindWithTag("Player");
 
 	public Attack_J_System()
 	{

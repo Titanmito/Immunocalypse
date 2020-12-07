@@ -6,9 +6,9 @@ public class Movement_System : FSystem {
 	// This system manages the movement of entities that can move. It also put each new entity that can move in their right spawn place when they are created. 
 	
 	// Enemies
-	private Family _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move)), new AnyOfTags("Respawn"));
+	private Family _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Attack_J)), new AnyOfTags("Respawn"));
 	// Allies 
-	private Family _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move)), new AnyOfTags("Tower"));
+	private Family _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
 
 	// Constructeur
 	public Movement_System()

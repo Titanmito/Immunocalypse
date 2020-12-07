@@ -27,4 +27,6 @@ public class Spawn : MonoBehaviour {
 	public GameObject macro_prefab;
 	public GameObject lymp_prefab;
 
+	public GameObject anti_prefab;
+
 }

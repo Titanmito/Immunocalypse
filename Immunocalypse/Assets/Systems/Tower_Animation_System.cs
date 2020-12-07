@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Tower_Animation_System : FSystem {
 
-    private Family _TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new NoneOfComponents(typeof(Lifespan)));
+    private Family _TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Price)), new NoneOfComponents(typeof(Lifespan)));
 
     public Tower_Animation_System()
     {

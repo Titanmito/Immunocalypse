@@ -10,11 +10,13 @@ public class Energy_System : FSystem {
 	// Special powers aren't implemented yet.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
-	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"));
-	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"));
+	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
 	private Family _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT), 
 		new AnyOfTags("Tower"));
-	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"));
+	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)));
+
+	private Family _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
 	private Spawn spawn;
 	private Bank bank;
@@ -22,6 +24,9 @@ public class Energy_System : FSystem {
 
 	private Price macro_price;
 	private Price lymp_price;
+	private Price anti_price;
+
+	private Efficiency anti_eff;
 
 	public Energy_System()
 	{
@@ -31,9 +36,13 @@ public class Energy_System : FSystem {
 
 		macro_price = spawn.macro_prefab.GetComponent<Price>();
 		lymp_price = spawn.lymp_prefab.GetComponent<Price>();
+		anti_price = spawn.anti_prefab.GetComponent<Price>();
+
+		anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
+
 	}
 
-	// Used to control the button for the buying of Macrophage towers.
+	// Used to control the button for buying of Macrophage towers.
 	// The idea is of having one function per button.
 	// A player can only buy a tower if the bank isn't used aka if there aren't any other tower waiting to be placed.
 	// The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
@@ -55,6 +64,7 @@ public class Energy_System : FSystem {
 		}
 	}
 
+	// Used to control the button for buying of Lymphocyte towers.
 	public void Lymp_Button(int amount)
 	{
 		if (bank.energy >= lymp_price.energy_cost && !bank.used)
@@ -71,6 +81,37 @@ public class Energy_System : FSystem {
 			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
 	}
+
+	public void Anti_Button(int amount)
+	{
+		if (bank.energy >= anti_price.energy_cost && !bank.used)
+		{
+			bank.energy -= anti_price.energy_cost;
+
+			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Bacterie)));
+			float pourcentage = anti_eff.nb_used / 10.0f;
+			
+			//Debug.Log("pourcentage = " + pourcentage);
+
+			foreach (GameObject go in _Respawn)
+			{
+				float nb = UnityEngine.Random.Range(0.0f, 1.0f);
+				
+				//Debug.Log("nb = " + nb);
+
+				if (nb <= 1 - pourcentage)
+				{
+					go.GetComponent<Has_Health>().health = -1;
+				}
+			}
+			anti_eff.nb_used += 1;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
+
+		}
+	}
+
 
 	protected override void onProcess(int familiesUpdateCount) {
 		spawn.energy_prog += Time.deltaTime;
@@ -101,7 +142,6 @@ public class Energy_System : FSystem {
 
 		// Enables and disables buttons according to their prices. 
 		foreach (GameObject b in _Buttons){
-			//Debug.Log(_Buttons.First().name);
 			Text t = b.transform.GetChild(0).GetComponent<Text>();
 			int value = int.Parse(t.text);
 			if (bank.energy >= value)
