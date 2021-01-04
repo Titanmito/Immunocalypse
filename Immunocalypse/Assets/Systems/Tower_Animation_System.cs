@@ -8,10 +8,28 @@ public class Tower_Animation_System : FSystem {
 
     public Tower_Animation_System()
     {
-		MainLoop.instance.StartCoroutine(animation_coroutine());
+        // this.Pause = true;
     }
 
-	private IEnumerator animation_coroutine()
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+
+        _TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Price)), new NoneOfComponents(typeof(Lifespan)));
+        MainLoop.instance.StartCoroutine(animation_coroutine());
+    }
+
+    private IEnumerator animation_coroutine()
     {
         Vector3 scaleChange = new Vector3(0.005f, 0.005f, 0.005f);
 

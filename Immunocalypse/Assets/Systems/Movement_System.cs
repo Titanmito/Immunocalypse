@@ -13,16 +13,7 @@ public class Movement_System : FSystem {
 	// Constructeur
 	public Movement_System()
 	{
-		foreach (GameObject go in _TargetGO)
-		{
-			onGOEnter(go);
-		}
-		foreach (GameObject go in _TargetingGO)
-		{
-			onGOEnter(go);
-		}
-		_TargetGO.addEntryCallback(onGOEnter);
-		_TargetingGO.addEntryCallback(onGOEnter);
+        // this.Pause = true;
 	}
 
 	private void onGOEnter(GameObject go)
@@ -30,7 +21,36 @@ public class Movement_System : FSystem {
 		go.transform.position = go.GetComponent<Can_Move>().spawn_point;
 	}
 
-	protected override void onProcess(int familiesUpdateCount)
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+
+        _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Attack_J)), new AnyOfTags("Respawn"));
+        _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
+
+        foreach (GameObject go in _TargetGO)
+        {
+            onGOEnter(go);
+        }
+        foreach (GameObject go in _TargetingGO)
+        {
+            onGOEnter(go);
+        }
+        _TargetGO.addEntryCallback(onGOEnter);
+        _TargetingGO.addEntryCallback(onGOEnter);
+    }
+
+    protected override void onProcess(int familiesUpdateCount)
 	{
 		// We recalculated where each ally that can move (now, only anticorps) should go.
 		foreach (GameObject go in _TargetingGO)

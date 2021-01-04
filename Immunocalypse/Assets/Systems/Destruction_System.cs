@@ -10,7 +10,30 @@ public class Destruction_System : FSystem {
     private Family _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
     private float _DestroyParticlesProgress = 0.0f, _DestroyParticlesReload = 0.05f;
 
-	protected override void onProcess(int familiesUpdateCount)
+    public Destruction_System()
+    {
+        // this.Pause = true;
+    }
+
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+        _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Attack_J), typeof(Create_Particles_After_Death)));
+        _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health), typeof(Lifespan)));
+        _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
+    }
+
+    protected override void onProcess(int familiesUpdateCount)
 	{
         _DestroyParticlesProgress += Time.deltaTime;
 		// destroy enemies that should be destroyed.

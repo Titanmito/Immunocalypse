@@ -20,19 +20,40 @@ public class Spawn_System : FSystem {
 
 	public Spawn_System()
 	{
-		spawn = _Spawn.First().GetComponent<Spawn>();
-		spawn_nb = _Spawn_nb.First().GetComponent<Text>();
+        // this.Pause = true;
+	}
 
-		// To facilitate the creation of enemies in onProcess.
-		// I couldn't find an automated way of creating this array.
-		enemies[0] = spawn.virus_prefab;
-		enemies[1] = spawn.bacterie_prefab;
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
 
-		// Puts the price of each tower and special power in their respective buttons.
-		// buttons must be named as *same start as the name of the respective prefab*_button.
-		foreach (GameObject button in _Buttons)
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
         {
-			/*
+            this.Pause = true;
+            return;
+        }
+
+        _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
+        _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Link_Prefab)));
+        _Spawn_nb = FamilyManager.getFamily(new AnyOfTags("Wave"), new AllOfComponents(typeof(Text)));
+
+        spawn = _Spawn.First().GetComponent<Spawn>();
+        spawn_nb = _Spawn_nb.First().GetComponent<Text>();
+
+        // To facilitate the creation of enemies in onProcess.
+        // I couldn't find an automated way of creating this array.
+        enemies[0] = spawn.virus_prefab;
+        enemies[1] = spawn.bacterie_prefab;
+
+        // Puts the price of each tower and special power in their respective buttons.
+        // buttons must be named as *same start as the name of the respective prefab*_button.
+        foreach (GameObject button in _Buttons)
+        {
+            /*
 			string name = button.name;
 			int index = name.IndexOf("_");
 			name = name.Substring(0, index + 1) + "prefab";
@@ -41,12 +62,12 @@ public class Spawn_System : FSystem {
 			Text t = button.transform.GetChild(0).GetComponent<Text>();
 			t.text = fab.GetComponent<Price>().energy_cost.ToString();
 			*/
-			Text t = button.transform.GetChild(0).GetComponent<Text>();
-			t.text = button.GetComponent<Link_Prefab>().prefab.GetComponent<Price>().energy_cost.ToString();
-		}
-	}
+            Text t = button.transform.GetChild(0).GetComponent<Text>();
+            t.text = button.GetComponent<Link_Prefab>().prefab.GetComponent<Price>().energy_cost.ToString();
+        }
+    }
 
-	protected override void onProcess(int familiesUpdateCount) {
+    protected override void onProcess(int familiesUpdateCount) {
 		spawn.spawn_prog += Time.deltaTime;
 
 		if (spawn.spawn_prog >= spawn.wait_time && spawn.nb_waves > 0)

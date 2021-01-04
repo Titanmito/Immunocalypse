@@ -28,27 +28,55 @@ public class Energy_System : FSystem {
 
 	private Efficiency anti_eff;
 
-	public Energy_System()
+    public static Energy_System instance;
+
+    public Energy_System()
 	{
-		spawn = _Spawn.First().GetComponent<Spawn>();
-		bank = _Joueur.First().GetComponent<Bank>();
-		energy_nb = _Energy_nb.First().GetComponent<Text>();
+        instance = this;
+        // this.Pause = true;
+    }
 
-		macro_price = spawn.macro_prefab.GetComponent<Price>();
-		lymp_price = spawn.lymp_prefab.GetComponent<Price>();
-		anti_price = spawn.anti_prefab.GetComponent<Price>();
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
 
-		anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
 
-	}
+        _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
+        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+        _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
+        _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT),
+            new AnyOfTags("Tower"));
+        _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)));
 
-	// Used to control the button for buying of Macrophage towers.
-	// The idea is of having one function per button.
-	// A player can only buy a tower if the bank isn't used aka if there aren't any other tower waiting to be placed.
-	// The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
-	public void Macro_Button(int amount)
-	{
-		if (bank.energy >= macro_price.energy_cost && !bank.used)
+        _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+
+        spawn = _Spawn.First().GetComponent<Spawn>();
+        bank = _Joueur.First().GetComponent<Bank>();
+        energy_nb = _Energy_nb.First().GetComponent<Text>();
+
+        macro_price = spawn.macro_prefab.GetComponent<Price>();
+        lymp_price = spawn.lymp_prefab.GetComponent<Price>();
+        anti_price = spawn.anti_prefab.GetComponent<Price>();
+
+        anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
+    }
+
+    // Used to control the button for buying of Macrophage towers.
+    // The idea is of having one function per button.
+    // A player can only buy a tower if the bank isn't used aka if there aren't any other tower waiting to be placed.
+    // The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
+    public void Macro_Button(int amount = 1)
+    {
+        if (bank.energy >= macro_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_prefab);
 			go.transform.position = new Vector3(20.0f, 20.0f);
@@ -65,7 +93,7 @@ public class Energy_System : FSystem {
 	}
 
 	// Used to control the button for buying of Lymphocyte towers.
-	public void Lymp_Button(int amount)
+	public void Lymp_Button(int amount = 1)
 	{
 		if (bank.energy >= lymp_price.energy_cost && !bank.used)
 		{
@@ -82,9 +110,9 @@ public class Energy_System : FSystem {
 		}
 	}
 
-	public void Anti_Button(int amount)
+	public void Anti_Button(int amount = 1)
 	{
-		if (bank.energy >= anti_price.energy_cost && !bank.used)
+        if (bank.energy >= anti_price.energy_cost && !bank.used)
 		{
 			bank.energy -= anti_price.energy_cost;
 

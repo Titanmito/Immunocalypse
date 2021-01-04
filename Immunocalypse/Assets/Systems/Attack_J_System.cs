@@ -17,13 +17,36 @@ public class Attack_J_System : FSystem {
 
 	public Attack_J_System()
 	{
-		joueur = _Joueur.First();
-		healthBar = _HealthBar.First().GetComponent<Slider>();
-		healthBar.maxValue = joueur.GetComponent<Has_Health>().max_health;
-		healthBar.value = joueur.GetComponent<Has_Health>().health;
+        // this.Pause = true;
+		//joueur = _Joueur.First();
+		//healthBar = _HealthBar.First().GetComponent<Slider>();
+		//healthBar.maxValue = joueur.GetComponent<Has_Health>().max_health;
+		//healthBar.value = joueur.GetComponent<Has_Health>().health;
 	}
 
-	protected override void onProcess(int familiesUpdateCount)
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+        _AttackingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Attack_J), typeof(Can_Move), typeof(Has_Health)));
+        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health)));
+        _HealthBar = FamilyManager.getFamily(new AnyOfTags("Health_Bar"), new AllOfComponents(typeof(Slider)));
+        joueur = _Joueur.First();
+        healthBar = _HealthBar.First().GetComponent<Slider>();
+        healthBar.maxValue = joueur.GetComponent<Has_Health>().max_health;
+        healthBar.value = joueur.GetComponent<Has_Health>().health;
+    }
+
+    protected override void onProcess(int familiesUpdateCount)
 	{
 		foreach (GameObject go in _AttackingGO)
 		{

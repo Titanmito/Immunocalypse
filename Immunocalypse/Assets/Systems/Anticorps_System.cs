@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using FYFY;
 using FYFY_plugins.TriggerManager;
+using System;
 
 public class Anticorps_System : FSystem {
 	// This system manages the creation of new anticorps.
@@ -10,10 +11,28 @@ public class Anticorps_System : FSystem {
 
 	public Anticorps_System()
     {
-		//anti = _Lymphocyte.First().GetComponent<Anticorps_Factory>();
+        //anti = _Lymphocyte.First().GetComponent<Anticorps_Factory>();
+        // this.Pause = true;
 	}
 
-	protected override void onProcess(int familiesUpdateCount)
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+        _Lymphocyte = FamilyManager.getFamily(new AllOfComponents(typeof(Anticorps_Factory)));
+        _Anti_Creators = FamilyManager.getFamily(new AllOfComponents(typeof(Anticorps_Factory), typeof(Triggered2D)));
+    }
+
+    protected override void onProcess(int familiesUpdateCount)
 	{
 		foreach (GameObject go in _Lymphocyte)
 		{

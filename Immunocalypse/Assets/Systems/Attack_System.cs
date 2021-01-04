@@ -12,7 +12,30 @@ public class Attack_System : FSystem
 	private Family _AnticorpsGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack), typeof(Has_Health), typeof(Triggered2D)));
 	private Family _MacrophageGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack), typeof(Triggered2D)), new NoneOfComponents(typeof(Has_Health)));
 
-	protected override void onProcess(int familiesUpdateCount)
+    public Attack_System()
+    {
+        // this.Pause = true;
+    }
+
+    protected override void onPause(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on pause");
+    }
+
+    protected override void onResume(int currentFrame)
+    {
+        // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
+        if (currentFrame == 1)
+        {
+            this.Pause = true;
+            return;
+        }
+        _AllAttackersGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack)));
+        _AnticorpsGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack), typeof(Has_Health), typeof(Triggered2D)));
+        _MacrophageGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack), typeof(Triggered2D)), new NoneOfComponents(typeof(Has_Health)));
+    }
+
+    protected override void onProcess(int familiesUpdateCount)
 	{
 		foreach (GameObject go in _AllAttackersGO)
         {
