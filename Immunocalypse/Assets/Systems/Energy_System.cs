@@ -4,6 +4,8 @@ using FYFY;
 using System;
 using System.Collections;
 
+using System.Diagnostics;
+
 public class Energy_System : FSystem {
 	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
 	// We use buttons to implement tower and special power buy.
@@ -38,17 +40,29 @@ public class Energy_System : FSystem {
 
     protected override void onPause(int currentFrame)
     {
-        // Debug.Log("System " + this.GetType().Name + " go on pause");
-    }
+		//Debug.Log("System " + this.GetType().Name + " go on pause");
+		//return;
+	}
 
     protected override void onResume(int currentFrame)
     {
+		/*
+		StackTrace st = new StackTrace();
+		StackFrame[] sf = st.GetFrames();
+        foreach (StackFrame s in sf)
+        {
+			UnityEngine.Debug.Log(s.GetMethod().Name);
+        }
+		*/
+
         // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
         if (currentFrame == 1)
         {
             this.Pause = true;
             return;
         }
+
+		//UnityEngine.Debug.Log(this.Pause);
 
         _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
         _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
@@ -60,15 +74,16 @@ public class Energy_System : FSystem {
         _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
         spawn = _Spawn.First().GetComponent<Spawn>();
-        bank = _Joueur.First().GetComponent<Bank>();
-        energy_nb = _Energy_nb.First().GetComponent<Text>();
+		bank = _Joueur.First().GetComponent<Bank>();
+		energy_nb = _Energy_nb.First().GetComponent<Text>();
 
-        macro_price = spawn.macro_prefab.GetComponent<Price>();
+		macro_price = spawn.macro_prefab.GetComponent<Price>();
         lymp_price = spawn.lymp_prefab.GetComponent<Price>();
         anti_price = spawn.anti_prefab.GetComponent<Price>();
 
         anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
-    }
+
+	}
 
     // Used to control the button for buying of Macrophage towers.
     // The idea is of having one function per button.

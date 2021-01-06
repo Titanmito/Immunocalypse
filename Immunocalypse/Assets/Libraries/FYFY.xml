@@ -357,9 +357,6 @@
             <summary>
             	Loads the specified scene at the beginning of the next update block.
             </summary>
-            <remarks>
-            	The scene is always loaded after closing the current scene.
-            </remarks>
             <param name="sceneBuildIndex">
             	Index of the scene in the Build Settings to load.
             </param>
@@ -371,14 +368,27 @@
             <summary>
             	Loads the scene at the beginning of the next update block.
             </summary>
-            <remarks>
-            	The scene is always loaded after closing the current scene.
-            </remarks>
             <param name="sceneName">
             	Name of the scene to load.
             </param>
             <param name="mode">
             	Allows you to specify whether or not to load the Scene additively. See UnityEngine.SceneManagement.LoadSceneMode for more information about the options.
+            </param>
+        </member>
+        <member name="M:FYFY.GameObjectManager.unloadScene(System.String)">
+            <summary>
+            	Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+            </summary>
+            <param name="sceneName">
+            	Name of the scene to load.
+            </param>
+        </member>
+        <member name="M:FYFY.GameObjectManager.unloadScene(System.Int32)">
+            <summary>
+            	Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+            </summary>
+            <param name="sceneBuildIndex">
+            	Index of the scene in the Build Settings to load.
             </param>
         </member>
         <member name="M:FYFY.GameObjectManager.dontDestroyOnLoadAndRebind(UnityEngine.GameObject)">
@@ -528,6 +538,12 @@
         </member>
         <member name="F:FYFY.MainLoop.loadedSceneByName">
             <summary>List of scene name to parse</summary>
+        </member>
+        <member name="F:FYFY.MainLoop.unloadedSceneById">
+            <summary>List of scene id to unload</summary>
+        </member>
+        <member name="F:FYFY.MainLoop.unloadedSceneByName">
+            <summary>List of scene name to unload</summary>
         </member>
         <member name="F:FYFY.MainLoop._fixedUpdateSystemDescriptions">
             <summary>List of systems defined in fixedUpdate context through the Inspector</summary>
