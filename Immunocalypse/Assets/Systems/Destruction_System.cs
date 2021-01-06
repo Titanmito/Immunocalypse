@@ -2,8 +2,8 @@
 using FYFY;
 
 public class Destruction_System : FSystem {
-	// This system manages the destruction of enemies and ends the level if the Joueur has negative or equal to zero health.
-	// The part controling the end of the level is not yet implemented.
+	// This system manages the destruction of enemies.
+	// The part controling the end of the level is implemented at Load_Scene_System!!
 
 	private Family _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Attack_J), typeof(Create_Particles_After_Death)));
 	private Family _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health), typeof(Lifespan)));

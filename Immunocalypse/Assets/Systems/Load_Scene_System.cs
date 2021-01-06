@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 using FYFY;
 using UnityEngine.UI;
 
-public class Load_Scene_System : FSystem
-{
+public class Load_Scene_System : FSystem {
+    // Basically controls everything lol
+    // This is the System that control which scenes are charged, how, when, etc. and when they are destroyed.
+    // It also controls the binding of evey button that isn't in the master scene.
+
     private Family buttonFamily = FamilyManager.getFamily(new AnyOfTags("Button"));
     private Family _AttackingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Attack_J), typeof(Can_Move), typeof(Has_Health)));
     private Family _AllAttackersGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack)));
@@ -246,7 +249,8 @@ public class Load_Scene_System : FSystem
         }
     }
 
-
+    // This function binds all the buttons not in the MasterScene to their respective methods.
+    // I wish there were a less ugly way of doing it, but frankly I can't think of a better way and this works so...
     private void newButton(GameObject go)
     {
         if (go.name == "macro_button")
@@ -264,12 +268,28 @@ public class Load_Scene_System : FSystem
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Energy_System.instance.Anti_Button(1); });
         }
+        if (go.name == "vaci_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Vaci_Button(1); });
+        }
         if (go.name == "return_button")
         {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate {Load_Scene_System.instance.Fin_Button(1); });
         }
-
+        if (go.name == "des_virus")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Virus_Button(1); });
+            go.SetActive(false);
+        }
+        if (go.name == "des_bacterie")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Bacterie_Button(1); });
+            go.SetActive(false);
+        }
     }
 
     public void Start_Button(int amount = 1)

@@ -9,16 +9,19 @@ using System.Diagnostics;
 public class Energy_System : FSystem {
 	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
 	// We use buttons to implement tower and special power buy.
-	// Special powers aren't implemented yet.
+	// Special powers aren't completely implemented yet
+	// In the end we keep the buttons that control which enemy is targeted by a vacine here because it's easier as all the Families we need are already in here.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
 	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
 	private Family _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT), 
 		new AnyOfTags("Tower"));
-	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)));
+	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8));
 
 	private Family _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+
+	private Family _Vaccin = FamilyManager.getFamily(new AllOfComponents(typeof(Vaccin)));
 
 	private Spawn spawn;
 	private Bank bank;
@@ -27,6 +30,7 @@ public class Energy_System : FSystem {
 	private Price macro_price;
 	private Price lymp_price;
 	private Price anti_price;
+	private Price vaci_price;
 
 	private Efficiency anti_eff;
 
@@ -69,7 +73,7 @@ public class Energy_System : FSystem {
         _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
         _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT),
             new AnyOfTags("Tower"));
-        _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)));
+        _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8));
 
         _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
@@ -80,8 +84,11 @@ public class Energy_System : FSystem {
 		macro_price = spawn.macro_prefab.GetComponent<Price>();
         lymp_price = spawn.lymp_prefab.GetComponent<Price>();
         anti_price = spawn.anti_prefab.GetComponent<Price>();
+		vaci_price = _Vaccin.First().GetComponent<Price>();
 
-        anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
+		anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
+
+		
 
 	}
 
@@ -155,6 +162,55 @@ public class Energy_System : FSystem {
 		}
 	}
 
+	public void Vaci_Button(int amount = 1)
+	{
+		if (bank.energy >= vaci_price.energy_cost && !bank.used)
+		{
+			bank.energy -= vaci_price.energy_cost;
+
+			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
+
+            foreach (GameObject go in _Des_buttons)
+            {
+				go.SetActive(true);
+            }
+
+			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Virus)));
+
+			//Debug.Log("pourcentage = " + pourcentage);
+
+			foreach (GameObject go in _Respawn)
+			{
+
+				go.GetComponent<Has_Health>().health = -1;
+			
+			}
+			
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
+
+		}
+	}
+
+	public void Des_Virus_Button(int type = 1)
+    {
+		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
+
+		foreach (GameObject go in _Des_buttons)
+		{
+			go.SetActive(false);
+		}
+	}
+
+	public void Des_Bacterie_Button(int type = 1)
+	{
+		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
+
+		foreach (GameObject go in _Des_buttons)
+		{
+			go.SetActive(false);
+		}
+	}
 
 	protected override void onProcess(int familiesUpdateCount) {
 		spawn.energy_prog += Time.deltaTime;
