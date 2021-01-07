@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -1489260657317707301}
   - component: {fileID: 5844678060163777598}
   m_Layer: 0
-  m_Name: virus
+  m_Name: Virus
   m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

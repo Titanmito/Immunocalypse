@@ -74,6 +74,7 @@ public class Load_Scene_System : FSystem {
                 }
                 start = false;
             }
+
         }
 
         if (menu)
@@ -152,17 +153,34 @@ public class Load_Scene_System : FSystem {
         if (spawn != null)
         {
             Spawn s = spawn.GetComponent<Spawn>();
-            if ((s.nb_waves <= 0) && (_AttackingGO.First() == null))
+            if (_AttackingGO.First() == null)
             {
-                if (!fin)
+                if (s.nb_waves <= 0)
                 {
-                    progressBefore = 0.0f;
-                    fin = true;
+                    if (!fin)
+                    {
+                        progressBefore = 0.0f;
+                        fin = true;
+                    }
+                    this.gagne();
                 }
-                this.gagne();
+                else
+                {
+                    bool enemies = false;
+                    foreach (int i in s.nb_enemies)
+                    {
+                        if (i > 0)
+                        {
+                            enemies = true;
+                        }
+                    }
+                    if (!enemies && !fin)
+                    {
+                        s.nb_waves = 0;
+                    }
+                }
             }
         }
-
     }
     private void gagne()
     {

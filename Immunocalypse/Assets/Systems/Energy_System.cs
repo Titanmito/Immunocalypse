@@ -176,16 +176,6 @@ public class Energy_System : FSystem {
             }
 
 			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Virus)));
-
-			//Debug.Log("pourcentage = " + pourcentage);
-
-			foreach (GameObject go in _Respawn)
-			{
-
-				go.GetComponent<Has_Health>().health = -1;
-			
-			}
-			
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 
@@ -200,6 +190,8 @@ public class Energy_System : FSystem {
 		{
 			go.SetActive(false);
 		}
+		// nb_enemies[0] -> virus
+		spawn.nb_enemies[0] = 0;
 	}
 
 	public void Des_Bacterie_Button(int type = 1)
@@ -210,6 +202,8 @@ public class Energy_System : FSystem {
 		{
 			go.SetActive(false);
 		}
+		// nb_enemies[1] -> bacterie
+		spawn.nb_enemies[1] = 0;
 	}
 
 	protected override void onProcess(int familiesUpdateCount) {

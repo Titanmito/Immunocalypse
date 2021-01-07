@@ -16,6 +16,7 @@ public class Spawn_System : FSystem {
 	private Spawn spawn;
 	private Text spawn_nb;
 
+	// we have two types of enemies now
 	private GameObject[] enemies = new GameObject[2];
 
 	public Spawn_System()
