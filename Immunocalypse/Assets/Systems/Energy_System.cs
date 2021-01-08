@@ -17,7 +17,8 @@ public class Energy_System : FSystem {
 	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
 	private Family _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT), 
 		new AnyOfTags("Tower"));
-	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8));
+	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8, 9), 
+		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
 	private Family _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
@@ -73,9 +74,10 @@ public class Energy_System : FSystem {
         _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
         _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT),
             new AnyOfTags("Tower"));
-        _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8));
+		_Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8, 9),
+		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
-        _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+	_Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
         spawn = _Spawn.First().GetComponent<Spawn>();
 		bank = _Joueur.First().GetComponent<Bank>();
