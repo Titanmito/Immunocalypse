@@ -3,6 +3,9 @@
 public class Bank : MonoBehaviour {
 	// This component is present only in the Joueur entity and contabilizes it's energy, the currency used to buy new towers. 
 
+	// The amount of energy the player starts with.
+	public int init_energy;
+
 	// The amount of energy the player has. It increases every second by a small amount (see Energy_System).
 	public int energy;
 

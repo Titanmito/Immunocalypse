@@ -176,8 +176,6 @@ public class Energy_System : FSystem {
             {
 				go.SetActive(true);
             }
-
-			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Virus)));
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 

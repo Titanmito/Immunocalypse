@@ -34,9 +34,19 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Dropdown", choix);
 	}
 
-	public void Fin_Button(System.Int32 amount)
+	public void Return_Menu_Button(System.Int32 amount)
 	{
-		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Fin_Button", amount);
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Return_Menu_Button", amount);
+	}
+
+	public void Next_Level_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Next_Level_Button", amount);
+	}
+
+	public void Play_Again_Button(System.Int32 actual_lvl)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Play_Again_Button", actual_lvl);
 	}
 
 }
