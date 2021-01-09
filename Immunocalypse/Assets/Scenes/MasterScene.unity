@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 9810228}
   - component: {fileID: 9810227}
   - component: {fileID: 9810226}
+  - component: {fileID: 9810234}
   m_Layer: 0
   m_Name: Main_Loop
   m_TagString: Untagged
@@ -184,6 +185,10 @@ MonoBehaviour:
     _typeFullName: Tower_Animation_System
     _pause: 0
   _updateSystemDescriptions:
+  - _typeAssemblyQualifiedName: Lvl_Button_Control_System, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _typeFullName: Lvl_Button_Control_System
+    _pause: 0
   - _typeAssemblyQualifiedName: Anticorps_System, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     _typeFullName: Anticorps_System
@@ -346,6 +351,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 796ceac3de70b134c921950b245f5d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9810234
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9810221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618d6965abab4bb4980273a5d46aed73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &39085722
@@ -3384,7 +3401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_scene: -1
   unlocked_scene: 1
-  max_scene: 2
+  max_scene: 3
 --- !u!1 &876148481
 GameObject:
   m_ObjectHideFlags: 0

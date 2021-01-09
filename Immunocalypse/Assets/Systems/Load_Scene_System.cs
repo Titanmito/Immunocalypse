@@ -120,7 +120,7 @@ public class Load_Scene_System : FSystem {
             menu_init.SetActive(true);
         }
 
-        // test to see if the player choose a level (this is where is unpause the systems after the creation of the level scene)
+        // test to see if the player choose a level (this is where we unpause the systems after the creation of the level scene)
         // this is necessary because if we try to unpause the systems just after the creation os the level scene, BAD THINGS HAPPEN 
         // (it seems not everything is created at the same time and the systems can't find necessary GameObjects)
         if (start)
@@ -170,11 +170,10 @@ public class Load_Scene_System : FSystem {
                 {
                     progressBefore = 0.0f;
                     fin = true;
+                    text_fin = "Niveau échoué !";
+                    lost = true;
                 }
-                text_fin = "Niveau échoué !";
-                lost = true;
                 this.fin_lvl();
-
             }
             // test to see if the player won a level
             if (spawn != null)
@@ -189,15 +188,14 @@ public class Load_Scene_System : FSystem {
                         {
                             progressBefore = 0.0f;
                             fin = true;
+                            lost = false;
+                            text_fin = "Niveau reussi !";
                             if (current_scene == unlocked_scene && unlocked_scene < max_scene)
                             {
                                 unlocked_scene++;
                                 joueur.GetComponent<Current_Lvl>().unlocked_scene = unlocked_scene;
                             }
-
                         }
-                        lost = false;
-                        text_fin = "Niveau reussi !";
                         this.fin_lvl();
                     }
                     else
@@ -313,6 +311,17 @@ public class Load_Scene_System : FSystem {
             btn.onClick.AddListener(delegate { Energy_System.instance.Des_Bacterie_Button(1); });
             go.SetActive(false);
         }
+        if (go.name == "des_cancel")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Cancel_Button(1); });
+            go.SetActive(false);
+        }
+        if (go.name == "back_from_lvl_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Load_Scene_System.instance.Back_From_Lvl_Button(1); });
+        }
 
         // end scene buttons
         if (go.name == "return_button")
@@ -350,6 +359,8 @@ public class Load_Scene_System : FSystem {
     // Buttons controlling scenes should be here so it's easier to control everything and the system has a reason for existing.
 
     // initial menu buttons
+
+    //Goes to the selection screen and restarts the level dropdown menu so that new unlocked levels are added
     public void Start_Button(int amount = 1)
     {
         menu_init.SetActive(false);
@@ -379,6 +390,7 @@ public class Load_Scene_System : FSystem {
         }
     }
 
+    // Goes to the first help screen
     public void Help_Button(int amount = 1) 
     {
         menu_init.SetActive(false);
@@ -417,6 +429,7 @@ public class Load_Scene_System : FSystem {
         menu_init.SetActive(true);
     }
 
+    // next page of the help menu (if exists) goes back to the menu if it doesn't
     public void Next_Button(int obj = 1)
     {
         obj++;
@@ -446,6 +459,8 @@ public class Load_Scene_System : FSystem {
     // Selection of level dropdown
     public void Dropdown(int choix = 1)
     {
+        Bank bank = _Joueur.First().GetComponent<Bank>();
+        bank.used = false;
         if (choix > 0)
         {
             current_scene = choix;
@@ -459,14 +474,19 @@ public class Load_Scene_System : FSystem {
     }
 
     // Fin scene buttons (they are here because they control scene changes)
+
+    // Goes back to the menu screen
     public void Return_Menu_Button(int amount = 1)
     {
         GameObjectManager.unloadScene("Fin");
         menu_init.SetActive(true);
     }
 
+    // Loads next level (the button is deactivated if the player can't do this or if there isn't a next level)
     public void Next_Level_Button(int amount = 1)
     {
+        Bank bank = _Joueur.First().GetComponent<Bank>();
+        bank.used = false;
         current_scene++;
         joueur.GetComponent<Current_Lvl>().current_scene = current_scene;
         string s = "Scene" + current_scene.ToString();
@@ -476,9 +496,11 @@ public class Load_Scene_System : FSystem {
         progressBefore = 0.0f;
     }
 
-
+    // Reloads the level
     public void Play_Again_Button(int actual_lvl = 0)
     {
+        Bank bank = _Joueur.First().GetComponent<Bank>();
+        bank.used = false;
         string s = "Scene" + current_scene.ToString();
         GameObjectManager.unloadScene("Fin");
         GameObjectManager.loadScene(s, LoadSceneMode.Additive);
@@ -486,4 +508,60 @@ public class Load_Scene_System : FSystem {
         progressBefore = 0.0f;
     }
 
+    // Level scene buttons (here because it controls the destruction of the level scene)
+    public void Back_From_Lvl_Button(int amount = 1)
+    {
+        joueur.GetComponent<Has_Health>().health = -1;
+
+        // Only here because I haven't decided yet what the behavior of the button should be but if I put everything in comments it gets huge and the editor doesn't 
+        // recognizes the code and so I can't click on the plus button to hide it.
+        bool bla = false;
+        if (bla)
+        {
+            // we pause the systems that deal with level stuff
+            foreach (FSystem system in FSystemManager.updateSystems())
+            {
+                system.Pause = true;
+                // Debug.Log(system.GetType().Name);
+            }
+            foreach (FSystem system in FSystemManager.lateUpdateSystems())
+            {
+                system.Pause = true;
+                // Debug.Log(system.GetType().Name);
+            }
+
+            // destroy any objects from the level that still exist
+            foreach (GameObject go in _AttackingGO)
+            {
+                GameObjectManager.unbind(go);
+                Object.Destroy(go);
+            }
+            foreach (GameObject go in _AllAttackersGO)
+            {
+                GameObjectManager.unbind(go);
+                Object.Destroy(go);
+            }
+            foreach (GameObject go in _AllParticlesGO)
+            {
+                GameObjectManager.unbind(go);
+                Object.Destroy(go);
+            }
+            foreach (GameObject go in _AllLymphocytesGO)
+            {
+                GameObjectManager.unbind(go);
+                Object.Destroy(go);
+
+            }
+
+            int max_health = joueur.GetComponent<Has_Health>().max_health;
+            joueur.GetComponent<Has_Health>().health = max_health;
+
+            int init_energy = joueur.GetComponent<Bank>().init_energy;
+            joueur.GetComponent<Bank>().energy = init_energy;
+
+            string s = "Scene" + current_scene.ToString();
+            GameObjectManager.unloadScene(s);
+            menu_init.SetActive(true);
+        }
+    }
 }

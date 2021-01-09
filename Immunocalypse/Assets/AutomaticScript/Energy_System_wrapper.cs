@@ -39,4 +39,9 @@ public class Energy_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Bacterie_Button", type);
 	}
 
+	public void Des_Cancel_Button(System.Int32 type)
+	{
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Cancel_Button", type);
+	}
+
 }

@@ -12,7 +12,7 @@ public class Energy_System : FSystem {
 	// Special powers aren't completely implemented yet
 	// In the end we keep the buttons that control which enemy is targeted by a vacine here because it's easier as all the Families we need are already in here.
 
-	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
+	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
 	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
 	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
 	private Family _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT), 
@@ -100,7 +100,9 @@ public class Energy_System : FSystem {
     // The tower is desactivated when created so that it isn't taken in consideration anywhere else until placed.
     public void Macro_Button(int amount = 1)
     {
-        if (bank.energy >= macro_price.energy_cost && !bank.used)
+		this.Des_Cancel_Button();
+
+		if (bank.energy >= macro_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_prefab);
 			go.transform.position = new Vector3(20.0f, 20.0f);
@@ -119,6 +121,9 @@ public class Energy_System : FSystem {
 	// Used to control the button for buying of Lymphocyte towers.
 	public void Lymp_Button(int amount = 1)
 	{
+
+		this.Des_Cancel_Button();
+
 		if (bank.energy >= lymp_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp_prefab);
@@ -136,7 +141,10 @@ public class Energy_System : FSystem {
 
 	public void Anti_Button(int amount = 1)
 	{
-        if (bank.energy >= anti_price.energy_cost && !bank.used)
+
+		this.Des_Cancel_Button();
+
+		if (bank.energy >= anti_price.energy_cost && !bank.used)
 		{
 			bank.energy -= anti_price.energy_cost;
 
@@ -160,7 +168,6 @@ public class Energy_System : FSystem {
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
-
 		}
 	}
 
@@ -168,42 +175,75 @@ public class Energy_System : FSystem {
 	{
 		if (bank.energy >= vaci_price.energy_cost && !bank.used)
 		{
-			bank.energy -= vaci_price.energy_cost;
-
-			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
-
-            foreach (GameObject go in _Des_buttons)
+			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
+			Active_Lvl_Buttons ActButtons = _Spawn.First().GetComponent<Active_Lvl_Buttons>();
+			foreach (GameObject go in _Des_buttons)
             {
-				go.SetActive(true);
-            }
-			// Actualizes the energy display to the player.
-			energy_nb.text = "energy: " + bank.energy.ToString();
 
+				Lvl_Buttons lb = go.GetComponent<Lvl_Buttons>();
+				switch (lb.button_nb)
+				{
+					case 31:
+						go.SetActive(ActButtons.des_virus);
+						break;
+					case 32:
+						go.SetActive(ActButtons.des_bacterie);
+						break;
+					case 40:
+						go.SetActive(ActButtons.des_cancel);
+						break;
+				}
+			}
 		}
 	}
 
 	public void Des_Virus_Button(int type = 1)
     {
-		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
-
-		foreach (GameObject go in _Des_buttons)
+		if (bank.energy >= vaci_price.energy_cost && !bank.used)
 		{
-			go.SetActive(false);
+			bank.energy -= vaci_price.energy_cost;
+
+			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
+
+			foreach (GameObject go in _Des_buttons)
+			{
+				go.SetActive(false);
+			}
+			// nb_enemies[0] -> virus
+			spawn.nb_enemies[0] = 0;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
-		// nb_enemies[0] -> virus
-		spawn.nb_enemies[0] = 0;
 	}
 
 	public void Des_Bacterie_Button(int type = 1)
 	{
-		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new AnyOfLayers(8));
+		if (bank.energy >= vaci_price.energy_cost && !bank.used)
+		{
+			bank.energy -= vaci_price.energy_cost;
 
+			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
+
+			foreach (GameObject go in _Des_buttons)
+			{
+				go.SetActive(false);
+			}
+			// nb_enemies[1] -> bacterie
+			spawn.nb_enemies[1] = 0;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
+		}
+	}
+
+	public void Des_Cancel_Button(int type = 1)
+    {
+		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
 		foreach (GameObject go in _Des_buttons)
 		{
 			go.SetActive(false);
 		}
-		// nb_enemies[1] -> bacterie
-		spawn.nb_enemies[1] = 0;
 	}
 
 	protected override void onProcess(int familiesUpdateCount) {

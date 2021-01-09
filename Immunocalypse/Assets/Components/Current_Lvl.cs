@@ -9,5 +9,5 @@ public class Current_Lvl : MonoBehaviour {
 	public int unlocked_scene = 1;
 
 	// this is the number of the last level 
-	public int max_scene = 2;
+	public int max_scene = 3;
 }
