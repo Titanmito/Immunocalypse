@@ -3,21 +3,16 @@ using FYFY;
 using FYFY_plugins.TriggerManager;
 
 public class Movement_System : FSystem {
-	// This system manages the movement of entities that can move. It also put each new entity that can move in their right spawn place when they are created. 
+	// This system manages the movement of entities that can move. It also puts each new entity that can move in their right spawn place when they are created. 
 	
 	// Enemies
 	private Family _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Attack_J)), new AnyOfTags("Respawn"));
 	// Allies 
 	private Family _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
 
-    public static Movement_System instance;
-    public bool reinitOnResume = true;
-    public bool afterSoftPauseResumed = false;
-
     // Constructeur
     public Movement_System()
 	{
-        instance = this;
         // this.Pause = true;
 	}
 
@@ -28,8 +23,6 @@ public class Movement_System : FSystem {
 
     protected override void onPause(int currentFrame)
     {
-        if (!reinitOnResume)
-            afterSoftPauseResumed = false;
         // Debug.Log("System " + this.GetType().Name + " go on pause");
     }
 
@@ -45,22 +38,18 @@ public class Movement_System : FSystem {
         _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Attack_J)), new AnyOfTags("Respawn"));
         _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
 
-        if (reinitOnResume)
+		foreach (GameObject go in _TargetGO)
+		{
+			onGOEnter(go);
+		}
+		foreach (GameObject go in _TargetingGO)
         {
-            foreach (GameObject go in _TargetGO)
-            {
-                onGOEnter(go);
-            }
-            foreach (GameObject go in _TargetingGO)
-            {
-                onGOEnter(go);
-            }
-            _TargetGO.addEntryCallback(onGOEnter);
-            _TargetingGO.addEntryCallback(onGOEnter);
-        }
-        else
-            afterSoftPauseResumed = true;
-    }
+			onGOEnter(go);
+		}
+		_TargetGO.addEntryCallback(onGOEnter);
+		_TargetingGO.addEntryCallback(onGOEnter);
+
+	}
 
     protected override void onProcess(int familiesUpdateCount)
 	{
@@ -84,6 +73,7 @@ public class Movement_System : FSystem {
 		foreach (GameObject go in _TargetGO)
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
+			cm.spawn_point = go.transform.position;
 
 			// If the entity has reached it's target and it's not an ally, we remove it from the visible screen.
 			if (Vector3.Distance(cm.target, go.transform.position) < 0.1f)

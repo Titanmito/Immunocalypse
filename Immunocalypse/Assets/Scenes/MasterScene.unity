@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 9810227}
   - component: {fileID: 9810226}
   - component: {fileID: 9810234}
-  - component: {fileID: 9810235}
   m_Layer: 0
   m_Name: Main_Loop
   m_TagString: Untagged
@@ -217,10 +216,6 @@ MonoBehaviour:
   - _typeAssemblyQualifiedName: Energy_System, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     _typeFullName: Energy_System
-    _pause: 0
-  - _typeAssemblyQualifiedName: Pause_Management_System, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _typeFullName: Pause_Management_System
     _pause: 0
   _lateUpdateSystemDescriptions: []
   _forceUpdateInspector: 0
@@ -368,18 +363,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 618d6965abab4bb4980273a5d46aed73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9810235
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9810221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107c0bc3c86b185488ca69dc9c4e6337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &39085722

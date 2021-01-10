@@ -9,7 +9,7 @@ using System.Diagnostics;
 public class Energy_System : FSystem {
 	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
 	// We use buttons to implement tower and special power buy.
-	// Special powers aren't completely implemented yet
+	// Special Powers are implemented here
 	// In the end we keep the buttons that control which enemy is targeted by a vacine here because it's easier as all the Families we need are already in here.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
@@ -141,7 +141,7 @@ public class Energy_System : FSystem {
 		{
 			bank.energy -= anti_price.energy_cost;
 			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Bacterie)));
-			float pourcentage = anti_eff.nb_used / 10.0f;
+			float pourcentage = anti_eff.nb_used / 5.0f;
 			
 			//Debug.Log("pourcentage = " + pourcentage);
 

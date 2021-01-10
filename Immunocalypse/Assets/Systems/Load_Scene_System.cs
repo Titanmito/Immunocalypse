@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Load_Scene_System : FSystem {
     // Basically controls everything lol
     // This is the System that control which scenes are charged, how, when, etc. and when they are destroyed.
-    // It also controls the binding of evey button that isn't in the master scene.
+    // It also controls the binding of every button that isn't in the master scene.
 
     // For the binding of the buttons we have to get all of them
     private Family buttonFamily = FamilyManager.getFamily(new AnyOfTags("Button"));
@@ -30,7 +30,7 @@ public class Load_Scene_System : FSystem {
     private Family _text = FamilyManager.getFamily(new AllOfComponents(typeof(Msg_Fin), typeof(Text)));
 
     // the message we write at the end of a level
-    private string text_fin;
+    private string text_fin = null;
 
     // if true we grayout the continue button in the fin scene
     private bool lost = true;
@@ -51,6 +51,8 @@ public class Load_Scene_System : FSystem {
     // controls for the different changes in scenes
     private bool start = false;
     private bool fin = false;
+    private bool pause = false;
+    private bool in_pause = false;
 
     // to be sure the scene is completely loaded before we start the systems again (yes, I tried without it and it doesn't work)
     private float timeBeforeLoad = 0.5f, timeBeforeFin = 1.0f, progressBefore;
@@ -151,10 +153,24 @@ public class Load_Scene_System : FSystem {
         }
 
         // if the player wants to exit a level in the middle. It takes them to the lost level screen
-        if (Input.GetKey(KeyCode.U))
+        if (Input.GetKey(KeyCode.Q))
         {
             joueur.GetComponent<Has_Health>().health = -1;
         }
+
+        // Pause 
+        if (Input.GetKey(KeyCode.P) && !bienvenu.activeInHierarchy && !menu_init.activeInHierarchy && 
+            !selection.activeInHierarchy && !menu_help.activeInHierarchy && text_fin == null)
+        {
+            if (!pause)
+            {
+                progressBefore = 0.0f;
+                pause = true;
+
+            }
+
+        }
+        this.pause_lvl();
 
         // test to see if we're at one of the levels
         if (!bienvenu.activeInHierarchy && !menu_init.activeInHierarchy && !selection.activeInHierarchy && !menu_help.activeInHierarchy)
@@ -217,6 +233,57 @@ public class Load_Scene_System : FSystem {
             }
         }
     }
+
+    // Pauses and unpauses the game
+    private void pause_lvl()
+    {
+        if (pause)
+        {
+            progressBefore += Time.deltaTime;
+            if (!in_pause) 
+            { 
+                // we pause the systems that deal with level stuff
+                foreach (FSystem system in FSystemManager.updateSystems())
+                    {
+                        system.Pause = true;
+                        // Debug.Log(system.GetType().Name);
+                    }
+                foreach (FSystem system in FSystemManager.lateUpdateSystems())
+                {
+                    system.Pause = true;
+                    // Debug.Log(system.GetType().Name);
+                }
+                if (progressBefore > timeBeforeFin)
+                {
+                    GameObjectManager.loadScene("Pause", LoadSceneMode.Additive);
+                    pause = false;
+                    in_pause = true;
+                }
+            }
+            else
+            {
+                if (progressBefore > timeBeforeFin)
+                {
+                    GameObjectManager.unloadScene("Pause");
+                    pause = false;
+                    in_pause = false;
+
+                    // we unpause the systems that deal with level stuff
+                    foreach (FSystem system in FSystemManager.updateSystems())
+                    {
+                        system.Pause = false;
+                        // Debug.Log(system.GetType().Name);
+                    }
+                    foreach (FSystem system in FSystemManager.lateUpdateSystems())
+                    {
+                        system.Pause = false;
+                        // Debug.Log(system.GetType().Name);
+                    }
+                }
+            }
+        }
+    }
+
 
     // What happens when the player wins or loses a level (aka their HP reaches 0)
     private void fin_lvl()
@@ -351,7 +418,7 @@ public class Load_Scene_System : FSystem {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Load_Scene_System.instance.Next_Level_Button(1); });
             
-            if (lost || current_scene >= max_scene)
+            if ((lost && current_scene == unlocked_scene) || current_scene >= max_scene)
             {
                 btn.interactable = false;
             }
@@ -492,6 +559,7 @@ public class Load_Scene_System : FSystem {
     {
         GameObjectManager.unloadScene("Fin");
         menu_init.SetActive(true);
+        text_fin = null;
     }
 
     // Loads next level (the button is deactivated if the player can't do this or if there isn't a next level)
@@ -506,6 +574,7 @@ public class Load_Scene_System : FSystem {
         GameObjectManager.loadScene(s, LoadSceneMode.Additive);
         start = true;
         progressBefore = 0.0f;
+        text_fin = null;
     }
 
     // Reloads the level
@@ -518,6 +587,7 @@ public class Load_Scene_System : FSystem {
         GameObjectManager.loadScene(s, LoadSceneMode.Additive);
         start = true;
         progressBefore = 0.0f;
+        text_fin = null;
     }
 
     // Level scene buttons (here because it controls the destruction of the level scene)
@@ -575,10 +645,5 @@ public class Load_Scene_System : FSystem {
             GameObjectManager.unloadScene(s);
             menu_init.SetActive(true);
         }
-    }
-
-    public string Get_Current_Scene_String()
-    {
-        return "Scene" + current_scene.ToString();
     }
 }
