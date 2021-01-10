@@ -10,9 +10,14 @@ public class Movement_System : FSystem {
 	// Allies 
 	private Family _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
 
-	// Constructeur
-	public Movement_System()
+    public static Movement_System instance;
+    public bool reinitOnResume = true;
+    public bool afterSoftPauseResumed = false;
+
+    // Constructeur
+    public Movement_System()
 	{
+        instance = this;
         // this.Pause = true;
 	}
 
@@ -23,6 +28,8 @@ public class Movement_System : FSystem {
 
     protected override void onPause(int currentFrame)
     {
+        if (!reinitOnResume)
+            afterSoftPauseResumed = false;
         // Debug.Log("System " + this.GetType().Name + " go on pause");
     }
 
@@ -38,16 +45,21 @@ public class Movement_System : FSystem {
         _TargetGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Attack_J)), new AnyOfTags("Respawn"));
         _TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack)), new AnyOfTags("Tower"));
 
-        foreach (GameObject go in _TargetGO)
+        if (reinitOnResume)
         {
-            onGOEnter(go);
+            foreach (GameObject go in _TargetGO)
+            {
+                onGOEnter(go);
+            }
+            foreach (GameObject go in _TargetingGO)
+            {
+                onGOEnter(go);
+            }
+            _TargetGO.addEntryCallback(onGOEnter);
+            _TargetingGO.addEntryCallback(onGOEnter);
         }
-        foreach (GameObject go in _TargetingGO)
-        {
-            onGOEnter(go);
-        }
-        _TargetGO.addEntryCallback(onGOEnter);
-        _TargetingGO.addEntryCallback(onGOEnter);
+        else
+            afterSoftPauseResumed = true;
     }
 
     protected override void onProcess(int familiesUpdateCount)

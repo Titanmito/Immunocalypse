@@ -576,4 +576,9 @@ public class Load_Scene_System : FSystem {
             menu_init.SetActive(true);
         }
     }
+
+    public string Get_Current_Scene_String()
+    {
+        return "Scene" + current_scene.ToString();
+    }
 }
