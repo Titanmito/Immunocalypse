@@ -7,9 +7,11 @@ public class Spawn : MonoBehaviour {
 	// The number of waves in a level. 
 	public int nb_waves = 10;
 	// Each wave will have nb_enemies[i] of each i enemy.
-	// i = 0 -> virus
-	// i = 1 -> bacterie
-	public int[] nb_enemies = new int[2]{4, 1};
+	// i = 0 -> virus1
+	// i = 1 -> virus2
+	// i = 2 -> bacterie1
+	// i = 3 -> bacterie2
+	public int[] nb_enemies = new int[4]{2, 3, 1, 1};
 
 	// How many energy the player gains each second.
 	public int energy_sec = 1;
@@ -21,12 +23,15 @@ public class Spawn : MonoBehaviour {
 	// How long since the last increase of energy.
 	public float energy_prog = 0f;
 
-	// Factories for virus, bacterie and macrophage. New towers and enemies must have their factories added here.
-	public GameObject virus_prefab;
-	public GameObject bacterie_prefab;
+	// Factories for enemies, towers and special powers. New towers and enemies must have their factories added here.
+	public GameObject virus1_prefab; 
+	public GameObject virus2_prefab;
+	public GameObject bacterie1_prefab;
+	public GameObject bacterie2_prefab;
 	public GameObject macro_prefab;
 	public GameObject lymp_prefab;
 
 	public GameObject anti_prefab;
+	public GameObject vaci_prefab;
 
 }

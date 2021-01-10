@@ -86,12 +86,9 @@ public class Energy_System : FSystem {
 		macro_price = spawn.macro_prefab.GetComponent<Price>();
         lymp_price = spawn.lymp_prefab.GetComponent<Price>();
         anti_price = spawn.anti_prefab.GetComponent<Price>();
-		vaci_price = _Vaccin.First().GetComponent<Price>();
+		vaci_price = spawn.vaci_prefab.GetComponent<Price>(); 
 
 		anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
-
-		
-
 	}
 
     // Used to control the button for buying of Macrophage towers.
@@ -101,7 +98,6 @@ public class Energy_System : FSystem {
     public void Macro_Button(int amount = 1)
     {
 		this.Des_Cancel_Button();
-
 		if (bank.energy >= macro_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_prefab);
@@ -114,16 +110,13 @@ public class Energy_System : FSystem {
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
-
 		}
 	}
 
 	// Used to control the button for buying of Lymphocyte towers.
 	public void Lymp_Button(int amount = 1)
 	{
-
 		this.Des_Cancel_Button();
-
 		if (bank.energy >= lymp_price.energy_cost && !bank.used)
 		{
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp_prefab);
@@ -139,15 +132,14 @@ public class Energy_System : FSystem {
 		}
 	}
 
+	// Used to control the button for the antibiotique special power.
 	public void Anti_Button(int amount = 1)
 	{
-
 		this.Des_Cancel_Button();
 
 		if (bank.energy >= anti_price.energy_cost && !bank.used)
 		{
 			bank.energy -= anti_price.energy_cost;
-
 			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Bacterie)));
 			float pourcentage = anti_eff.nb_used / 10.0f;
 			
@@ -171,6 +163,7 @@ public class Energy_System : FSystem {
 		}
 	}
 
+	// Controls the vaci_button
 	public void Vaci_Button(int amount = 1)
 	{
 		if (bank.energy >= vaci_price.energy_cost && !bank.used)
@@ -184,10 +177,16 @@ public class Energy_System : FSystem {
 				switch (lb.button_nb)
 				{
 					case 31:
-						go.SetActive(ActButtons.des_virus);
+						go.SetActive(ActButtons.des_virus1);
 						break;
 					case 32:
-						go.SetActive(ActButtons.des_bacterie);
+						go.SetActive(ActButtons.des_virus2);
+						break;
+					case 33:
+						go.SetActive(ActButtons.des_bacterie1);
+						break;
+					case 34:
+						go.SetActive(ActButtons.des_bacterie2);
 						break;
 					case 40:
 						go.SetActive(ActButtons.des_cancel);
@@ -197,7 +196,10 @@ public class Energy_System : FSystem {
 		}
 	}
 
-	public void Des_Virus_Button(int type = 1)
+	// I couldn't make the wrapper for this in Unity pass a number to the function (I think it's linked to the fack we're not really using the wrapper and doing the bind by hand? maybe?)
+	// so I ended up creating a function that set the correct case at nb_enemies in Spawn to zero and 4 functions that call it with the correct argument.
+	
+	private void Destruction(int i = 1)
     {
 		if (bank.energy >= vaci_price.energy_cost && !bank.used)
 		{
@@ -209,34 +211,33 @@ public class Energy_System : FSystem {
 			{
 				go.SetActive(false);
 			}
-			// nb_enemies[0] -> virus
-			spawn.nb_enemies[0] = 0;
-
+			spawn.nb_enemies[i] = 0;
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
 	}
-
-	public void Des_Bacterie_Button(int type = 1)
+	// Controls des_virus1 button
+	public void Des_Virus1_Button(int type = 1)
+    {
+		Destruction(0);
+	}
+	// Controls des_virus2 button
+	public void Des_Virus2_Button(int type = 1)
 	{
-		if (bank.energy >= vaci_price.energy_cost && !bank.used)
-		{
-			bank.energy -= vaci_price.energy_cost;
-
-			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
-
-			foreach (GameObject go in _Des_buttons)
-			{
-				go.SetActive(false);
-			}
-			// nb_enemies[1] -> bacterie
-			spawn.nb_enemies[1] = 0;
-
-			// Actualizes the energy display to the player.
-			energy_nb.text = "energy: " + bank.energy.ToString();
-		}
+		Destruction(1);
+	}
+	// Controls des_bacterie1 button
+	public void Des_Bacterie1_Button(int type = 1)
+	{
+		Destruction(2);
+	}
+	// Controls des_bacterie2 button
+	public void Des_Bacterie2_Button(int type = 1)
+	{
+		Destruction(3);
 	}
 
+	// Controls the cancel button of the vaccine
 	public void Des_Cancel_Button(int type = 1)
     {
 		Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));

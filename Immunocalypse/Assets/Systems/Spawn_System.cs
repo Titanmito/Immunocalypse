@@ -16,8 +16,12 @@ public class Spawn_System : FSystem {
 	private Spawn spawn;
 	private Text spawn_nb;
 
-	// we have two types of enemies now
-	private GameObject[] enemies = new GameObject[2];
+	// we have four types of enemies now 
+	// 0 -> Virus1
+	// 1 -> Virus2
+	// 2 -> Bacterie1
+	// 3 -> Bacterie2
+	private GameObject[] enemies = new GameObject[4];
 
 	public Spawn_System()
 	{
@@ -47,22 +51,15 @@ public class Spawn_System : FSystem {
 
         // To facilitate the creation of enemies in onProcess.
         // I couldn't find an automated way of creating this array.
-        enemies[0] = spawn.virus_prefab;
-        enemies[1] = spawn.bacterie_prefab;
+        enemies[0] = spawn.virus1_prefab;
+		enemies[1] = spawn.virus2_prefab;
+		enemies[2] = spawn.bacterie1_prefab; 
+		enemies[3] = spawn.bacterie2_prefab;
 
-        // Puts the price of each tower and special power in their respective buttons.
-        // buttons must be named as *same start as the name of the respective prefab*_button.
-        foreach (GameObject button in _Buttons)
+		// Puts the price of each tower and special power in their respective buttons.
+		// buttons must be named as *same start as the name of the respective prefab*_button.
+		foreach (GameObject button in _Buttons)
         {
-            /*
-			string name = button.name;
-			int index = name.IndexOf("_");
-			name = name.Substring(0, index + 1) + "prefab";
-
-			GameObject fab = (GameObject)typeof(Spawn).GetField(name).GetValue(spawn);
-			Text t = button.transform.GetChild(0).GetComponent<Text>();
-			t.text = fab.GetComponent<Price>().energy_cost.ToString();
-			*/
             Text t = button.transform.GetChild(0).GetComponent<Text>();
             t.text = button.GetComponent<Link_Prefab>().prefab.GetComponent<Price>().energy_cost.ToString();
         }

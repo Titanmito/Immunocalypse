@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
 public class Virus : MonoBehaviour {
-	// Advice: FYFY component aims to contain only public members (according to Entity-Component-System paradigm).
+	// This component marks the virus entity and keeps its type (1 or 2) so we can find the enemies we want.
+	public int type;
 }

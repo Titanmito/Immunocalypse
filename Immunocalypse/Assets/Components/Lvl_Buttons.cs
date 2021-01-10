@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 
-public class Lvl_Buttons : MonoBehaviour {
+public class Lvl_Buttons : MonoBehaviour
+{
 	// Indicates which button present in levels we're dealing with.
 	// 0 -> macro_button (macrophage tower)
 	// 10 -> lymp_button (lymphocyte tower)
 	// 20 -> anti_button (antibiotique special power)
 	// 30 -> vaci_button (vaccine special power)
-	// 31 -> des_virus (uses the vaccine to the virus type of enemy)
-	// 32 -> des_bacterie (uses the vacine to the bacterie type of enemy)
+	// 31 -> des_virus1 (uses the vaccine to the virus1 type of enemy)
+	// 32 -> des_virus2 (uses the vaccine to the virus2 type of enemy)
+	// 33 -> des_bacterie1 (uses the vacine to the bacterie1 type of enemy)
+	// 34 -> des_bacterie2 (uses the vacine to the bacterie2 type of enemy)
 	// 40 -> des_cancel (cancel the use of a vaccine. Only here because it has to have this componet so that it shows up, but it should always be true)
 	// 50 -> back_from_lvl_button (the quit button on each level. Only here so that all buttons in a level have this component as the name of the component suggests)
 

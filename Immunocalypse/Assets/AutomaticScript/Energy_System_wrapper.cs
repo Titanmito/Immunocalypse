@@ -29,14 +29,24 @@ public class Energy_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Energy_System", "Vaci_Button", amount);
 	}
 
-	public void Des_Virus_Button(System.Int32 type)
+	public void Des_Virus1_Button(System.Int32 type)
 	{
-		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Virus_Button", type);
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Virus1_Button", type);
 	}
 
-	public void Des_Bacterie_Button(System.Int32 type)
+	public void Des_Virus2_Button(System.Int32 type)
 	{
-		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Bacterie_Button", type);
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Virus2_Button", type);
+	}
+
+	public void Des_Bacterie1_Button(System.Int32 type)
+	{
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Bacterie1_Button", type);
+	}
+
+	public void Des_Bacterie2_Button(System.Int32 type)
+	{
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Des_Bacterie2_Button", type);
 	}
 
 	public void Des_Cancel_Button(System.Int32 type)

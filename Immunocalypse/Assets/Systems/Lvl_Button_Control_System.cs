@@ -50,8 +50,6 @@ public class Lvl_Button_Control_System : FSystem {
 					break;
 			}
 		}
-
-
 	}
 
 	// Use to process your families.

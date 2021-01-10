@@ -10,8 +10,11 @@ public class Active_Lvl_Buttons : MonoBehaviour {
 	public bool anti_button = true;
 	public bool vaci_button = true;
 
-	public bool des_virus = true;
-	public bool des_bacterie = true;
+	public bool des_virus1 = true;
+	public bool des_virus2 = true;
+	public bool des_bacterie1 = true;
+	public bool des_bacterie2 = true;
+
 	public bool des_cancel = true;
 
 	public bool back_from_lvl_button = true;

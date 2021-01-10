@@ -299,16 +299,28 @@ public class Load_Scene_System : FSystem {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Energy_System.instance.Vaci_Button(1); });
         }
-        if (go.name == "des_virus")
+        if (go.name == "des_virus1")
         {
             Button btn = go.GetComponent<Button>();
-            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Virus_Button(1); });
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Virus1_Button(1); });
             go.SetActive(false);
         }
-        if (go.name == "des_bacterie")
+        if (go.name == "des_virus2")
         {
             Button btn = go.GetComponent<Button>();
-            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Bacterie_Button(1); });
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Virus2_Button(1); });
+            go.SetActive(false);
+        }
+        if (go.name == "des_bacterie1")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Bacterie1_Button(1); });
+            go.SetActive(false);
+        }
+        if (go.name == "des_bacterie2")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Des_Bacterie2_Button(1); });
             go.SetActive(false);
         }
         if (go.name == "des_cancel")
