@@ -34,9 +34,9 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Dropdown", choix);
 	}
 
-	public void Return_Menu_Button(System.Int32 amount)
+	public void Return_To_Menu_From_Fin_Button(System.Int32 amount)
 	{
-		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Return_Menu_Button", amount);
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Return_To_Menu_From_Fin_Button", amount);
 	}
 
 	public void Next_Level_Button(System.Int32 amount)
@@ -47,6 +47,26 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 	public void Play_Again_Button(System.Int32 actual_lvl)
 	{
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Play_Again_Button", actual_lvl);
+	}
+
+	public void Continue_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Continue_Button", amount);
+	}
+
+	public void Replay_Pause_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Replay_Pause_Button", amount);
+	}
+
+	public void Return_To_Menu_From_Pause_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Return_To_Menu_From_Pause_Button", amount);
+	}
+
+	public void Exit_From_Pause_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Exit_From_Pause_Button", amount);
 	}
 
 	public void Back_From_Lvl_Button(System.Int32 amount)
