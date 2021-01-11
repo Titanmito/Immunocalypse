@@ -35,6 +35,7 @@ public class Destruction_System : FSystem {
 
     protected override void onProcess(int familiesUpdateCount)
 	{
+        float angle = 0.0f;
         _DestroyParticlesProgress += Time.deltaTime;
 		// destroy enemies that should be destroyed.
 		foreach (GameObject go in _EnemiesAliveGO)
@@ -54,8 +55,12 @@ public class Destruction_System : FSystem {
                         GameObject particle = UnityEngine.Object.Instantiate<GameObject>(cpad.particles_prefab, go.transform.position, go.transform.rotation);
                         GameObjectManager.bind(particle);
                         particle.GetComponent<SpriteRenderer>().color = go.GetComponent<SpriteRenderer>().color;
+                        particle.transform.Rotate(new Vector3(0, 0, Random.value * 360));
+                        angle = Mathf.PI * particle.transform.rotation.eulerAngles.z / 180.0f;
                         Rigidbody2D prb = particle.GetComponent<Rigidbody2D>();
-                        prb.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * cpad.explosion_force);
+                        prb.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * cpad.explosion_force * Random.Range(0.0f, 1.0f));
+                        // Old logic according to that a random force was applied to a particle
+                        // prb.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * cpad.explosion_force);
                     }
                 }
 				GameObjectManager.unbind(go);

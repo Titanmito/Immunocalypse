@@ -29,6 +29,9 @@ public class Load_Scene_System : FSystem {
     // We get the text GameObject at the end scene so we can write different messages on it
     private Family _text = FamilyManager.getFamily(new AllOfComponents(typeof(Msg_Fin), typeof(Text)));
 
+    private Family _Particles;
+    private Dictionary<int, Vector2> velocityDict;
+
     // the message we write at the end of a level
     private string text_fin = null;
 
@@ -55,7 +58,8 @@ public class Load_Scene_System : FSystem {
     private bool in_pause = false;
 
     // to be sure the scene is completely loaded before we start the systems again (yes, I tried without it and it doesn't work)
-    private float timeBeforeLoad = 0.5f, timeBeforeFin = 1.0f, progressBefore;
+    private float timeBeforeLoad = 0.5f, timeBeforeFin = 1.0f, progressBefore, timeBeforePause = 0.1f, pauseDetectionProgress = 0.0f, pauseDetectionReload = 1.0f;
+    private float explosion_force = 100.0f;
 
     // because there are buttons functions here that are binded to buttons that aren't on the masterscene 
     public static Load_Scene_System instance;
@@ -65,6 +69,7 @@ public class Load_Scene_System : FSystem {
         instance = this;
         buttonFamily.addEntryCallback(newButton);
         _text.addEntryCallback(end_text);
+        velocityDict = new Dictionary<int, Vector2>();
 
         // we get each of those menu GameObjects so it's easier to navigate between menus in the code
         foreach (GameObject go in _Menu)
@@ -115,6 +120,7 @@ public class Load_Scene_System : FSystem {
     // yes, it's big and ugly now.
     protected override void onProcess(int familiesUpdateCount)
     {
+        pauseDetectionProgress += Time.deltaTime;
         // test to see if we're at the title screen
         if (Input.GetMouseButton(0) && bienvenu.activeInHierarchy)
         {
@@ -159,17 +165,22 @@ public class Load_Scene_System : FSystem {
         }
 
         // Pause 
-        if (Input.GetKey(KeyCode.P) && !bienvenu.activeInHierarchy && !menu_init.activeInHierarchy && 
-            !selection.activeInHierarchy && !menu_help.activeInHierarchy && text_fin == null)
+        if (pauseDetectionProgress > pauseDetectionReload)
         {
-            if (!pause)
+            if (Input.GetKey(KeyCode.Escape) && !bienvenu.activeInHierarchy && !menu_init.activeInHierarchy &&
+                !selection.activeInHierarchy && !menu_help.activeInHierarchy && text_fin == null)
             {
-                progressBefore = 0.0f;
-                pause = true;
+                pauseDetectionProgress = 0.0f;
+                if (!pause)
+                {
+                    progressBefore = 0.0f;
+                    pause = true;
+
+                }
 
             }
-
         }
+
         this.pause_lvl();
 
         // test to see if we're at one of the levels
@@ -237,6 +248,7 @@ public class Load_Scene_System : FSystem {
     // Pauses and unpauses the game
     private void pause_lvl()
     {
+        float angle = 0.0f;
         if (pause)
         {
             progressBefore += Time.deltaTime;
@@ -244,16 +256,26 @@ public class Load_Scene_System : FSystem {
             { 
                 // we pause the systems that deal with level stuff
                 foreach (FSystem system in FSystemManager.updateSystems())
-                    {
+                {
                         system.Pause = true;
                         // Debug.Log(system.GetType().Name);
-                    }
+                }
                 foreach (FSystem system in FSystemManager.lateUpdateSystems())
                 {
                     system.Pause = true;
                     // Debug.Log(system.GetType().Name);
                 }
-                if (progressBefore > timeBeforeFin)
+                _Particles = FamilyManager.getFamily(new AnyOfTags("Particle"));
+                velocityDict.Clear();
+                foreach (GameObject particle in _Particles)
+                {
+                    Rigidbody2D rb2d = particle.GetComponent<Rigidbody2D>();
+                    // velocityDict.Add(particle.GetInstanceID(), new Vector2(rb2d.velocity.x, rb2d.velocity.y));
+                    // Debug.Log(velocityDict[particle.GetInstanceID()]);
+                    rb2d.velocity = Vector2.zero;
+                    // Debug.Log(velocityDict[particle.GetInstanceID()]);
+                }
+                if (progressBefore > timeBeforePause)
                 {
                     GameObjectManager.loadScene("Pause", LoadSceneMode.Additive);
                     pause = false;
@@ -262,7 +284,7 @@ public class Load_Scene_System : FSystem {
             }
             else
             {
-                if (progressBefore > timeBeforeFin)
+                if (progressBefore > timeBeforePause)
                 {
                     GameObjectManager.unloadScene("Pause");
                     pause = false;
@@ -278,6 +300,15 @@ public class Load_Scene_System : FSystem {
                     {
                         system.Pause = false;
                         // Debug.Log(system.GetType().Name);
+                    }
+                    foreach (GameObject particle in _Particles)
+                    {
+                        angle = Mathf.PI * particle.transform.rotation.eulerAngles.z / 180.0f;
+                        Rigidbody2D rb2d = particle.GetComponent<Rigidbody2D>();
+                        rb2d.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * explosion_force * Random.Range(0.5f, 1.0f));
+                        // rb2d.AddForce(velocityDict[particle.GetInstanceID()].normalized * explosion_force);
+                        // Debug.Log(velocityDict[particle.GetInstanceID()]);
+                        // rb2d.velocity = velocityDict[particle.GetInstanceID()];
                     }
                 }
             }

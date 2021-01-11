@@ -10,6 +10,6 @@ public class Create_Particles_After_Death : MonoBehaviour {
     public GameObject particles_prefab;
 
     // Force that would be used to the particle when it would be created
-    public float explosion_force = 100f;
+    public float explosion_force = 200f;
 
 }
