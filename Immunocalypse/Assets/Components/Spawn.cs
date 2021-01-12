@@ -24,14 +24,22 @@ public class Spawn : MonoBehaviour {
 	public float energy_prog = 0f;
 
 	// Factories for enemies, towers and special powers. New towers and enemies must have their factories added here.
+	// Enemies
 	public GameObject virus1_prefab; 
 	public GameObject virus2_prefab;
 	public GameObject bacterie1_prefab;
 	public GameObject bacterie2_prefab;
+	// Towers (do not forget to add a factory for their shadow too!)
 	public GameObject macro_prefab;
-	public GameObject lymp_prefab;
-
+	public GameObject macro_shadow_prefab;
+	public GameObject lymp1_prefab;
+	public GameObject lymp1_shadow_prefab;
+	public GameObject lymp2_prefab;
+	public GameObject lymp2_shadow_prefab;
+	// Special powers
 	public GameObject anti_prefab;
 	public GameObject vaci_prefab;
+
+
 
 }

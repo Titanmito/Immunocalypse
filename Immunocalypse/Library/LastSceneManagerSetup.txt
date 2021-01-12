@@ -11,15 +11,3 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Scenes/Scene3.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Scenes/Fin.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Scenes/Pause.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0

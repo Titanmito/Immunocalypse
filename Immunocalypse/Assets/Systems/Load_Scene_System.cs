@@ -18,6 +18,7 @@ public class Load_Scene_System : FSystem {
     private Family _AllAttackersGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack)));
     private Family _AllParticlesGO = FamilyManager.getFamily(new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
     private Family _AllLymphocytesGO = FamilyManager.getFamily(new AllOfComponents(typeof(Anticorps_Factory)));
+    private Family _ShadowGO = FamilyManager.getFamily(new AllOfComponents(typeof(Shadow)));
 
     // We need those to test if the level ended 
     private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Current_Lvl)));
@@ -137,21 +138,8 @@ public class Load_Scene_System : FSystem {
             if (progressBefore > timeBeforeLoad)
             {
                 // unpause all systems
-                foreach (FSystem system in FSystemManager.fixedUpdateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
-                foreach (FSystem system in FSystemManager.updateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
-                foreach (FSystem system in FSystemManager.lateUpdateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
+                unpause_systems();
+
                 // the level is loaded so start goes back to false
                 start = false;
             }
@@ -186,21 +174,8 @@ public class Load_Scene_System : FSystem {
             if (progressBefore > timeBeforeLoad)
             {
                 // unpause all systems
-                foreach (FSystem system in FSystemManager.fixedUpdateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
-                foreach (FSystem system in FSystemManager.updateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
-                foreach (FSystem system in FSystemManager.lateUpdateSystems())
-                {
-                    system.Pause = false;
-                    // Debug.Log(system.GetType().Name);
-                }
+                unpause_systems();
+
                 // the level is reloaded so replay goes back to false
                 replay = false;
             }
@@ -276,18 +251,10 @@ public class Load_Scene_System : FSystem {
         {
             progressBefore += Time.deltaTime;
             if (!in_pause) 
-            { 
+            {
                 // we pause the systems that deal with level stuff
-                foreach (FSystem system in FSystemManager.updateSystems())
-                {
-                        system.Pause = true;
-                        // Debug.Log(system.GetType().Name);
-                }
-                foreach (FSystem system in FSystemManager.lateUpdateSystems())
-                {
-                    system.Pause = true;
-                    // Debug.Log(system.GetType().Name);
-                }
+                pause_systems();
+
                 _Particles = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)));
                 foreach (GameObject particle in _Particles)
                 {
@@ -310,16 +277,8 @@ public class Load_Scene_System : FSystem {
                     in_pause = false;
 
                     // we unpause the systems that deal with level stuff
-                    foreach (FSystem system in FSystemManager.updateSystems())
-                    {
-                        system.Pause = false;
-                        // Debug.Log(system.GetType().Name);
-                    }
-                    foreach (FSystem system in FSystemManager.lateUpdateSystems())
-                    {
-                        system.Pause = false;
-                        // Debug.Log(system.GetType().Name);
-                    }
+                    unpause_systems();
+
                     foreach (GameObject particle in _Particles)
                     {
                         angle = Mathf.PI * particle.transform.rotation.eulerAngles.z / 180.0f;
@@ -336,16 +295,8 @@ public class Load_Scene_System : FSystem {
     private void fin_lvl()
     {
         // we pause the systems that deal with level stuff
-        foreach (FSystem system in FSystemManager.updateSystems())
-        {
-            system.Pause = true;
-            // Debug.Log(system.GetType().Name);
-        }
-        foreach (FSystem system in FSystemManager.lateUpdateSystems())
-        {
-            system.Pause = true;
-            // Debug.Log(system.GetType().Name);
-        }
+        pause_systems();
+
         progressBefore += Time.deltaTime;
         if (progressBefore > timeBeforeFin)
         {
@@ -361,27 +312,7 @@ public class Load_Scene_System : FSystem {
             GameObjectManager.loadScene("Fin", LoadSceneMode.Additive);
 
             // destroy any objects from the level that still exist
-            foreach (GameObject go in _AttackingGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllAttackersGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllParticlesGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllLymphocytesGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-                
-            }
+            destroy_lvl_objects();
 
             // fin scene is loaded so fin goes back to false
             fin = false;
@@ -398,10 +329,15 @@ public class Load_Scene_System : FSystem {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Energy_System.instance.Macro_Button(1); });
         }
-        if (go.name == "lymp_button")
+        if (go.name == "lymp1_button")
         {
             Button btn = go.GetComponent<Button>();
-            btn.onClick.AddListener(delegate { Energy_System.instance.Lymp_Button(1); });
+            btn.onClick.AddListener(delegate { Energy_System.instance.Lymp1_Button(1); });
+        }
+        if (go.name == "lymp2_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Energy_System.instance.Lymp2_Button(1); });
         }
         if (go.name == "anti_button")
         {
@@ -447,6 +383,11 @@ public class Load_Scene_System : FSystem {
         {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Load_Scene_System.instance.Back_From_Lvl_Button(1); });
+        }
+        if (go.name == "menu_from_lvl_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Load_Scene_System.instance.Menu_From_Lvl_Button(1); });
         }
 
         // end scene buttons
@@ -667,6 +608,7 @@ public class Load_Scene_System : FSystem {
         pause = true;
     }
 
+    // Restarts the level
     public void Replay_Pause_Button(int amount = 1)
     {
         replay = true;
@@ -700,27 +642,7 @@ public class Load_Scene_System : FSystem {
         joueur.GetComponent<Bank>().energy = init_energy;
 
         // destroy any objects from the level that still exist
-        foreach (GameObject go in _AttackingGO)
-        {
-            GameObjectManager.unbind(go);
-            Object.Destroy(go);
-        }
-        foreach (GameObject go in _AllAttackersGO)
-        {
-            GameObjectManager.unbind(go);
-            Object.Destroy(go);
-        }
-        foreach (GameObject go in _AllParticlesGO)
-        {
-            GameObjectManager.unbind(go);
-            Object.Destroy(go);
-        }
-        foreach (GameObject go in _AllLymphocytesGO)
-        {
-            GameObjectManager.unbind(go);
-            Object.Destroy(go);
-
-        }
+        destroy_lvl_objects();
 
         // start the counter to the reestart
         progressBefore = 0.0f;
@@ -729,6 +651,7 @@ public class Load_Scene_System : FSystem {
         GameObjectManager.loadScene(s, LoadSceneMode.Additive);
     }
 
+    // go back to the menu 
     public void Return_To_Menu_From_Pause_Button(int amount = 1)
     {
         in_pause = false;
@@ -736,16 +659,7 @@ public class Load_Scene_System : FSystem {
         string s = "Scene" + current_scene.ToString();
 
         // we pause the systems that deal with level stuff
-        foreach (FSystem system in FSystemManager.updateSystems())
-        {
-            system.Pause = true;
-            // Debug.Log(system.GetType().Name);
-        }
-        foreach (FSystem system in FSystemManager.lateUpdateSystems())
-        {
-            system.Pause = true;
-            // Debug.Log(system.GetType().Name);
-        }
+        pause_systems();
 
         //we unload the level and the Pause scene
         GameObjectManager.unloadScene(s);
@@ -760,6 +674,63 @@ public class Load_Scene_System : FSystem {
         joueur.GetComponent<Bank>().energy = init_energy;
 
         // destroy any objects from the level that still exist
+        destroy_lvl_objects();
+
+        menu_init.SetActive(true);
+        text_fin = null;
+    }
+
+    // quits the game
+    public void Exit_From_Pause_Button(int amount = 1)
+    {
+        Application.Quit();
+    }
+
+    // Level scene buttons (here because it controls the destruction of the level scene)
+
+    // go back to menu
+    public void Back_From_Lvl_Button(int amount = 1)
+    {
+        joueur.GetComponent<Has_Health>().health = -1;
+
+        // Only here because I haven't decided yet what the behavior of the button should be but if I put everything in comments it gets huge and the editor doesn't 
+        // recognizes the code and so I can't click on the plus button to hide it.
+        bool bla = false;
+        if (bla)
+        {
+            // we pause the systems that deal with level stuff
+            pause_systems();
+
+            // destroy any objects from the level that still exist
+            destroy_lvl_objects();
+
+            int max_health = joueur.GetComponent<Has_Health>().max_health;
+            joueur.GetComponent<Has_Health>().health = max_health;
+
+            int init_energy = joueur.GetComponent<Bank>().init_energy;
+            joueur.GetComponent<Bank>().energy = init_energy;
+
+            string s = "Scene" + current_scene.ToString();
+            GameObjectManager.unloadScene(s);
+            menu_init.SetActive(true);
+        }
+    }
+
+    // pause menu
+    public void Menu_From_Lvl_Button(int amount = 1)
+    {
+        pauseDetectionProgress = 0.0f;
+        if (!pause)
+        {
+            progressBefore = 0.0f;
+            pause = true;
+        }
+    }
+
+    // Functions to facilitate things
+
+    private void destroy_lvl_objects()
+    {
         foreach (GameObject go in _AttackingGO)
         {
             GameObjectManager.unbind(go);
@@ -779,71 +750,45 @@ public class Load_Scene_System : FSystem {
         {
             GameObjectManager.unbind(go);
             Object.Destroy(go);
+
         }
-
-        menu_init.SetActive(true);
-        text_fin = null;
-    }
-
-    public void Exit_From_Pause_Button(int amount = 1)
-    {
-        Application.Quit();
-    }
-    // Level scene buttons (here because it controls the destruction of the level scene)
-
-    public void Back_From_Lvl_Button(int amount = 1)
-    {
-        joueur.GetComponent<Has_Health>().health = -1;
-
-        // Only here because I haven't decided yet what the behavior of the button should be but if I put everything in comments it gets huge and the editor doesn't 
-        // recognizes the code and so I can't click on the plus button to hide it.
-        bool bla = false;
-        if (bla)
+        foreach (GameObject go in _ShadowGO)
         {
-            // we pause the systems that deal with level stuff
-            foreach (FSystem system in FSystemManager.updateSystems())
-            {
-                system.Pause = true;
-                // Debug.Log(system.GetType().Name);
-            }
-            foreach (FSystem system in FSystemManager.lateUpdateSystems())
-            {
-                system.Pause = true;
-                // Debug.Log(system.GetType().Name);
-            }
+            GameObjectManager.unbind(go);
+            Object.Destroy(go);
+        }
+    }
 
-            // destroy any objects from the level that still exist
-            foreach (GameObject go in _AttackingGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllAttackersGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllParticlesGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
-            }
-            foreach (GameObject go in _AllLymphocytesGO)
-            {
-                GameObjectManager.unbind(go);
-                Object.Destroy(go);
+    private void pause_systems()
+    {
+        foreach (FSystem system in FSystemManager.updateSystems())
+        {
+            system.Pause = true;
+            // Debug.Log(system.GetType().Name);
+        }
+        foreach (FSystem system in FSystemManager.lateUpdateSystems())
+        {
+            system.Pause = true;
+            // Debug.Log(system.GetType().Name);
+        }
+    }
 
-            }
-
-            int max_health = joueur.GetComponent<Has_Health>().max_health;
-            joueur.GetComponent<Has_Health>().health = max_health;
-
-            int init_energy = joueur.GetComponent<Bank>().init_energy;
-            joueur.GetComponent<Bank>().energy = init_energy;
-
-            string s = "Scene" + current_scene.ToString();
-            GameObjectManager.unloadScene(s);
-            menu_init.SetActive(true);
+    private void unpause_systems()
+    {
+        foreach (FSystem system in FSystemManager.fixedUpdateSystems())
+        {
+            system.Pause = false;
+            // Debug.Log(system.GetType().Name);
+        }
+        foreach (FSystem system in FSystemManager.updateSystems())
+        {
+            system.Pause = false;
+            // Debug.Log(system.GetType().Name);
+        }
+        foreach (FSystem system in FSystemManager.lateUpdateSystems())
+        {
+            system.Pause = false;
+            // Debug.Log(system.GetType().Name);
         }
     }
 }

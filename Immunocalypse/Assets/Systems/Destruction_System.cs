@@ -59,12 +59,13 @@ public class Destruction_System : FSystem {
                         angle = Mathf.PI * particle.transform.rotation.eulerAngles.z / 180.0f;
                         Rigidbody2D prb = particle.GetComponent<Rigidbody2D>();
                         prb.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * cpad.explosion_force * Random.Range(0.0f, 1.0f));
-                        // Old logic according to that a random force was applied to a particle
-                        // prb.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * cpad.explosion_force);
+
                     }
                 }
-				GameObjectManager.unbind(go);
+
+                GameObjectManager.unbind(go);
 				Object.Destroy(go);
+
 			}
 		}
 
@@ -87,7 +88,7 @@ public class Destruction_System : FSystem {
         }
 
         // This loop destroys all the particles after they live their lifespan
-        // ATTENTION This loop would probably force a RETURN OF THE METHOD that is why it is necessary to put it at the very end of this method !!!
+        // ATTENTION This loop would probably force a RETURN OF THE METHOD that is why it is necessary to put it at the very end of this method!!!
         foreach (GameObject go in _ParticlesAliveGO)
         {
             Lifespan ls = go.GetComponent<Lifespan>();

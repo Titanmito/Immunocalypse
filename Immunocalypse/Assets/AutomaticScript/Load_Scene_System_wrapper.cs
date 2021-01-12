@@ -74,4 +74,9 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Back_From_Lvl_Button", amount);
 	}
 
+	public void Menu_From_Lvl_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Menu_From_Lvl_Button", amount);
+	}
+
 }

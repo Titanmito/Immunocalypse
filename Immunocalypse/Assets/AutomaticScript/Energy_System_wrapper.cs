@@ -14,9 +14,14 @@ public class Energy_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Energy_System", "Macro_Button", amount);
 	}
 
-	public void Lymp_Button(System.Int32 amount)
+	public void Lymp1_Button(System.Int32 amount)
 	{
-		MainLoop.callAppropriateSystemMethod ("Energy_System", "Lymp_Button", amount);
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Lymp1_Button", amount);
+	}
+
+	public void Lymp2_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Energy_System", "Lymp2_Button", amount);
 	}
 
 	public void Anti_Button(System.Int32 amount)

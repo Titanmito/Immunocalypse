@@ -13,6 +13,8 @@ TagManager:
   - Wave
   - Particle
   - Special
+  - PauseText
+  - Shadow
   layers:
   - Default
   - TransparentFX

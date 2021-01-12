@@ -9,7 +9,7 @@ using System.Diagnostics;
 public class Energy_System : FSystem {
 	// This system manages the energy of the Joueur. For that it contabilizes and actualizes the energy each second and also each time a tower is bought or a special power is used.
 	// We use buttons to implement tower and special power buy.
-	// Special Powers are implemented here
+	// Special Powers are implemented here.
 	// In the end we keep the buttons that control which enemy is targeted by a vacine here because it's easier as all the Families we need are already in here.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
@@ -29,11 +29,15 @@ public class Energy_System : FSystem {
 	private Text energy_nb;
 
 	private Price macro_price;
-	private Price lymp_price;
+	private Price lymp1_price;
+	private Price lymp2_price;
 	private Price anti_price;
 	private Price vaci_price;
 
 	private Efficiency anti_eff;
+
+	private GameObject shadow;
+	private int price;
 
     public static Energy_System instance;
 
@@ -84,8 +88,9 @@ public class Energy_System : FSystem {
 		energy_nb = _Energy_nb.First().GetComponent<Text>();
 
 		macro_price = spawn.macro_prefab.GetComponent<Price>();
-        lymp_price = spawn.lymp_prefab.GetComponent<Price>();
-        anti_price = spawn.anti_prefab.GetComponent<Price>();
+        lymp1_price = spawn.lymp1_prefab.GetComponent<Price>();
+		lymp2_price = spawn.lymp2_prefab.GetComponent<Price>();
+		anti_price = spawn.anti_prefab.GetComponent<Price>();
 		vaci_price = spawn.vaci_prefab.GetComponent<Price>(); 
 
 		anti_eff = _Antibiotique.First().GetComponent<Efficiency>();
@@ -100,32 +105,79 @@ public class Energy_System : FSystem {
 		this.Des_Cancel_Button();
 		if (bank.energy >= macro_price.energy_cost && !bank.used)
 		{
+			// Creates and deactivates the tower
 			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_prefab);
 			go.transform.position = new Vector3(20.0f, 20.0f);
 			GameObjectManager.bind(go);
 			go.SetActive(false);
 
+			// Creates and set the shadow of the tower
+			shadow = UnityEngine.Object.Instantiate<GameObject>(spawn.macro_shadow_prefab);
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+			shadow.transform.position = worldPosition;
+			GameObjectManager.bind(shadow);
+
 			bank.energy -= macro_price.energy_cost;
 			bank.used = true;
+			price = macro_price.energy_cost;
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
 	}
 
-	// Used to control the button for buying of Lymphocyte towers.
-	public void Lymp_Button(int amount = 1)
+	// Used to control the buttons for buying Lymphocyte towers.
+	public void Lymp1_Button(int amount = 1)
 	{
 		this.Des_Cancel_Button();
-		if (bank.energy >= lymp_price.energy_cost && !bank.used)
+		if (bank.energy >= lymp1_price.energy_cost && !bank.used)
 		{
-			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp_prefab);
+			// Creates and deactivates the tower
+			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp1_prefab);
 			go.transform.position = new Vector3(20.0f, 20.0f);
 			GameObjectManager.bind(go);
 			go.SetActive(false);
 
-			bank.energy -= lymp_price.energy_cost;
+			// Creates and set the shadow of the tower
+			shadow = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp1_shadow_prefab);
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+			shadow.transform.position = worldPosition;
+			GameObjectManager.bind(shadow);
+
+			bank.energy -= lymp1_price.energy_cost;
 			bank.used = true;
+			price = lymp1_price.energy_cost;
+
+			// Actualizes the energy display to the player.
+			energy_nb.text = "energy: " + bank.energy.ToString();
+		}
+	}
+	public void Lymp2_Button(int amount = 1)
+	{
+		this.Des_Cancel_Button();
+		if (bank.energy >= lymp2_price.energy_cost && !bank.used)
+		{
+			// Creates and deactivates the tower
+			GameObject go = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp2_prefab);
+			go.transform.position = new Vector3(20.0f, 20.0f);
+			GameObjectManager.bind(go);
+			go.SetActive(false);
+
+			// Creates and set the shadow of the tower
+			shadow = UnityEngine.Object.Instantiate<GameObject>(spawn.lymp2_shadow_prefab);
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+			shadow.transform.position = worldPosition;
+			GameObjectManager.bind(shadow);
+
+			bank.energy -= lymp2_price.energy_cost;
+			bank.used = true;
+			price = lymp2_price.energy_cost;
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
@@ -256,21 +308,34 @@ public class Energy_System : FSystem {
 
 		// This part places the last tower bought and not placed, when the player clicks on the screen (in the position the player clicks).
 		// It reactivates the tower so that it's taken in consideration elsewhere. 
+		// It also moves the shadow of any tower.
 		if (bank.used)
         {
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+			shadow.transform.position = worldPosition;
+
 			if (Input.GetMouseButton(0) && _Inactive_tower.First())
             {
-				Vector3 mousePos = Input.mousePosition;
-				mousePos.z = Camera.main.nearClipPlane;
-				Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-
 				GameObject go = _Inactive_tower.First();
 				go.SetActive(true);
 				go.transform.position = worldPosition;
-
+				GameObjectManager.unbind(shadow);
+				UnityEngine.Object.Destroy(shadow);
 				bank.used = false;
 			}
-        }
+			if (Input.GetMouseButton(1) && _Inactive_tower.First())
+            {
+				bank.energy += price;
+				GameObject go = _Inactive_tower.First();
+				GameObjectManager.unbind(go);
+				UnityEngine.Object.Destroy(go);
+				GameObjectManager.unbind(shadow);
+				UnityEngine.Object.Destroy(shadow);
+				bank.used = false;
+			}
+		}
 		// Actualizes the energy display to the player.
 		energy_nb.text = "energy: " + bank.energy.ToString();
 
