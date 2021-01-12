@@ -193,14 +193,13 @@ public class Energy_System : FSystem {
 		{
 			bank.energy -= anti_price.energy_cost;
 			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Bacterie)));
-			float pourcentage = anti_eff.nb_used / 5.0f;
-			
+			Family _SpeEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
+			float pourcentage = anti_eff.nb_used / 10.0f;
 			//Debug.Log("pourcentage = " + pourcentage);
 
 			foreach (GameObject go in _Respawn)
 			{
 				float nb = UnityEngine.Random.Range(0.0f, 1.0f);
-				
 				//Debug.Log("nb = " + nb);
 
 				if (nb <= 1 - pourcentage)
@@ -209,6 +208,12 @@ public class Energy_System : FSystem {
 				}
 			}
 			anti_eff.nb_used += 1;
+
+			GameObject anti = _SpeEffectGO.First();
+			Color color = anti.GetComponent<Image>().color;
+			color = Color.green;
+			color.a = 0.5f;
+			anti.GetComponent<Image>().color = color;
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
@@ -258,12 +263,20 @@ public class Energy_System : FSystem {
 			bank.energy -= vaci_price.energy_cost;
 
 			Family _Des_buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AnyOfLayers(8));
+			Family _SpeEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
 
 			foreach (GameObject go in _Des_buttons)
 			{
 				go.SetActive(false);
 			}
 			spawn.nb_enemies[i] = 0;
+
+			GameObject vaci = _SpeEffectGO.First();
+			Color color = vaci.GetComponent<Image>().color;
+			color = Color.blue;
+			color.a = 0.5f;
+			vaci.GetComponent<Image>().color = color;
+
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 		}
