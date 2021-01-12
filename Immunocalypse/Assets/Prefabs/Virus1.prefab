@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 2.3
-  spawn_point: {x: -8.5, y: 0, z: 0}
+  spawn_point: {x: -11, y: 0, z: 0}
   target: {x: 9, y: 0, z: 0}
   arrived: 0
 --- !u!114 &8149925029586573216

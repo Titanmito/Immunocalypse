@@ -65,7 +65,7 @@ public class Movement_System : FSystem {
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
 			int type = go.GetComponent<Anticorps>().type;
-			float distance = 100000f;
+			float distance = 300000f;
 			// each type of anticorps only goes after one type of enemy
 			if (type == 1)
 			{

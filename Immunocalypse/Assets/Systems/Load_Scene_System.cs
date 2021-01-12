@@ -41,6 +41,7 @@ public class Load_Scene_System : FSystem {
     // here we get all menu we need to activate/deactivate to show things outside of the levels.
     private GameObject bienvenu;
     private GameObject menu_init;
+    private GameObject menu_encyclo;
     private GameObject menu_help;
     private GameObject selection;
 
@@ -87,6 +88,9 @@ public class Load_Scene_System : FSystem {
                     selection = go;
                     break;
                 case 3:
+                    menu_encyclo = go;
+                    break;
+                case 4:
                     menu_help = go;
                     break;
             }
@@ -95,6 +99,7 @@ public class Load_Scene_System : FSystem {
         // We start at the title screen
         bienvenu.SetActive(true);
         menu_init.SetActive(false);
+        menu_encyclo.SetActive(false);
         menu_help.SetActive(false);
         selection.SetActive(false);
 
@@ -155,7 +160,7 @@ public class Load_Scene_System : FSystem {
         if (pauseDetectionProgress > pauseDetectionReload)
         {
             if (Input.GetKey(KeyCode.Escape) && !bienvenu.activeInHierarchy && !menu_init.activeInHierarchy &&
-                !selection.activeInHierarchy && !menu_help.activeInHierarchy && text_fin == null)
+                !selection.activeInHierarchy && !menu_help.activeInHierarchy && !menu_encyclo.activeInHierarchy && text_fin == null)
             {
                 pauseDetectionProgress = 0.0f;
                 if (!pause)
@@ -182,7 +187,7 @@ public class Load_Scene_System : FSystem {
         }
 
         // test to see if we're at one of the levels
-        if (!bienvenu.activeInHierarchy && !menu_init.activeInHierarchy && !selection.activeInHierarchy && !menu_help.activeInHierarchy && !replay)
+        if (!bienvenu.activeInHierarchy && !menu_init.activeInHierarchy && !selection.activeInHierarchy && !menu_help.activeInHierarchy && !menu_encyclo.activeInHierarchy &&!replay)
         {
             GameObject spawn = _Spawn.First();
 
@@ -479,16 +484,14 @@ public class Load_Scene_System : FSystem {
         }
     }
 
-    // Goes to the first help screen
-    public void Help_Button(int amount = 1) 
+    // less repeated code haha
+    private void Help_Encyclo_Button(int type = 1) 
     {
-        menu_init.SetActive(false);
-        menu_help.SetActive(true);
         Family _HelpPages = FamilyManager.getFamily(new AllOfComponents(typeof(Help)));
         foreach (GameObject go in _HelpPages)
         {
             Help h = go.GetComponent<Help>();
-            if (h.help_nb == 0)
+            if (h.help_nb == 0 && h.type == type)
             {
                 go.SetActive(true);
             }
@@ -499,34 +502,58 @@ public class Load_Scene_System : FSystem {
         }
     }
 
-    // help menu buttons (back_button is also used in the selection menu)
+    // Goes to the first help screen
+    public void Help_Button(int amount = 1)
+    {
+        menu_init.SetActive(false);
+        menu_help.SetActive(true);
+        Help_Encyclo_Button(2);
+    }
+    // Goes to the first encyclopedia screen
+    public void Encyclo_Button(int amount = 1)
+    {
+        menu_init.SetActive(false);
+        menu_encyclo.SetActive(true);
+        Help_Encyclo_Button(1);
+    }
+
+    // help and encyclopedia menu buttons (back_button is also used in the selection menu)
     public void Back_Button(int obj = 1)
     {
-        // obj = 0 -> help menu
-        // obj = 1 -> selection menu
+        // obj = 0 -> selection menu
+        // obj = 1 -> encyclopedia menu
+        // obj = 2 -> help menu
 
         if (obj == 0)
         {
-            menu_help.SetActive(false);
+            selection.SetActive(false);
         }
         if (obj == 1)
         {
-            selection.SetActive(false);
+            menu_encyclo.SetActive(false);
         }
-
+        if (obj == 2)
+        {
+            menu_help.SetActive(false);
+        }
         menu_init.SetActive(true);
     }
 
-    // next page of the help menu (if exists) goes back to the menu if it doesn't
+    // next page of the help/encyclopedia menu (if it exists) goes back to the menu if it doesn't
     public void Next_Button(int obj = 1)
     {
         obj++;
         bool last = true;
+        int type = 1;
+        if (menu_help.activeSelf)
+        {
+            type = 2;
+        }
         Family _HelpPages = FamilyManager.getFamily(new AllOfComponents(typeof(Help)));
         foreach (GameObject go in _HelpPages)
         {
             Help h = go.GetComponent<Help>();
-            if (h.help_nb == obj)
+            if ((h.help_nb == obj) && (h.type == type))
             {
                 go.SetActive(true);
                 last = false;
@@ -536,9 +563,16 @@ public class Load_Scene_System : FSystem {
                 go.SetActive(false);
             }
         }
-        if (last)
+        //Debug.Log("active:" + menu_help.activeSelf.ToString());
+        //Debug.Log("last:" + last.ToString());
+        if (last && menu_help.activeSelf)
         {
             menu_help.SetActive(false);
+            menu_init.SetActive(true);
+        }
+        if (last && menu_encyclo.activeSelf)
+        {
+            menu_encyclo.SetActive(false);
             menu_init.SetActive(true);
         }
 

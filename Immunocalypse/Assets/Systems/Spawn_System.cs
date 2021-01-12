@@ -75,13 +75,16 @@ public class Spawn_System : FSystem {
             for (int j = 0; j < enemies.Length; j++)
             {
 				// We create as many of an type of enemy as the correspondant number in nb_enemies.
-				for (int i = 0; i < spawn.nb_enemies[j]; i++)
+				for (int i = 1; i <= spawn.nb_enemies[j]; i++)
 				{
 					GameObject go = UnityEngine.Object.Instantiate<GameObject>(enemies[j]);
 					go.GetComponent<Can_Move>().spawn_point = new Vector3(go.GetComponent<Can_Move>().spawn_point.x, UnityEngine.Random.Range(-1.0f, 1.0f));
                     GameObjectManager.bind(go);
                 }
-			}
+                // adding so that we have more enemies after
+                float new_spawn = spawn.nb_enemies[j] + spawn.add;
+                _Spawn.First().GetComponent<Spawn>().nb_enemies[j] = new_spawn;
+            }
 
 			spawn.spawn_prog = 0;
 			spawn.nb_waves--;

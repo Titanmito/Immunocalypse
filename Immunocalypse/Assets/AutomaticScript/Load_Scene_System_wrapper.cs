@@ -19,6 +19,11 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Help_Button", amount);
 	}
 
+	public void Encyclo_Button(System.Int32 amount)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Encyclo_Button", amount);
+	}
+
 	public void Back_Button(System.Int32 obj)
 	{
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Back_Button", obj);
