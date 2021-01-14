@@ -5,7 +5,8 @@ public class Active_Lvl_Buttons : MonoBehaviour {
 	// This facilitates the creation and modification of levels so that we have an increasing in complexity
 
 	public bool macro_button = true;
-	public bool lymp_button = true;
+	public bool lymp1_button = true;
+	public bool lymp2_button = true;
 
 	public bool anti_button = true;
 	public bool vaci_button = true;

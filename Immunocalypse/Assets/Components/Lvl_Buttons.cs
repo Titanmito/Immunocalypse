@@ -4,7 +4,8 @@ public class Lvl_Buttons : MonoBehaviour
 {
 	// Indicates which button present in levels we're dealing with.
 	// 0 -> macro_button (macrophage tower)
-	// 10 -> lymp_button (lymphocyte tower)
+	// 10 -> lymp1_button (lymphocyte1 tower, attacks virus)
+	// 10 -> lymp2_button (lymphocyte2 tower, attacks bacterie)
 	// 20 -> anti_button (antibiotique special power)
 	// 30 -> vaci_button (vaccine special power)
 	// 31 -> des_virus1 (uses the vaccine to the virus1 type of enemy)

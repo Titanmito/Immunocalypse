@@ -34,6 +34,11 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Next_Button", obj);
 	}
 
+	public void Before_Button(System.Int32 obj)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Before_Button", obj);
+	}
+
 	public void Dropdown(System.Int32 choix)
 	{
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Dropdown", choix);

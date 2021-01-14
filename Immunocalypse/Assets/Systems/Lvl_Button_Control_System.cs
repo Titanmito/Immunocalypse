@@ -40,13 +40,22 @@ public class Lvl_Button_Control_System : FSystem {
 					go.SetActive(ActButtons.macro_button);
 					break;
 				case 10:
-					go.SetActive(ActButtons.lymp_button);
+					go.SetActive(ActButtons.lymp1_button);
+					break;
+				case 11:
+					go.SetActive(ActButtons.lymp2_button);
 					break;
 				case 20:
 					go.SetActive(ActButtons.anti_button);
 					break;
 				case 30:
 					go.SetActive(ActButtons.vaci_button);
+					break;
+				case 40:
+					go.SetActive(ActButtons.des_cancel);
+					break;
+				case 50:
+					go.SetActive(ActButtons.back_from_lvl_button);
 					break;
 			}
 		}

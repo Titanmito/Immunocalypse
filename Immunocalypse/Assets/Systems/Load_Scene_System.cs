@@ -575,8 +575,48 @@ public class Load_Scene_System : FSystem {
             menu_encyclo.SetActive(false);
             menu_init.SetActive(true);
         }
-
     }
+
+    // previous page of the help/encyclopedia menu (if it exists) goes back to the menu if it doesn't
+    public void Before_Button(int obj = 1)
+    {
+        obj--;
+        int type = 1;
+        if (menu_help.activeSelf)
+        {
+            type = 2;
+        }
+        if (obj >= 0)
+        {
+            Family _HelpPages = FamilyManager.getFamily(new AllOfComponents(typeof(Help)));
+            foreach (GameObject go in _HelpPages)
+            {
+                Help h = go.GetComponent<Help>();
+                if ((h.help_nb == obj) && (h.type == type))
+                {
+                    go.SetActive(true);
+                }
+                else
+                {
+                    go.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            if (menu_help.activeSelf)
+            {
+                menu_help.SetActive(false);
+                menu_init.SetActive(true);
+            }
+            if (menu_encyclo.activeSelf)
+            {
+                menu_encyclo.SetActive(false);
+                menu_init.SetActive(true);
+            }
+        }
+    }
+
 
     // Selection of level dropdown
     public void Dropdown(int choix = 1)
