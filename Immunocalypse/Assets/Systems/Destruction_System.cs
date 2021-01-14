@@ -1,13 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using FYFY;
 
 public class Destruction_System : FSystem {
-	// This system manages the destruction of enemies.
+	// This system manages the destruction of enemies. It also controls the energy bonus the player gets each time they kill an enemy.
 	// The part controling the end of the level is implemented at Load_Scene_System!!
 
 	private Family _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Attack_J), typeof(Create_Particles_After_Death)));
 	private Family _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health), typeof(Lifespan)));
     private Family _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
+
+    private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
+    private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
+    private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+    private int energy_enemy;
+    private Bank bank;
+    private Text energy_nb;
+
     private float _DestroyParticlesProgress = 0.0f, _DestroyParticlesReload = 0.05f;
 
     public Destruction_System()
@@ -31,6 +40,13 @@ public class Destruction_System : FSystem {
         _EnemiesAliveGO = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Attack_J), typeof(Create_Particles_After_Death)));
         _AlliesAliveGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Has_Health), typeof(Lifespan)));
         _ParticlesAliveGO = FamilyManager.getFamily(new AnyOfTags("Particle"), new AllOfComponents(typeof(Lifespan)), new NoneOfComponents(typeof(Has_Health)));
+
+        _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
+        _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
+        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+        energy_enemy = _Spawn.First().GetComponent<Spawn>().energy_enemy;
+        bank = _Joueur.First().GetComponent<Bank>();
+        energy_nb = _Energy_nb.First().GetComponent<Text>();
     }
 
     protected override void onProcess(int familiesUpdateCount)
@@ -44,10 +60,17 @@ public class Destruction_System : FSystem {
 			Attack_J aj = go.GetComponent<Attack_J>();
             Create_Particles_After_Death cpad = go.GetComponent<Create_Particles_After_Death>();
 
-			// it destroys all enemies with negative or equal to zero energy and those who have already attacked (and aren't visible anymore).
-			if (hh.health <= 0 || aj.has_attacked)
-			{
-                // If an enemy has a component Create_Particles_After_Death it means that we must create particles in the place where it dies
+            // we give the bonus energy to the player.
+            if (hh.health <= 0)
+            {
+                bank.energy += energy_enemy;
+                // Actualizes the energy display to the player.
+                energy_nb.text = "energy: " + bank.energy.ToString();
+            }
+            // it destroys all enemies with negative or equal to zero energy and those who have already attacked (and aren't visible anymore).
+            if (hh.health <= 0 || aj.has_attacked)
+            {
+                // If an enemy has a component Create_Particles_After_Death it means that we must create particles in the place where it dies.
                 if (cpad != null)
                 {
                     for (int i = 0; i < cpad.particles_number; i++)
@@ -62,11 +85,9 @@ public class Destruction_System : FSystem {
 
                     }
                 }
-
                 GameObjectManager.unbind(go);
-				Object.Destroy(go);
-
-			}
+                Object.Destroy(go);
+            }
 		}
 
 		// destroy allies that should be destroyed.

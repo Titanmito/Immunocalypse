@@ -269,7 +269,7 @@ public class Energy_System : FSystem {
 			{
 				go.SetActive(false);
 			}
-			spawn.nb_enemies[i] = 0;
+			spawn.nb_enemies[i] = -1000;
 
 			GameObject vaci = _SpeEffectGO.First();
 			Color color = vaci.GetComponent<Image>().color;
