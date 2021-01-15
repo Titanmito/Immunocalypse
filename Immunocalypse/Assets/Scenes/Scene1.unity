@@ -1051,7 +1051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388982941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.37512714, y: -0.13189143, z: -0.24784845}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1071,16 +1071,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nb_waves: 5
   nb_enemies:
-  - 2
-  - 0
   - 1
-  - 0
+  - -100
+  - 1
+  - -100
+  hp_enemies: 140000001e0000006400000050000000
+  atk_enemies: 04000000050000000f0000000d000000
+  speed_enemies:
+  - 1.7
+  - 1.5
+  - 0.9
+  - 1
+  size_enemies:
+  - 0.25
+  - 0.3
+  - 0.4
+  - 0.5
   energy_sec: 1
   energy_enemy: 5
   wait_time: 10
-  spawn_prog: 9
+  spawn_prog: 10
   energy_prog: 0
-  add: 0.2
+  add: 0.4
   virus1_prefab: {fileID: 8149925029586573221, guid: a68f95fa72cefd649813f8e00bf6a2f9, type: 3}
   virus2_prefab: {fileID: 8149925029586573221, guid: d19b9227e38a183469f6a29be630aa24, type: 3}
   bacterie1_prefab: {fileID: 7961487623211551741, guid: 275903944ad70644fbc64c6845a4bdb5, type: 3}
@@ -1106,8 +1118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macro_button: 1
-  lymp1_button: 0
-  lymp2_button: 0
+  lymp1_button: 1
+  lymp2_button: 1
   anti_button: 0
   vaci_button: 0
   des_virus1: 0

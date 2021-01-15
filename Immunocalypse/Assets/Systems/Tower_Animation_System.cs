@@ -3,7 +3,7 @@ using FYFY;
 using System.Collections;
 
 public class Tower_Animation_System : FSystem {
-
+    // This system controls the "moving" of the towers aka they get rhythmically bigger and smaller.
     private Family _TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AnyOfComponents(typeof(Price), typeof(Can_Attack)));
 
     public Tower_Animation_System()

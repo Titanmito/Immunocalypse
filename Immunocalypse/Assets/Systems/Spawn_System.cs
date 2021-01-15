@@ -77,11 +77,28 @@ public class Spawn_System : FSystem {
 				// We create as many of an type of enemy as the correspondant number in nb_enemies.
 				for (int i = 1; i <= spawn.nb_enemies[j]; i++)
 				{
+                    // Creation of an enemy
 					GameObject go = UnityEngine.Object.Instantiate<GameObject>(enemies[j]);
-					go.GetComponent<Can_Move>().spawn_point = new Vector3(go.GetComponent<Can_Move>().spawn_point.x, UnityEngine.Random.Range(-1.0f, 1.0f));
+
+                    // we put the enemy in the starting place
+                    go.GetComponent<Can_Move>().spawn_point = new Vector3(go.GetComponent<Can_Move>().spawn_point.x, UnityEngine.Random.Range(-1.0f, 1.0f));
+
+                    // we set its speed
+                    go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j];
+
+                    // we set its health
+                    go.GetComponent<Has_Health>().max_health = spawn.hp_enemies[j];
+                    go.GetComponent<Has_Health>().health = spawn.hp_enemies[j];
+
+                    // we set its attack strength 
+                    go.GetComponent<Attack_J>().strength = spawn.atk_enemies[j];
+
+                    // we set its size
+                    go.transform.localScale = new Vector3(spawn.size_enemies[j], spawn.size_enemies[j], 1);
+
                     GameObjectManager.bind(go);
                 }
-                // adding so that we have more enemies after
+                // adding spawn.add so that we have more enemies in later waves
                 float new_spawn = spawn.nb_enemies[j] + spawn.add;
                 _Spawn.First().GetComponent<Spawn>().nb_enemies[j] = new_spawn;
             }

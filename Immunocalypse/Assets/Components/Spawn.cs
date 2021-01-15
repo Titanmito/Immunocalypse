@@ -2,17 +2,30 @@
 
 public class Spawn : MonoBehaviour {
 	// Component present in the Level entity that contains information about how many and which enemies will be created in a level. 
-	// It also has the factories needed to create entities that aren't fixed in number (so, enemies and towers).
+	// This component together with Active_Lvl_Buttons allows us to control what happens in a level (except the way enemies go).
+	// It also has the factories needed to create entities (so, enemies, towers and special powers).
 
 	// The number of waves in a level. 
 	public int nb_waves = 10;
 
-	// Each wave will have nb_enemies[i] of each i enemy.
 	// i = 0 -> virus1
 	// i = 1 -> virus2
 	// i = 2 -> bacterie1
 	// i = 3 -> bacterie2
+	// Each wave will have nb_enemies[i] of each i enemy.
 	public float[] nb_enemies = new float[4]{2, 3, 1, 1};
+
+	// How much HP each type of enemy has in this level.
+	public int[] hp_enemies = new int[4] {20, 30, 100, 80};
+
+	// How much damage each type of enemy has in this level.
+	public int[] atk_enemies = new int[4] {4, 5, 15, 13};
+
+	// How much speed each type of enemy has in this level.
+	public float[] speed_enemies = new float[4] { 1.7f, 1.5f, 1, 1.2f };
+
+	// The size of each type of enemy.
+	public float[] size_enemies = new float[4] {0.25f, 0.3f, 0.4f, 0.5f};
 
 	// How many energy the player gains each second.
 	public int energy_sec = 1;

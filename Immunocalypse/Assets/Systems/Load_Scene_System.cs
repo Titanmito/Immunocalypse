@@ -44,6 +44,7 @@ public class Load_Scene_System : FSystem {
     private GameObject menu_encyclo;
     private GameObject menu_help;
     private GameObject selection;
+    private GameObject charging_lvl;
 
     private GameObject joueur;
 
@@ -93,6 +94,9 @@ public class Load_Scene_System : FSystem {
                 case 4:
                     menu_help = go;
                     break;
+                case 5:
+                    charging_lvl = go;
+                    break;
             }
         }
 
@@ -102,6 +106,7 @@ public class Load_Scene_System : FSystem {
         menu_encyclo.SetActive(false);
         menu_help.SetActive(false);
         selection.SetActive(false);
+        charging_lvl.SetActive(false);
 
         joueur = _Joueur.First();
         max_scene = joueur.GetComponent<Current_Lvl>().max_scene;
@@ -133,18 +138,37 @@ public class Load_Scene_System : FSystem {
             menu_init.SetActive(true);
         }
 
+        // test to see if we're goint to start a level
+        if (Input.GetMouseButton(0) && charging_lvl.activeInHierarchy)
+        {
+            charging_lvl.SetActive(false);
+            // unpause all systems
+            unpause_systems();
+        }
+
         // test to see if the player choose a level (this is where we unpause the systems after the creation of the level scene)
         // this is necessary because if we try to unpause the systems just after the creation os the level scene, BAD THINGS HAPPEN 
         // (it seems not everything is created at the same time and the systems can't find necessary GameObjects)
         if (start)
         {
+            charging_lvl.SetActive(true);
+            Family _textGO = FamilyManager.getFamily(new AllOfComponents(typeof(Tips), typeof(Text)));
+            foreach (GameObject tgo in _textGO)
+            {
+                if (tgo.GetComponent<Tips>().lvl_nb == current_scene)
+                {
+                    tgo.SetActive(true);
+                }
+                else
+                {
+                    tgo.SetActive(false);
+                }
+            }
+
             progressBefore += Time.deltaTime;
             // test to see if enough time has passed after the creation of the level scene, we can unpause the systems
             if (progressBefore > timeBeforeLoad)
             {
-                // unpause all systems
-                unpause_systems();
-
                 // the level is loaded so start goes back to false
                 start = false;
             }

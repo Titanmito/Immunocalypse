@@ -62,6 +62,10 @@ public class Attack_System : FSystem
 				{
 					h_e.health -= ca.strength;
 					ca.last_attack = 0f;
+
+					// changes the color of the tower to indicate it just attacked
+					SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
+					sr.color = new Color(1, 0, 0, 1);
 				}
 			}
 		}
