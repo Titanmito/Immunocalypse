@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nb_waves: 5
   nb_enemies:
-  - 1
+  - -100
   - -100
   - 1
   - -100
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   speed_enemies:
   - 1.7
   - 1.5
-  - 0.9
+  - 1
   - 1
   size_enemies:
   - 0.25
@@ -1089,6 +1089,7 @@ MonoBehaviour:
   - 0.5
   energy_sec: 1
   energy_enemy: 5
+  energy_start: 75
   wait_time: 10
   spawn_prog: 10
   energy_prog: 0
@@ -1118,8 +1119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macro_button: 1
-  lymp1_button: 1
-  lymp2_button: 1
+  lymp1_button: 0
+  lymp2_button: 0
   anti_button: 0
   vaci_button: 0
   des_virus1: 0

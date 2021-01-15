@@ -139,7 +139,7 @@ public class Load_Scene_System : FSystem {
         }
 
         // test to see if we're goint to start a level
-        if (Input.GetMouseButton(0) && charging_lvl.activeInHierarchy)
+        if (Input.GetMouseButton(0) && charging_lvl.activeInHierarchy && !start)
         {
             charging_lvl.SetActive(false);
             // unpause all systems
@@ -171,6 +171,10 @@ public class Load_Scene_System : FSystem {
             {
                 // the level is loaded so start goes back to false
                 start = false;
+                // we set the starting energy and current energy in the bank 
+                int energy = _Spawn.First().GetComponent<Spawn>().energy_start;
+                joueur.GetComponent<Bank>().energy = energy;
+                joueur.GetComponent<Bank>().init_energy = energy;
             }
         }
 
@@ -768,8 +772,6 @@ public class Load_Scene_System : FSystem {
         bank.used = false;
         int max_health = joueur.GetComponent<Has_Health>().max_health;
         joueur.GetComponent<Has_Health>().health = max_health;
-        int init_energy = joueur.GetComponent<Bank>().init_energy;
-        joueur.GetComponent<Bank>().energy = init_energy;
 
         // destroy any objects from the level that still exist
         destroy_lvl_objects();
@@ -790,28 +792,6 @@ public class Load_Scene_System : FSystem {
     public void Back_From_Lvl_Button(int amount = 1)
     {
         joueur.GetComponent<Has_Health>().health = -1;
-
-        // Only here because I haven't decided yet what the behavior of the button should be but if I put everything in comments it gets huge and the editor doesn't 
-        // recognizes the code and so I can't click on the plus button to hide it.
-        bool bla = false;
-        if (bla)
-        {
-            // we pause the systems that deal with level stuff
-            pause_systems();
-
-            // destroy any objects from the level that still exist
-            destroy_lvl_objects();
-
-            int max_health = joueur.GetComponent<Has_Health>().max_health;
-            joueur.GetComponent<Has_Health>().health = max_health;
-
-            int init_energy = joueur.GetComponent<Bank>().init_energy;
-            joueur.GetComponent<Bank>().energy = init_energy;
-
-            string s = "Scene" + current_scene.ToString();
-            GameObjectManager.unloadScene(s);
-            menu_init.SetActive(true);
-        }
     }
 
     // pause menu

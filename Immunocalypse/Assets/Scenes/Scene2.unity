@@ -1069,18 +1069,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f107205d7f54d498b6063511a2ace8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nb_waves: 10
+  nb_waves: 6
   nb_enemies:
-  - 3
-  - 2
+  - -100
+  - -100
   - 1
-  - 0
+  - 2
+  hp_enemies: 140000001e0000006400000050000000
+  atk_enemies: 04000000050000000f0000000a000000
+  speed_enemies:
+  - 1.7
+  - 1.5
+  - 1
+  - 1.2
+  size_enemies:
+  - 0.25
+  - 0.3
+  - 0.4
+  - 0.5
   energy_sec: 1
   energy_enemy: 5
+  energy_start: 150
   wait_time: 10
-  spawn_prog: 8
+  spawn_prog: 10
   energy_prog: 0
-  add: 0.2
+  add: 0.3
   virus1_prefab: {fileID: 8149925029586573221, guid: a68f95fa72cefd649813f8e00bf6a2f9, type: 3}
   virus2_prefab: {fileID: 8149925029586573221, guid: d19b9227e38a183469f6a29be630aa24, type: 3}
   bacterie1_prefab: {fileID: 7961487623211551741, guid: 275903944ad70644fbc64c6845a4bdb5, type: 3}
@@ -1106,9 +1119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macro_button: 1
-  lymp1_button: 1
+  lymp1_button: 0
   lymp2_button: 0
-  anti_button: 1
+  anti_button: 0
   vaci_button: 0
   des_virus1: 0
   des_virus2: 0
@@ -1910,7 +1923,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 64409961e3983614a8c62a041b4037b0, type: 3}
-  m_Color: {r: 0.1652189, g: 0.8514012, b: 0.8584906, a: 1}
+  m_Color: {r: 0.29622638, g: 0.99204797, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

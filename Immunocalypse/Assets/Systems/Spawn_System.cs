@@ -83,8 +83,11 @@ public class Spawn_System : FSystem {
                     // we put the enemy in the starting place
                     go.GetComponent<Can_Move>().spawn_point = new Vector3(go.GetComponent<Can_Move>().spawn_point.x, UnityEngine.Random.Range(-1.0f, 1.0f));
 
+                    // we set its target
+                    go.GetComponent<Can_Move>().target = new Vector3(go.GetComponent<Can_Move>().target.x, UnityEngine.Random.Range(-1.0f, 1.0f));
+
                     // we set its speed
-                    go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j];
+                    go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j] + UnityEngine.Random.Range(0.0f, 0.2f);
 
                     // we set its health
                     go.GetComponent<Has_Health>().max_health = spawn.hp_enemies[j];
@@ -94,7 +97,8 @@ public class Spawn_System : FSystem {
                     go.GetComponent<Attack_J>().strength = spawn.atk_enemies[j];
 
                     // we set its size
-                    go.transform.localScale = new Vector3(spawn.size_enemies[j], spawn.size_enemies[j], 1);
+                    float z = +UnityEngine.Random.Range(-0.1f, 0.1f);
+                    go.transform.localScale = new Vector3(spawn.size_enemies[j] + z, spawn.size_enemies[j] + z, 1);
 
                     GameObjectManager.bind(go);
                 }

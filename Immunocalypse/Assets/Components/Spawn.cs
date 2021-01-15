@@ -33,6 +33,9 @@ public class Spawn : MonoBehaviour {
 	// How many energy the player gains for each enemy killed.
 	public int energy_enemy = 5;
 
+	// How many energy the player start with.
+	public int energy_start = 200;
+
 	// How many seconds between each wave.
 	public float wait_time = 10f;
 	// How many seconds since the last wave.
