@@ -4,6 +4,7 @@ using FYFY;
 using UnityEngine.UI;
 
 using System.Collections.Generic;
+using System.Linq;
 
 public class Load_Scene_System : FSystem {
     // Basically controls everything lol
@@ -31,6 +32,13 @@ public class Load_Scene_System : FSystem {
     private Family _text = FamilyManager.getFamily(new AllOfComponents(typeof(Msg_Fin), typeof(Text)));
 
     private Family _Particles;
+
+    private Family _AudioSources = FamilyManager.getFamily(new AllOfComponents(typeof(AudioSource)));
+    private static string main_theme_audio_source_name = "MainThemeAudioSource", level_in_progress_audio_source_name = "LevelInProgressAudioSource",
+        level_completed_audio_source_name = "LevelCompletedAudioSource", level_failed_audio_source_name = "LevelFailedAudioSource";
+    private string[] audio_source_names = {
+        main_theme_audio_source_name, level_in_progress_audio_source_name, level_completed_audio_source_name, level_failed_audio_source_name};
+    private Dictionary<string, AudioSource> audio_sources_dict;
 
     // the message we write at the end of a level
     private string text_fin = null;
@@ -113,6 +121,11 @@ public class Load_Scene_System : FSystem {
         unlocked_scene = joueur.GetComponent<Current_Lvl>().unlocked_scene;
         current_scene = joueur.GetComponent<Current_Lvl>().current_scene;
 
+        audio_sources_dict = new Dictionary<string, AudioSource>();
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            if (audio_source_names.Contains(go_with_audio_source.name))
+                audio_sources_dict[go_with_audio_source.name] = go_with_audio_source.GetComponent<AudioSource>();
+
     }
     // Use this to update member variables when system pause. 
     // Advice: avoid to update your families inside this function.
@@ -144,6 +157,8 @@ public class Load_Scene_System : FSystem {
             charging_lvl.SetActive(false);
             // unpause all systems
             unpause_systems();
+            audio_sources_dict[main_theme_audio_source_name].Stop();
+            audio_sources_dict[level_in_progress_audio_source_name].Play();
         }
 
         // test to see if the player choose a level (this is where we unpause the systems after the creation of the level scene)
@@ -230,6 +245,8 @@ public class Load_Scene_System : FSystem {
                     fin = true;
                     text_fin = "Niveau échoué !";
                     lost = true;
+                    audio_sources_dict[level_in_progress_audio_source_name].Stop();
+                    audio_sources_dict[level_failed_audio_source_name].Play();
                 }
                 this.fin_lvl();
             }
@@ -253,6 +270,8 @@ public class Load_Scene_System : FSystem {
                                 unlocked_scene++;
                                 joueur.GetComponent<Current_Lvl>().unlocked_scene = unlocked_scene;
                             }
+                            audio_sources_dict[level_in_progress_audio_source_name].Stop();
+                            audio_sources_dict[level_completed_audio_source_name].Play();
                         }
                         this.fin_lvl();
                     }
@@ -272,6 +291,7 @@ public class Load_Scene_System : FSystem {
                         }
                     }
                 }
+                // Debug.Log("Level win!");
             }
         }
     }
@@ -671,6 +691,8 @@ public class Load_Scene_System : FSystem {
         GameObjectManager.unloadScene("Fin");
         menu_init.SetActive(true);
         text_fin = null;
+        Debug.Log("Returned to menu");
+        audio_sources_dict[main_theme_audio_source_name].Play();
     }
 
     // Loads next level (the button is deactivated if the player can't do this or if there isn't a next level)
@@ -778,6 +800,10 @@ public class Load_Scene_System : FSystem {
 
         menu_init.SetActive(true);
         text_fin = null;
+
+
+        audio_sources_dict[level_in_progress_audio_source_name].Stop();
+        audio_sources_dict[main_theme_audio_source_name].Play();
     }
 
     // quits the game

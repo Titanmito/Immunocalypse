@@ -1119,14 +1119,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macro_button: 1
-  lymp1_button: 0
-  lymp2_button: 0
-  anti_button: 0
-  vaci_button: 0
-  des_virus1: 0
-  des_virus2: 0
-  des_bacterie1: 0
-  des_bacterie2: 0
+  lymp1_button: 1
+  lymp2_button: 1
+  anti_button: 1
+  vaci_button: 1
+  des_virus1: 1
+  des_virus2: 1
+  des_bacterie1: 1
+  des_bacterie2: 1
   des_cancel: 1
   back_from_lvl_button: 1
 --- !u!1 &411846676

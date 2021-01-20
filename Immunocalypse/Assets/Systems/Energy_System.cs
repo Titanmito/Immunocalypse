@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using FYFY;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 using System.Diagnostics;
 
@@ -39,12 +41,22 @@ public class Energy_System : FSystem {
 	private GameObject shadow;
 	private int price;
 
+    private Family _AudioSources = FamilyManager.getFamily(new AllOfComponents(typeof(AudioSource)));
+    private static string antibiotic_audio_source_name = "AntibioticAudioSource", vaccine_audio_source_name = "VaccineAudioSource";
+    private string[] audio_source_names = {antibiotic_audio_source_name, vaccine_audio_source_name};
+    private Dictionary<string, AudioSource> audio_sources_dict;
+
     public static Energy_System instance;
 
     public Energy_System()
 	{
         instance = this;
         // this.Pause = true;
+
+        audio_sources_dict = new Dictionary<string, AudioSource>();
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            if (audio_source_names.Contains(go_with_audio_source.name))
+                audio_sources_dict[go_with_audio_source.name] = go_with_audio_source.GetComponent<AudioSource>();
     }
 
     protected override void onPause(int currentFrame)
@@ -81,7 +93,7 @@ public class Energy_System : FSystem {
 		_Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button)), new NoneOfLayers(8, 9),
 		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
-	_Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+	    _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
 
         spawn = _Spawn.First().GetComponent<Spawn>();
 		bank = _Joueur.First().GetComponent<Bank>();
@@ -217,7 +229,9 @@ public class Energy_System : FSystem {
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
-		}
+
+            audio_sources_dict[antibiotic_audio_source_name].Play();
+        }
 	}
 
 	// Controls the vaci_button
@@ -279,7 +293,9 @@ public class Energy_System : FSystem {
 
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
-		}
+
+            audio_sources_dict[vaccine_audio_source_name].Play();
+        }
 	}
 	// Controls des_virus1 button
 	public void Des_Virus1_Button(int type = 1)
