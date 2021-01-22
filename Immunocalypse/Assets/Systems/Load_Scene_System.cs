@@ -35,10 +35,23 @@ public class Load_Scene_System : FSystem {
 
     private Family _AudioSources = FamilyManager.getFamily(new AllOfComponents(typeof(AudioSource)));
     private static string main_theme_audio_source_name = "MainThemeAudioSource", level_in_progress_audio_source_name = "LevelInProgressAudioSource",
-        level_completed_audio_source_name = "LevelCompletedAudioSource", level_failed_audio_source_name = "LevelFailedAudioSource";
+        level_completed_audio_source_name = "LevelCompletedAudioSource", level_failed_audio_source_name = "LevelFailedAudioSource",
+        antibiotic_audio_source_name = "AntibioticAudioSource", vaccine_audio_source_name = "VaccineAudioSource",
+        antibody_hit_audio_source_name = "AntibodyHitAudioSource", macrophage_hit_audio_source_name = "MacrophageHitAudioSource";
     private string[] audio_source_names = {
-        main_theme_audio_source_name, level_in_progress_audio_source_name, level_completed_audio_source_name, level_failed_audio_source_name};
+        main_theme_audio_source_name, level_in_progress_audio_source_name, level_completed_audio_source_name, level_failed_audio_source_name,
+        antibiotic_audio_source_name, vaccine_audio_source_name, antibody_hit_audio_source_name, macrophage_hit_audio_source_name };
+    private string[] sounds_audio_source_names = {
+        antibiotic_audio_source_name, vaccine_audio_source_name, antibody_hit_audio_source_name, macrophage_hit_audio_source_name,
+        level_completed_audio_source_name, level_failed_audio_source_name };
+    private string[] music_audio_source_names = {
+        main_theme_audio_source_name, level_in_progress_audio_source_name};
     private Dictionary<string, AudioSource> audio_sources_dict;
+    private Dictionary<string, bool> was_playing_before_mute;
+    private Dictionary<string, GameObject> go_s_with_audio_source;
+
+    public bool musicMuted = false, soundsMuted = false;
+    private Family _MuteCanvas = FamilyManager.getFamily(new AllOfComponents(typeof(Mute_Canvas)));
 
     // the message we write at the end of a level
     private string text_fin = null;
@@ -71,6 +84,10 @@ public class Load_Scene_System : FSystem {
     // to be sure the scene is completely loaded before we start the systems again (yes, I tried without it and it doesn't work)
     private float timeBeforeLoad = 0.5f, timeBeforeFin = 1.0f, progressBefore, timeBeforePause = 0.1f, pauseDetectionProgress = 0.0f, pauseDetectionReload = 1.0f;
     private float explosion_force = 100.0f;
+
+    //private string muteSoundButtonName = "MuteSoundButton", muteMusicButtonName = "MuteMusicButton";
+    //private Vector3 muteSoundButtonPositionOnLevel, muteMusicButtonPositionOnLevel, muteSoundButtonPositionInMenu, muteMusicButtonPositionInMenu,
+    //    muteSoundButtonPositionHelpOrEnc, muteMusicButtonPositionHelpOrEnc;
 
     // because there are buttons functions here that are binded to buttons that aren't on the masterscene 
     public static Load_Scene_System instance;
@@ -116,6 +133,18 @@ public class Load_Scene_System : FSystem {
         selection.SetActive(false);
         charging_lvl.SetActive(false);
 
+        //muteSoundButtonPositionOnLevel = new Vector3(961.3f, 529.5f, 0.0f);
+        //muteMusicButtonPositionOnLevel = new Vector3(961.3f, 461.9f, 0.0f);
+
+        //muteSoundButtonPositionInMenu = new Vector3(391.6f, 564.0f, 0.0f);
+        //muteMusicButtonPositionInMenu = new Vector3(642.6f, 564.0f, 0.0f);
+
+        //muteSoundButtonPositionHelpOrEnc = new Vector3(955.5f, 507.9f, 0.0f);
+        //muteMusicButtonPositionHelpOrEnc = new Vector3(955.5f, 436.2f, 0.0f);
+
+        foreach (GameObject m_canvas in _MuteCanvas)
+            m_canvas.SetActive(false);
+
         joueur = _Joueur.First();
         max_scene = joueur.GetComponent<Current_Lvl>().max_scene;
         unlocked_scene = joueur.GetComponent<Current_Lvl>().unlocked_scene;
@@ -125,6 +154,10 @@ public class Load_Scene_System : FSystem {
         foreach (GameObject go_with_audio_source in _AudioSources)
             if (audio_source_names.Contains(go_with_audio_source.name))
                 audio_sources_dict[go_with_audio_source.name] = go_with_audio_source.GetComponent<AudioSource>();
+        go_s_with_audio_source = new Dictionary<string, GameObject>();
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            go_s_with_audio_source[go_with_audio_source.name] = go_with_audio_source;
+        was_playing_before_mute = new Dictionary<string, bool>();
 
     }
     // Use this to update member variables when system pause. 
@@ -149,6 +182,10 @@ public class Load_Scene_System : FSystem {
         {
             bienvenu.SetActive(false);
             menu_init.SetActive(true);
+            foreach (GameObject m_canvas in _MuteCanvas)
+                m_canvas.SetActive(true);
+            //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionInMenu;
+            //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionInMenu;
         }
 
         // test to see if we're goint to start a level
@@ -157,8 +194,18 @@ public class Load_Scene_System : FSystem {
             charging_lvl.SetActive(false);
             // unpause all systems
             unpause_systems();
-            audio_sources_dict[main_theme_audio_source_name].Stop();
-            audio_sources_dict[level_in_progress_audio_source_name].Play();
+            if (go_s_with_audio_source[main_theme_audio_source_name].activeSelf)
+                audio_sources_dict[main_theme_audio_source_name].Stop();
+            else
+                was_playing_before_mute[main_theme_audio_source_name] = false;
+            if (go_s_with_audio_source[level_in_progress_audio_source_name].activeSelf)
+                audio_sources_dict[level_in_progress_audio_source_name].Play();
+            else
+                was_playing_before_mute[level_in_progress_audio_source_name] = true;
+            foreach (GameObject m_canvas in _MuteCanvas)
+                m_canvas.SetActive(false);
+            //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionOnLevel;
+            //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionOnLevel;
         }
 
         // test to see if the player choose a level (this is where we unpause the systems after the creation of the level scene)
@@ -245,8 +292,12 @@ public class Load_Scene_System : FSystem {
                     fin = true;
                     text_fin = "Niveau échoué !";
                     lost = true;
-                    audio_sources_dict[level_in_progress_audio_source_name].Stop();
-                    audio_sources_dict[level_failed_audio_source_name].Play();
+                    if (go_s_with_audio_source[level_in_progress_audio_source_name].activeSelf)
+                        audio_sources_dict[level_in_progress_audio_source_name].Stop();
+                    else
+                        was_playing_before_mute[level_in_progress_audio_source_name] = false;
+                    if (go_s_with_audio_source[level_failed_audio_source_name].activeSelf)
+                        audio_sources_dict[level_failed_audio_source_name].Play();
                 }
                 this.fin_lvl();
             }
@@ -270,8 +321,12 @@ public class Load_Scene_System : FSystem {
                                 unlocked_scene++;
                                 joueur.GetComponent<Current_Lvl>().unlocked_scene = unlocked_scene;
                             }
-                            audio_sources_dict[level_in_progress_audio_source_name].Stop();
-                            audio_sources_dict[level_completed_audio_source_name].Play();
+                            if (go_s_with_audio_source[level_in_progress_audio_source_name].activeSelf)
+                                audio_sources_dict[level_in_progress_audio_source_name].Stop();
+                            else
+                                was_playing_before_mute[level_in_progress_audio_source_name] = false;
+                            if (go_s_with_audio_source[level_completed_audio_source_name].activeSelf)
+                                audio_sources_dict[level_completed_audio_source_name].Play();
                         }
                         this.fin_lvl();
                     }
@@ -363,6 +418,8 @@ public class Load_Scene_System : FSystem {
             string s = "Scene" + current_scene.ToString();
             GameObjectManager.unloadScene(s);
             GameObjectManager.loadScene("Fin", LoadSceneMode.Additive);
+            foreach (GameObject m_canvas in _MuteCanvas)
+                m_canvas.SetActive(true);
 
             // destroy any objects from the level that still exist
             destroy_lvl_objects();
@@ -442,6 +499,16 @@ public class Load_Scene_System : FSystem {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Load_Scene_System.instance.Menu_From_Lvl_Button(1); });
         }
+        if (go.name == "mute_sound_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Load_Scene_System.instance.MuteSound(1); });
+        }
+        if (go.name == "mute_music_button")
+        {
+            Button btn = go.GetComponent<Button>();
+            btn.onClick.AddListener(delegate { Load_Scene_System.instance.MuteMusic(1); });
+        }
 
         // end scene buttons
         if (go.name == "return_button")
@@ -508,6 +575,9 @@ public class Load_Scene_System : FSystem {
         menu_init.SetActive(false);
         selection.SetActive(true);
 
+        //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionHelpOrEnc;
+        //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionHelpOrEnc;
+
         Family _drop = FamilyManager.getFamily(new AllOfComponents(typeof(Dropdown)));
         Dropdown dropdown = _drop.First().GetComponent<Dropdown>();
 
@@ -556,6 +626,8 @@ public class Load_Scene_System : FSystem {
         menu_init.SetActive(false);
         menu_help.SetActive(true);
         Help_Encyclo_Button(2);
+        foreach (GameObject m_canvas in _MuteCanvas)
+            m_canvas.SetActive(false);
     }
     // Goes to the first encyclopedia screen
     public void Encyclo_Button(int amount = 1)
@@ -563,6 +635,8 @@ public class Load_Scene_System : FSystem {
         menu_init.SetActive(false);
         menu_encyclo.SetActive(true);
         Help_Encyclo_Button(1);
+        foreach (GameObject m_canvas in _MuteCanvas)
+            m_canvas.SetActive(false);
     }
 
     // help and encyclopedia menu buttons (back_button is also used in the selection menu)
@@ -585,6 +659,10 @@ public class Load_Scene_System : FSystem {
             menu_help.SetActive(false);
         }
         menu_init.SetActive(true);
+        //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionInMenu;
+        //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionInMenu;
+        foreach (GameObject m_canvas in _MuteCanvas)
+            m_canvas.SetActive(true);
     }
 
     // next page of the help/encyclopedia menu (if it exists) goes back to the menu if it doesn't
@@ -617,11 +695,15 @@ public class Load_Scene_System : FSystem {
         {
             menu_help.SetActive(false);
             menu_init.SetActive(true);
+            foreach (GameObject m_canvas in _MuteCanvas)
+                m_canvas.SetActive(true);
         }
         if (last && menu_encyclo.activeSelf)
         {
             menu_encyclo.SetActive(false);
             menu_init.SetActive(true);
+            foreach (GameObject m_canvas in _MuteCanvas)
+                m_canvas.SetActive(true);
         }
     }
 
@@ -691,8 +773,11 @@ public class Load_Scene_System : FSystem {
         GameObjectManager.unloadScene("Fin");
         menu_init.SetActive(true);
         text_fin = null;
-        Debug.Log("Returned to menu");
-        audio_sources_dict[main_theme_audio_source_name].Play();
+        // Debug.Log("Returned to menu");
+        if (go_s_with_audio_source[main_theme_audio_source_name].activeSelf)
+            audio_sources_dict[main_theme_audio_source_name].Play();
+        else
+            was_playing_before_mute[main_theme_audio_source_name] = true;
     }
 
     // Loads next level (the button is deactivated if the player can't do this or if there isn't a next level)
@@ -801,9 +886,16 @@ public class Load_Scene_System : FSystem {
         menu_init.SetActive(true);
         text_fin = null;
 
-
-        audio_sources_dict[level_in_progress_audio_source_name].Stop();
-        audio_sources_dict[main_theme_audio_source_name].Play();
+        if (go_s_with_audio_source[level_in_progress_audio_source_name].activeSelf)
+            audio_sources_dict[level_in_progress_audio_source_name].Stop();
+        else
+            was_playing_before_mute[level_in_progress_audio_source_name] = false;
+        if (go_s_with_audio_source[main_theme_audio_source_name].activeSelf)
+            audio_sources_dict[main_theme_audio_source_name].Play();
+        else
+            was_playing_before_mute[main_theme_audio_source_name] = true;
+        foreach (GameObject m_canvas in _MuteCanvas)
+            m_canvas.SetActive(true);
     }
 
     // quits the game
@@ -829,6 +921,38 @@ public class Load_Scene_System : FSystem {
             progressBefore = 0.0f;
             pause = true;
         }
+    }
+
+    public void MuteSound(int amount = 1)
+    {
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            if (sounds_audio_source_names.Contains(go_with_audio_source.name))
+                go_with_audio_source.SetActive(!go_with_audio_source.activeSelf);
+        soundsMuted = !soundsMuted;
+        Debug.Log("Sound muted");
+    }
+
+    public void MuteMusic(int amount = 1)
+    {
+        foreach (GameObject go_with_audio_source in _AudioSources)
+        {
+
+            if (music_audio_source_names.Contains(go_with_audio_source.name))
+            {
+                if (!musicMuted)
+                    was_playing_before_mute[go_with_audio_source.name] = audio_sources_dict[go_with_audio_source.name].isPlaying;
+                go_with_audio_source.SetActive(!go_with_audio_source.activeSelf);
+                if (musicMuted)
+                {
+                    if (was_playing_before_mute[go_with_audio_source.name])
+                        audio_sources_dict[go_with_audio_source.name].Play();
+                    else
+                        audio_sources_dict[go_with_audio_source.name].Stop();
+                }
+            }
+        }
+        musicMuted = !musicMuted;
+        Debug.Log("Music muted");
     }
 
     // Functions to facilitate things

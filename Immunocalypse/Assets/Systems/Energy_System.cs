@@ -45,6 +45,7 @@ public class Energy_System : FSystem {
     private static string antibiotic_audio_source_name = "AntibioticAudioSource", vaccine_audio_source_name = "VaccineAudioSource";
     private string[] audio_source_names = {antibiotic_audio_source_name, vaccine_audio_source_name};
     private Dictionary<string, AudioSource> audio_sources_dict;
+    private Dictionary<string, GameObject> go_s_with_audio_source;
 
     public static Energy_System instance;
 
@@ -57,6 +58,10 @@ public class Energy_System : FSystem {
         foreach (GameObject go_with_audio_source in _AudioSources)
             if (audio_source_names.Contains(go_with_audio_source.name))
                 audio_sources_dict[go_with_audio_source.name] = go_with_audio_source.GetComponent<AudioSource>();
+        go_s_with_audio_source = new Dictionary<string, GameObject>();
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            if (audio_source_names.Contains(go_with_audio_source.name))
+                go_s_with_audio_source[go_with_audio_source.name] = go_with_audio_source;
     }
 
     protected override void onPause(int currentFrame)
@@ -230,7 +235,8 @@ public class Energy_System : FSystem {
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 
-            audio_sources_dict[antibiotic_audio_source_name].Play();
+            if (go_s_with_audio_source[antibiotic_audio_source_name].activeSelf)
+                audio_sources_dict[antibiotic_audio_source_name].Play();
         }
 	}
 
@@ -294,7 +300,8 @@ public class Energy_System : FSystem {
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 
-            audio_sources_dict[vaccine_audio_source_name].Play();
+            if (go_s_with_audio_source[vaccine_audio_source_name].activeSelf)
+                audio_sources_dict[vaccine_audio_source_name].Play();
         }
 	}
 	// Controls des_virus1 button

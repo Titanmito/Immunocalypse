@@ -18,6 +18,7 @@ public class Attack_System : FSystem
     private static string antibody_hit_audio_source_name = "AntibodyHitAudioSource", macrophage_hit_audio_source_name = "MacrophageHitAudioSource";
     private string[] audio_source_names = { antibody_hit_audio_source_name, macrophage_hit_audio_source_name };
     private Dictionary<string, AudioSource> audio_sources_dict;
+    private Dictionary<string, GameObject> go_s_with_audio_source;
 
     public Attack_System()
     {
@@ -26,6 +27,10 @@ public class Attack_System : FSystem
         foreach (GameObject go_with_audio_source in _AudioSources)
             if (audio_source_names.Contains(go_with_audio_source.name))
                 audio_sources_dict[go_with_audio_source.name] = go_with_audio_source.GetComponent<AudioSource>();
+        go_s_with_audio_source = new Dictionary<string, GameObject>();
+        foreach (GameObject go_with_audio_source in _AudioSources)
+            if (audio_source_names.Contains(go_with_audio_source.name))
+                go_s_with_audio_source[go_with_audio_source.name] = go_with_audio_source;
     }
 
     protected override void onPause(int currentFrame)
@@ -78,7 +83,8 @@ public class Attack_System : FSystem
 					SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
 					sr.color = new Color(1, 0, 0, 1);
 
-                    audio_sources_dict[macrophage_hit_audio_source_name].Play();
+                    if (go_s_with_audio_source[macrophage_hit_audio_source_name].activeSelf)
+                        audio_sources_dict[macrophage_hit_audio_source_name].Play();
 				}
 			}
 		}
@@ -122,7 +128,8 @@ public class Attack_System : FSystem
 						}
 					}
 
-                    audio_sources_dict[antibody_hit_audio_source_name].Play();
+                    if (go_s_with_audio_source[antibody_hit_audio_source_name].activeSelf)
+                        audio_sources_dict[antibody_hit_audio_source_name].Play();
 				}
 
 			}
