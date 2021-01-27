@@ -1218,11 +1218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nb_waves: 6
   nb_enemies:
-  - 2
-  - 1
+  - 2.5
+  - 1.5
   - -100
   - -100
-  hp_enemies: 140000001e0000000000000000000000
+  hp_enemies: 1e000000280000000000000000000000
   atk_enemies: 0a000000080000000000000000000000
   speed_enemies:
   - 1.4
@@ -1242,8 +1242,8 @@ MonoBehaviour:
   spawn_prog: 10
   energy_prog: 0
   add_enemies:
-  - 0.5
-  - 0.5
+  - 0.75
+  - 0.75
   - 0
   - 0
   lvl_spawn_point:

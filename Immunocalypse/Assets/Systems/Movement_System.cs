@@ -112,7 +112,7 @@ public class Movement_System : FSystem {
 			// If the entity has reached one of their checkpoints and it's not an ally.
 			if (cm.checkpoints.Count > 0)
 			{
-				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 0.1f)
+				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 1.0f)
 				{
 					cm.checkpoints.RemoveAt(0);
 				}
@@ -146,7 +146,7 @@ public class Movement_System : FSystem {
 			// If the entity has reached one of their checkpoints and it's not an ally.
 			if (cm.checkpoints.Count > 0)
 			{
-				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 0.1f)
+				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 1.0f)
 				{
 					cm.checkpoints.RemoveAt(0);
 				}

@@ -4063,7 +4063,7 @@ GameObject:
   - component: {fileID: 325701715}
   - component: {fileID: 325701714}
   m_Layer: 0
-  m_Name: AntibodyHitAudioSource
+  m_Name: AntibodyHitAudioSource_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4177,7 +4177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1150942310}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342313966
 GameObject:
@@ -4898,7 +4898,7 @@ MonoBehaviour:
     Des bact\xE9ries peuvent \xEAtre isol\xE9es du sol, des eaux, de l\u2019air et
     m\xEAme des d\xE9chets radioactifs ! \r\n\r\nUn nombre important de bact\xE9ries
     vit dans le corps humain, d'ordre comparable \xE0 la quantit\xE9 des cellules
-    qui le constituent, mais la masse de ces derni\xE8res est plus importante.\r\n"
+    qui le constituent, mais la masse de ces derni\xE8res est plus importante.\r"
 --- !u!222 &383429871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7605,6 +7605,133 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547338816}
   m_CullTransparentMesh: 0
+--- !u!1 &567348035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567348036}
+  - component: {fileID: 567348037}
+  m_Layer: 0
+  m_Name: AntibodyHitAudioSource_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567348036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567348035}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1150942310}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &567348037
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567348035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 480981f7313d04b498da740841757f83, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 64
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &573488340
 GameObject:
   m_ObjectHideFlags: 0
@@ -9587,7 +9714,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1311828062}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11362,7 +11489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_scene: -1
   unlocked_scene: 1
-  max_scene: 6
+  max_scene: 7
 --- !u!114 &871674073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11841,6 +11968,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913557013}
   m_CullTransparentMesh: 0
+--- !u!1 &914639734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 914639735}
+  - component: {fileID: 914639738}
+  - component: {fileID: 914639737}
+  - component: {fileID: 914639736}
+  m_Layer: 5
+  m_Name: lvl_txt_7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &914639735
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914639734}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &914639736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914639734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 7
+--- !u!114 &914639737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914639734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Les virus sont en r\xE9alit\xE9 beaucoup plus petits que les bact\xE9ries
+    et cellules du corps et avec des microscopes communs on n\u2019arrive pas \xE0
+    les voir. Il nous faut un microscope \xE9lectronique, invent\xE9 dans les ann\xE9es
+    1930 et beaucoup plus puissant.\r\n\r\nLe g\xE9nome d\u2019un virus peut \xEAtre
+    un ADN ou un ARN. La coque prot\xE9ique qui enveloppe ce g\xE9nome est appel\xE9e
+    capside et peut avoir diff\xE9rentes formes : b\xE2tonnet, poly\xE8dre, h\xE9lico\xEFdal\u2026
+    parfois la coque est m\xEAme faite avec des pi\xE8ces des cellules que le virus
+    a utilis\xE9 pour se reproduire !\r"
+--- !u!222 &914639738
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914639734}
+  m_CullTransparentMesh: 0
 --- !u!1 &919275725
 GameObject:
   m_ObjectHideFlags: 0
@@ -12316,7 +12543,7 @@ MonoBehaviour:
     en cr\xE9ant des anticorps, des petites prot\xE9ines sp\xE9ciales qui ont la
     propri\xE9t\xE9 de neutraliser les effets nocifs des microbes et des toxines
     qu\u2019ils produisent. \r\n\r\nCe faisant, le corps devient r\xE9fractaire \xE0
-    l\u2019agent envahisseur : il s\u2019immunise !\r\n"
+    l\u2019agent envahisseur : il s\u2019immunise !\r"
 --- !u!222 &936297266
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15020,6 +15247,7 @@ Transform:
   - {fileID: 1144870331}
   - {fileID: 1014993164}
   - {fileID: 1336022151}
+  - {fileID: 567348036}
   - {fileID: 325701715}
   - {fileID: 1802235921}
   m_Father: {fileID: 0}
@@ -16864,6 +17092,7 @@ RectTransform:
   - {fileID: 936297263}
   - {fileID: 1278148663}
   - {fileID: 2016171710}
+  - {fileID: 914639735}
   - {fileID: 699742374}
   m_Father: {fileID: 1316973883}
   m_RootOrder: 0
@@ -23034,7 +23263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1150942310}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811244875
 GameObject:
@@ -24341,7 +24570,7 @@ MonoBehaviour:
     2018, on a recens\xE9 129 esp\xE8ces de virus impliqu\xE9s dans des maladies
     humaines. Le rhume, la varicelle et la rougeole sont des exemples de pathologies
     humaines relativement courantes d'origine virale mais on conna\xEEt aussi des
-    virus plus nocifs comme le SIDA et le coronavirus.\r\n"
+    virus plus nocifs comme le SIDA et le coronavirus.\r"
 --- !u!222 &2016171713
 CanvasRenderer:
   m_ObjectHideFlags: 0

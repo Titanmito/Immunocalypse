@@ -1467,8 +1467,8 @@ MonoBehaviour:
   lvl_spawn_point:
   - {x: -9, y: 3.5, z: 0}
   lvl_checkpoints:
-  - {x: 1, y: 1.75, z: 0}
-  - {x: -3, y: -2, z: 0}
+  - {x: 1.7, y: 2.1, z: 0}
+  - {x: -3, y: -2.3, z: 0}
   - {x: 9, y: -3, z: 0}
   lvl_target_final: {x: 9, y: -3, z: 0}
   virus1_prefab: {fileID: 8149925029586573221, guid: a68f95fa72cefd649813f8e00bf6a2f9, type: 3}
@@ -1640,7 +1640,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 0.5}
+  m_Size: {x: 6.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &441511347
 SpriteRenderer:
@@ -2506,7 +2506,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2, y: -3.5}
+  m_Offset: {x: 1.6, y: -3.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2517,7 +2517,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 0.5}
+  m_Size: {x: 14, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &732927874
 SpriteRenderer:
@@ -4241,13 +4241,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369743586}
-  m_LocalRotation: {x: 0, y: 0, z: -0.35836798, w: 0.93358046}
+  m_LocalRotation: {x: 0, y: 0, z: -0.30070576, w: 0.953717}
   m_LocalPosition: {x: 0, y: 0, z: 110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1150399561}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -42}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -35}
 --- !u!61 &1369743588
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4261,7 +4261,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1, y: 2}
+  m_Offset: {x: 1.4, y: 2.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4272,7 +4272,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 6}
+  m_Size: {x: 0.5, y: 5}
   m_EdgeRadius: 0
 --- !u!212 &1369743589
 SpriteRenderer:
@@ -5161,7 +5161,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -9, y: 3.5}
+  m_Offset: {x: 1.7, y: 2.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5331,7 +5331,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3, y: 2}
+  m_Offset: {x: -3.25, y: 2}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
