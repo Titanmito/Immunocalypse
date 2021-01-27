@@ -15,7 +15,7 @@ public class Energy_System : FSystem {
 	// In the end we keep the buttons that control which enemy is targeted by a vacine here because it's easier as all the Families we need are already in here.
 
 	private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
-	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+	private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Score)));
 	private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
 	private Family _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT), 
 		new AnyOfTags("Tower"));
@@ -23,6 +23,7 @@ public class Energy_System : FSystem {
 		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
 	private Family _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+	private Family _AntiTextGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Text)));
 
 	private Family _Vaccin = FamilyManager.getFamily(new AllOfComponents(typeof(Vaccin)));
 
@@ -72,15 +73,6 @@ public class Energy_System : FSystem {
 
     protected override void onResume(int currentFrame)
     {
-		/*
-		StackTrace st = new StackTrace();
-		StackFrame[] sf = st.GetFrames();
-        foreach (StackFrame s in sf)
-        {
-			UnityEngine.Debug.Log(s.GetMethod().Name);
-        }
-		*/
-
         // Debug.Log("System " + this.GetType().Name + " go on resume ; " + currentFrame.ToString());
         if (currentFrame == 1)
         {
@@ -91,7 +83,7 @@ public class Energy_System : FSystem {
 		//UnityEngine.Debug.Log(this.Pause);
 
         _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
-        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Score)));
         _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
         _Inactive_tower = FamilyManager.getFamily(new NoneOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY, PropertyMatcher.PROPERTY.HAS_PARENT),
             new AnyOfTags("Tower"));
@@ -99,6 +91,7 @@ public class Energy_System : FSystem {
 		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
 	    _Antibiotique = FamilyManager.getFamily(new AllOfComponents(typeof(Efficiency)));
+		_AntiTextGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Text)));
 
         spawn = _Spawn.First().GetComponent<Spawn>();
 		bank = _Joueur.First().GetComponent<Bank>();
@@ -235,7 +228,16 @@ public class Energy_System : FSystem {
 			// Actualizes the energy display to the player.
 			energy_nb.text = "energy: " + bank.energy.ToString();
 
-            if (go_s_with_audio_source[antibiotic_audio_source_name].activeSelf)
+			// Actualises the disappearing text over the button.
+			GameObject text = _AntiTextGO.First();
+			color = text.GetComponent<Text>().color;
+			color = Color.black;
+			color.a = 1.0f;
+			text.GetComponent<Text>().color = color;
+
+			text.GetComponent<Text>().text = "utilisé\n" + anti_eff.nb_used + " fois";
+
+			if (go_s_with_audio_source[antibiotic_audio_source_name].activeSelf)
                 audio_sources_dict[antibiotic_audio_source_name].Play();
         }
 	}
@@ -274,7 +276,7 @@ public class Energy_System : FSystem {
 	}
 
 	// I couldn't make the wrapper for this in Unity pass a number to the function (I think it's linked to the fack we're not really using the wrapper and doing the bind by hand? maybe?)
-	// so I ended up creating a function that set the correct case at nb_enemies in Spawn to zero and 4 functions that call it with the correct argument.
+	// so I ended up creating a function that set the correct case at nb_enemies in Spawn to -1000 and 4 functions that call it with the correct argument.
 	
 	private void Destruction(int i = 1)
     {
@@ -289,6 +291,12 @@ public class Energy_System : FSystem {
 			{
 				go.SetActive(false);
 			}
+
+			// if there are enemies who do not appear because of the vacine, we give the player points as if they killed those enemies. 
+			int sc = Convert.ToInt32(Math.Max(0, spawn.nb_enemies[i]));
+			_Joueur.First().GetComponent<Score>().lvl_score += spawn.score_enemy * sc;
+
+			// we set it in such a negative number it never turns positive until the end.
 			spawn.nb_enemies[i] = -1000;
 
 			GameObject vaci = _SpeEffectGO.First();

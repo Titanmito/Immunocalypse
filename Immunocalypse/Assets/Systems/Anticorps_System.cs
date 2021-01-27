@@ -75,7 +75,7 @@ public class Anticorps_System : FSystem {
 
 							anti_f.spawn_prog = 0f;
 							anticorps.GetComponent<Can_Move>().spawn_point = new Vector3(go.transform.position.x, go.transform.position.y);
-							anticorps.GetComponent<Can_Move>().target = new Vector3(target.transform.position.x, target.transform.position.y);
+							anticorps.GetComponent<Can_Move>().target_final = new Vector3(target.transform.position.x, target.transform.position.y);
 
 							// changes the color of the tower to indicate it just created an anticorps
 							SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
@@ -96,7 +96,7 @@ public class Anticorps_System : FSystem {
 
 							anti_f.spawn_prog = 0f;
 							anticorps.GetComponent<Can_Move>().spawn_point = new Vector3(go.transform.position.x, go.transform.position.y);
-							anticorps.GetComponent<Can_Move>().target = new Vector3(target.transform.position.x, target.transform.position.y);
+							anticorps.GetComponent<Can_Move>().target_final = new Vector3(target.transform.position.x, target.transform.position.y);
 							// changes the color of the tower to indicate it just created an anticorps
 							SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
 							sr.color = new Color(1, 0.4f, 1, 1);

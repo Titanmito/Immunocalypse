@@ -6,7 +6,8 @@ using System.Collections;
 public class Special_Powers_Effects_System : FSystem 
 {
 	// This system controls the color pulse that happens when a player uses the antibiotique or vaccin special powers.
-	private Family _VaciEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
+	private Family _SpeEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
+	private Family _AntiTextGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Text)));
 
 	public Special_Powers_Effects_System()
 	{
@@ -31,7 +32,8 @@ public class Special_Powers_Effects_System : FSystem
 			return;
 		}
 
-		_VaciEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
+		_SpeEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
+		_AntiTextGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Text)));
 		MainLoop.instance.StartCoroutine(color_coroutine());
 	}
 
@@ -39,15 +41,24 @@ public class Special_Powers_Effects_System : FSystem
 	{
 		for (; ; )
 		{
-			GameObject vaci = _VaciEffectGO.First();
-			if (vaci != null) 
+			GameObject spe = _SpeEffectGO.First();
+			GameObject text = _AntiTextGO.First();
+			if (spe != null) 
 			{ 
-
-				Color color = vaci.GetComponent<Image>().color;
+				Color color = spe.GetComponent<Image>().color;
 				if (color.a > 0)
 				{
 					color.a -= 0.05f;
-					vaci.GetComponent<Image>().color = color;
+					spe.GetComponent<Image>().color = color;
+				}
+			}
+			if (text != null)
+            {
+				Color color = text.GetComponent<Text>().color;
+				if (color.a > 0)
+				{
+					color.a -= 0.025f;
+					text.GetComponent<Text>().color = color;
 				}
 			}
 

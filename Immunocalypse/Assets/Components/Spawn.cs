@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Spawn : MonoBehaviour {
 	// Component present in the Level entity that contains information about how many and which enemies will be created in a level. 
@@ -36,6 +37,9 @@ public class Spawn : MonoBehaviour {
 	// How many energy the player start with.
 	public int energy_start = 200;
 
+	// How many score points the player gains for each kill.
+	public int score_enemy = 10;
+
 	// How many seconds between each wave.
 	public float wait_time = 10f;
 	// How many seconds since the last wave.
@@ -43,8 +47,14 @@ public class Spawn : MonoBehaviour {
 	// How long since the last increase of energy.
 	public float energy_prog = 0f;
 
-	// add for the spawn (so that we have more enemies at the end of a level)
-	public float add = 0.2f;
+	// we add a quantity to each enemy spawn (so that we have more enemies at the end of a level).
+	public float[] add_enemies = new float[4] {0.2f, 0.2f, 0.2f, 0.2f};
+
+	// each level may have different spawn and target points.
+	public Vector3 lvl_spawn_point = new Vector3(-10.5f, 0.5f);
+
+	public List<Vector3> lvl_checkpoints = new List<Vector3>();
+	public Vector3 lvl_target_final = new Vector3(9.0f, -0.5f);
 
 	// Factories for enemies, towers and special powers. New towers and enemies must have their factories added here.
 	// Enemies

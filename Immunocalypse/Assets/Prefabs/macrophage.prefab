@@ -120,7 +120,6 @@ MonoBehaviour:
   strength: 100
   attack_speed: 10
   last_attack: 10
-  has_attacked: 0
   range: 1
 --- !u!70 &3657951906875850265
 CapsuleCollider2D:
@@ -136,7 +135,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 5, y: 3.75}
+  m_Size: {x: 3.7, y: 2.1}
   m_Direction: 1
 --- !u!114 &3657951906875850266
 MonoBehaviour:

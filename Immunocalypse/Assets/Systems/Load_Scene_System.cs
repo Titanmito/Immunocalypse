@@ -22,17 +22,19 @@ public class Load_Scene_System : FSystem {
     private Family _ShadowGO = FamilyManager.getFamily(new AllOfComponents(typeof(Shadow)));
 
     // We need those to test if the level ended 
-    private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Current_Lvl)));
+    private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Current_Lvl), typeof(Score)));
     private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn)));
 
     // This is the family with all the menus
     private Family _Menu = FamilyManager.getFamily(new AllOfComponents(typeof(Menu)));
 
     // We get the text GameObject at the end scene so we can write different messages on it
-    private Family _text = FamilyManager.getFamily(new AllOfComponents(typeof(Msg_Fin), typeof(Text)));
+    private Family _text = FamilyManager.getFamily(new AllOfComponents(typeof(Msg_Fin), typeof(Text)), new AnyOfTags("Finish"));
 
     private Family _Particles;
 
+    // To control the music and sound effects !
+    // yes, it's complicated =)
     private Family _AudioSources = FamilyManager.getFamily(new AllOfComponents(typeof(AudioSource)));
     private static string main_theme_audio_source_name = "MainThemeAudioSource", level_in_progress_audio_source_name = "LevelInProgressAudioSource",
         level_completed_audio_source_name = "LevelCompletedAudioSource", level_failed_audio_source_name = "LevelFailedAudioSource",
@@ -53,8 +55,10 @@ public class Load_Scene_System : FSystem {
     public bool musicMuted = false, soundsMuted = false;
     private Family _MuteCanvas = FamilyManager.getFamily(new AllOfComponents(typeof(Mute_Canvas)));
 
-    // the message we write at the end of a level
+    // messages we write at the end of a level
     private string text_fin = null;
+    private string text_score = null;
+    private string text_pass = null;
 
     // if true we grayout the continue button in the fin scene
     private bool lost = true;
@@ -84,10 +88,6 @@ public class Load_Scene_System : FSystem {
     // to be sure the scene is completely loaded before we start the systems again (yes, I tried without it and it doesn't work)
     private float timeBeforeLoad = 0.5f, timeBeforeFin = 1.0f, progressBefore, timeBeforePause = 0.1f, pauseDetectionProgress = 0.0f, pauseDetectionReload = 1.0f;
     private float explosion_force = 100.0f;
-
-    //private string muteSoundButtonName = "MuteSoundButton", muteMusicButtonName = "MuteMusicButton";
-    //private Vector3 muteSoundButtonPositionOnLevel, muteMusicButtonPositionOnLevel, muteSoundButtonPositionInMenu, muteMusicButtonPositionInMenu,
-    //    muteSoundButtonPositionHelpOrEnc, muteMusicButtonPositionHelpOrEnc;
 
     // because there are buttons functions here that are binded to buttons that aren't on the masterscene 
     public static Load_Scene_System instance;
@@ -133,15 +133,6 @@ public class Load_Scene_System : FSystem {
         selection.SetActive(false);
         charging_lvl.SetActive(false);
 
-        //muteSoundButtonPositionOnLevel = new Vector3(961.3f, 529.5f, 0.0f);
-        //muteMusicButtonPositionOnLevel = new Vector3(961.3f, 461.9f, 0.0f);
-
-        //muteSoundButtonPositionInMenu = new Vector3(391.6f, 564.0f, 0.0f);
-        //muteMusicButtonPositionInMenu = new Vector3(642.6f, 564.0f, 0.0f);
-
-        //muteSoundButtonPositionHelpOrEnc = new Vector3(955.5f, 507.9f, 0.0f);
-        //muteMusicButtonPositionHelpOrEnc = new Vector3(955.5f, 436.2f, 0.0f);
-
         foreach (GameObject m_canvas in _MuteCanvas)
             m_canvas.SetActive(false);
 
@@ -149,6 +140,11 @@ public class Load_Scene_System : FSystem {
         max_scene = joueur.GetComponent<Current_Lvl>().max_scene;
         unlocked_scene = joueur.GetComponent<Current_Lvl>().unlocked_scene;
         current_scene = joueur.GetComponent<Current_Lvl>().current_scene;
+        joueur.GetComponent<Score>().max_scores = new int[max_scene];
+        for (int i = 0; i < joueur.GetComponent<Score>().max_scores.Length; i++)
+        {
+            joueur.GetComponent<Score>().max_scores[i] = 0;
+        }
 
         audio_sources_dict = new Dictionary<string, AudioSource>();
         foreach (GameObject go_with_audio_source in _AudioSources)
@@ -173,7 +169,7 @@ public class Load_Scene_System : FSystem {
     }
 
     // Use to process your families.
-    // yes, it's big and ugly now.
+    // yes, it's big and ugly.
     protected override void onProcess(int familiesUpdateCount)
     {
         pauseDetectionProgress += Time.deltaTime;
@@ -184,8 +180,6 @@ public class Load_Scene_System : FSystem {
             menu_init.SetActive(true);
             foreach (GameObject m_canvas in _MuteCanvas)
                 m_canvas.SetActive(true);
-            //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionInMenu;
-            //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionInMenu;
         }
 
         // test to see if we're goint to start a level
@@ -204,8 +198,6 @@ public class Load_Scene_System : FSystem {
                 was_playing_before_mute[level_in_progress_audio_source_name] = true;
             foreach (GameObject m_canvas in _MuteCanvas)
                 m_canvas.SetActive(false);
-            //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionOnLevel;
-            //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionOnLevel;
         }
 
         // test to see if the player choose a level (this is where we unpause the systems after the creation of the level scene)
@@ -237,6 +229,9 @@ public class Load_Scene_System : FSystem {
                 int energy = _Spawn.First().GetComponent<Spawn>().energy_start;
                 joueur.GetComponent<Bank>().energy = energy;
                 joueur.GetComponent<Bank>().init_energy = energy;
+
+                // the score of the level goes back to zero.
+                joueur.GetComponent<Score>().lvl_score = 0;
             }
         }
 
@@ -291,6 +286,15 @@ public class Load_Scene_System : FSystem {
                     progressBefore = 0.0f;
                     fin = true;
                     text_fin = "Niveau échoué !";
+
+                    // the score of the level goes back to zero.
+                    joueur.GetComponent<Score>().lvl_score = 0;
+                    // Actualizes text_score
+                    text_score = "Score du niveau : " + joueur.GetComponent<Score>().lvl_score.ToString() + "\nScore total : " + joueur.GetComponent<Score>().max_scores.Sum().ToString();
+
+                    // Actualizes the password text
+                    text_pass = "";
+
                     lost = true;
                     if (go_s_with_audio_source[level_in_progress_audio_source_name].activeSelf)
                         audio_sources_dict[level_in_progress_audio_source_name].Stop();
@@ -300,6 +304,7 @@ public class Load_Scene_System : FSystem {
                         audio_sources_dict[level_failed_audio_source_name].Play();
                 }
                 this.fin_lvl();
+
             }
             // test to see if the player won a level
             if (spawn != null)
@@ -316,6 +321,17 @@ public class Load_Scene_System : FSystem {
                             fin = true;
                             lost = false;
                             text_fin = "Niveau reussi !";
+
+                            // Actualizes text_score
+                            if (joueur.GetComponent<Score>().max_scores[current_scene - 1] <= joueur.GetComponent<Score>().lvl_score)
+                            {
+                                joueur.GetComponent<Score>().max_scores[current_scene - 1] = joueur.GetComponent<Score>().lvl_score;
+                            }
+                            text_score = "Score du niveau : " + joueur.GetComponent<Score>().lvl_score.ToString() + "\nScore total : " + joueur.GetComponent<Score>().max_scores.Sum().ToString();
+
+                            // Actualizes the password text
+                            text_pass = "mot de passe : " + (current_scene + 1).ToString();
+
                             if (current_scene == unlocked_scene && unlocked_scene < max_scene)
                             {
                                 unlocked_scene++;
@@ -346,7 +362,6 @@ public class Load_Scene_System : FSystem {
                         }
                     }
                 }
-                // Debug.Log("Level win!");
             }
         }
     }
@@ -556,12 +571,29 @@ public class Load_Scene_System : FSystem {
 
     }
 
-    // We do a callback when the text at the end scene is created because this is the only way to be sure we can change the text consistently without having a NullReferenceException 
+    // We do a callback when both texts at the end scene are created because this is the only way to be sure we can change the text consistently without having a NullReferenceException 
     // (because it seems it takes some time for the scene to load)
     private void end_text(GameObject go)
     {
-        Text text = _text.First().GetComponent<Text>();
-        text.text = text_fin;
+        foreach (GameObject gg in _text)
+        {
+            if (gg.GetComponent<Msg_Fin>().txt_nb == 0)
+            {
+                Text text = gg.GetComponent<Text>();
+                text.text = text_fin;
+            }
+            if (gg.GetComponent<Msg_Fin>().txt_nb == 1)
+            {
+                Text text = gg.GetComponent<Text>();
+                text.text = text_score;
+            }
+            if (gg.GetComponent<Msg_Fin>().txt_nb == 2)
+            {
+                Text text = gg.GetComponent<Text>();
+                text.text = text_pass;
+            }
+
+        }
     }
 
     //All buttons in the MasterScene have their functions here at the moment as they all control changes in scenes.
@@ -574,9 +606,6 @@ public class Load_Scene_System : FSystem {
     {
         menu_init.SetActive(false);
         selection.SetActive(true);
-
-        //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionHelpOrEnc;
-        //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionHelpOrEnc;
 
         Family _drop = FamilyManager.getFamily(new AllOfComponents(typeof(Dropdown)));
         Dropdown dropdown = _drop.First().GetComponent<Dropdown>();
@@ -600,6 +629,21 @@ public class Load_Scene_System : FSystem {
             //Add each entry to the Dropdown
             dropdown.options.Add(message);
         }
+    }
+
+    // Controls the input thing in the selection menu. The idea is to use a hashtable of some sort so that each lvl has an unique code. 
+    // Right now it's simply the nulber of the level so we can navigate between levels easily.
+    public void Password(string s)
+    {
+        Family _pass = FamilyManager.getFamily(new AllOfComponents(typeof(InputField)));
+        InputField pass = _pass.First().GetComponent<InputField>();
+        string ss = pass.text; 
+        int pass_unlocked_scene = 0;
+        if (System.Int32.TryParse(ss, out pass_unlocked_scene) && (pass_unlocked_scene <= max_scene) && (pass_unlocked_scene > 0))
+        {
+            unlocked_scene = pass_unlocked_scene;
+        }
+        Start_Button();
     }
 
     // less repeated code haha
@@ -629,6 +673,7 @@ public class Load_Scene_System : FSystem {
         foreach (GameObject m_canvas in _MuteCanvas)
             m_canvas.SetActive(false);
     }
+
     // Goes to the first encyclopedia screen
     public void Encyclo_Button(int amount = 1)
     {
@@ -659,8 +704,6 @@ public class Load_Scene_System : FSystem {
             menu_help.SetActive(false);
         }
         menu_init.SetActive(true);
-        //GameObject.Find(muteSoundButtonName).transform.position = muteSoundButtonPositionInMenu;
-        //GameObject.Find(muteMusicButtonName).transform.position = muteMusicButtonPositionInMenu;
         foreach (GameObject m_canvas in _MuteCanvas)
             m_canvas.SetActive(true);
     }
@@ -747,7 +790,6 @@ public class Load_Scene_System : FSystem {
         }
     }
 
-
     // Selection of level dropdown
     public void Dropdown(int choix = 1)
     {
@@ -826,7 +868,7 @@ public class Load_Scene_System : FSystem {
         // see what level it was
         string s = "Scene" + current_scene.ToString();
 
-        // we pause the systems that deal with level stuff
+        // we pause the systems that deal with level stuff.
         foreach (FSystem system in FSystemManager.updateSystems())
         {
             system.Pause = true;
@@ -838,7 +880,7 @@ public class Load_Scene_System : FSystem {
             // Debug.Log(system.GetType().Name);
         }
 
-        //we unload the level (easier way of getting everything to have their default values)
+        //we unload the level (easier way of getting everything back to their default values).
         GameObjectManager.unloadScene(s);
         GameObjectManager.unloadScene("Pause");
 
@@ -849,6 +891,8 @@ public class Load_Scene_System : FSystem {
         joueur.GetComponent<Has_Health>().health = max_health;
         int init_energy = joueur.GetComponent<Bank>().init_energy;
         joueur.GetComponent<Bank>().energy = init_energy;
+        // the score of the level goes back to zero.
+        joueur.GetComponent<Score>().lvl_score = 0;
 
         // destroy any objects from the level that still exist
         destroy_lvl_objects();
@@ -923,15 +967,17 @@ public class Load_Scene_System : FSystem {
         }
     }
 
+    //Controls sounds effects
     public void MuteSound(int amount = 1)
     {
         foreach (GameObject go_with_audio_source in _AudioSources)
             if (sounds_audio_source_names.Contains(go_with_audio_source.name))
                 go_with_audio_source.SetActive(!go_with_audio_source.activeSelf);
         soundsMuted = !soundsMuted;
-        Debug.Log("Sound muted");
+        // Debug.Log("Sound muted");
     }
 
+    // Controls the music
     public void MuteMusic(int amount = 1)
     {
         foreach (GameObject go_with_audio_source in _AudioSources)
@@ -952,7 +998,7 @@ public class Load_Scene_System : FSystem {
             }
         }
         musicMuted = !musicMuted;
-        Debug.Log("Music muted");
+        // Debug.Log("Music muted");
     }
 
     // Functions to facilitate things

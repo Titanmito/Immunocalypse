@@ -29,7 +29,7 @@ public class Tower_Attack_Effects_System : FSystem {
 			this.Pause = true;
 			return;
 		}
-		_TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AnyOfComponents(typeof(Price), typeof(Can_Attack)));
+		_TowerGO = FamilyManager.getFamily(new AnyOfTags("Tower"), new AllOfComponents(typeof(Price), typeof(Can_Attack)));
 		_Lymphocyte = FamilyManager.getFamily(new AllOfComponents(typeof(Anticorps_Factory), typeof(Lymphocyte)));
 		MainLoop.instance.StartCoroutine(color_coroutine());
 	}

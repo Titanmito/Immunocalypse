@@ -8,8 +8,7 @@ public class Lvl_Button_Control_System : FSystem {
 	// This enables us to control the difficulty and complexity, and present each element in different levels.
 	
 	private Family _Level = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
-	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new NoneOfLayers(8, 9),
-		new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
+	private Family _Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 	private Active_Lvl_Buttons ActButtons;
 
 	// Use this to update member variables when system pause. 
@@ -26,8 +25,7 @@ public class Lvl_Button_Control_System : FSystem {
 			return;
 		}
 		_Level = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
-		_Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new NoneOfLayers(8, 9),
-				new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
+		_Buttons = FamilyManager.getFamily(new AnyOfTags("Button"), new AllOfComponents(typeof(Button), typeof(Lvl_Buttons)), new AllOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 
 		ActButtons = _Level.First().GetComponent<Active_Lvl_Buttons>();
 		
@@ -56,6 +54,15 @@ public class Lvl_Button_Control_System : FSystem {
 					break;
 				case 50:
 					go.SetActive(ActButtons.back_from_lvl_button);
+					break;
+				case 51:
+					go.SetActive(ActButtons.menu_from_lvl_button);
+					break;
+				case 60:
+					go.SetActive(ActButtons.mute_sound_button);
+					break;
+				case 61:
+					go.SetActive(ActButtons.mute_music_button);
 					break;
 			}
 		}

@@ -22,6 +22,11 @@ public class Movement_System : FSystem {
 		go.transform.position = go.GetComponent<Can_Move>().spawn_point;
 	}
 
+	private void onGOExit(int id)
+    {
+		_TargetingGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Move), typeof(Can_Attack), typeof(Anticorps)), new AnyOfTags("Tower"));
+	}
+
     protected override void onPause(int currentFrame)
     {
         // Debug.Log("System " + this.GetType().Name + " go on pause");
@@ -51,11 +56,12 @@ public class Movement_System : FSystem {
 		foreach (GameObject go in _TargetingGO)
         {
 			onGOEnter(go);
+			onGOExit(1);
 		}
 		_TargetVirusGO.addEntryCallback(onGOEnter);
 		_TargetBacterieGO.addEntryCallback(onGOEnter);
 		_TargetingGO.addEntryCallback(onGOEnter);
-
+		_TargetingGO.addExitCallback(onGOExit);
 	}
 
     protected override void onProcess(int familiesUpdateCount)
@@ -73,7 +79,7 @@ public class Movement_System : FSystem {
 				{
 					if (Vector3.Distance(go.transform.position, target.transform.position) < distance)
 					{
-						cm.target = new Vector3(target.transform.position.x, target.transform.position.y);
+						cm.target_final = new Vector3(target.transform.position.x, target.transform.position.y);
 						distance = Vector3.Distance(go.transform.position, target.transform.position);
 					}
 				}
@@ -84,7 +90,7 @@ public class Movement_System : FSystem {
 				{
 					if (Vector3.Distance(go.transform.position, target.transform.position) < distance)
 					{
-						cm.target = new Vector3(target.transform.position.x, target.transform.position.y);
+						cm.target_final = new Vector3(target.transform.position.x, target.transform.position.y);
 						distance = Vector3.Distance(go.transform.position, target.transform.position);
 					}
 				}
@@ -98,15 +104,31 @@ public class Movement_System : FSystem {
 			cm.spawn_point = go.transform.position;
 
 			// If the entity has reached it's target and it's not an ally, we remove it from the visible screen.
-			if (Vector3.Distance(cm.target, go.transform.position) < 0.1f)
+			if (Vector3.Distance(cm.target_final, go.transform.position) < 0.1f)
 			{
 				go.transform.position = new Vector3(-20.0f, -20.0f);
 				cm.arrived = true;
 			}
-			else
+			// If the entity has reached one of their checkpoints and it's not an ally.
+			if (cm.checkpoints.Count > 0)
 			{
-				if (! cm.arrived) {
-					go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 0.1f)
+				{
+					cm.checkpoints.RemoveAt(0);
+				}
+				else
+				{
+					if (!cm.arrived)
+					{
+						go.transform.position = Vector3.MoveTowards(go.transform.position, cm.checkpoints[0], cm.move_speed * Time.deltaTime);
+					}
+				}
+            }
+            else
+            {
+				if (!cm.arrived)
+				{
+					go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target_final, cm.move_speed * Time.deltaTime);
 				}
 			}
 		}
@@ -116,16 +138,31 @@ public class Movement_System : FSystem {
 			cm.spawn_point = go.transform.position;
 
 			// If the entity has reached it's target and it's not an ally, we remove it from the visible screen.
-			if (Vector3.Distance(cm.target, go.transform.position) < 0.1f)
+			if (Vector3.Distance(cm.target_final, go.transform.position) < 0.1f)
 			{
 				go.transform.position = new Vector3(-20.0f, -20.0f);
 				cm.arrived = true;
+			}
+			// If the entity has reached one of their checkpoints and it's not an ally.
+			if (cm.checkpoints.Count > 0)
+			{
+				if (Vector3.Distance(cm.checkpoints[0], go.transform.position) < 0.1f)
+				{
+					cm.checkpoints.RemoveAt(0);
+				}
+				else
+				{
+					if (!cm.arrived)
+					{
+						go.transform.position = Vector3.MoveTowards(go.transform.position, cm.checkpoints[0], cm.move_speed * Time.deltaTime);
+					}
+				}
 			}
 			else
 			{
 				if (!cm.arrived)
 				{
-					go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+					go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target_final, cm.move_speed * Time.deltaTime);
 				}
 			}
 		}
@@ -134,7 +171,7 @@ public class Movement_System : FSystem {
 		foreach (GameObject go in _TargetingGO)
 		{
 			Can_Move cm = go.GetComponent<Can_Move>();
-			go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target, cm.move_speed * Time.deltaTime);
+			go.transform.position = Vector3.MoveTowards(go.transform.position, cm.target_final, cm.move_speed * Time.deltaTime);
 		}
 	}
 }

@@ -12,10 +12,12 @@ public class Destruction_System : FSystem {
 
     private Family _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
     private Family _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
-    private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+    private Family _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Score)));
     private int energy_enemy;
     private Bank bank;
     private Text energy_nb;
+    private int score_enemy;
+    private Score score;
 
     private float _DestroyParticlesProgress = 0.0f, _DestroyParticlesReload = 0.05f;
 
@@ -43,10 +45,12 @@ public class Destruction_System : FSystem {
 
         _Spawn = FamilyManager.getFamily(new AllOfComponents(typeof(Spawn), typeof(Active_Lvl_Buttons)));
         _Energy_nb = FamilyManager.getFamily(new AnyOfTags("Energy"), new AllOfComponents(typeof(Text)));
-        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank)));
+        _Joueur = FamilyManager.getFamily(new AnyOfTags("Player"), new AllOfComponents(typeof(Has_Health), typeof(Bank), typeof(Score)));
         energy_enemy = _Spawn.First().GetComponent<Spawn>().energy_enemy;
         bank = _Joueur.First().GetComponent<Bank>();
         energy_nb = _Energy_nb.First().GetComponent<Text>();
+        score_enemy = _Spawn.First().GetComponent<Spawn>().score_enemy;
+        score = _Joueur.First().GetComponent<Score>();
     }
 
     protected override void onProcess(int familiesUpdateCount)
@@ -61,9 +65,11 @@ public class Destruction_System : FSystem {
             Create_Particles_After_Death cpad = go.GetComponent<Create_Particles_After_Death>();
 
             // we give the bonus energy to the player.
-            if (hh.health <= 0)
+            if (hh.health <= 0 && !aj.has_attacked)
             {
                 bank.energy += energy_enemy;
+                score.lvl_score += score_enemy;
+
                 // Actualizes the energy display to the player.
                 energy_nb.text = "energy: " + bank.energy.ToString();
             }
@@ -71,7 +77,7 @@ public class Destruction_System : FSystem {
             if (hh.health <= 0 || aj.has_attacked)
             {
                 // If an enemy has a component Create_Particles_After_Death it means that we must create particles in the place where it dies.
-                if (cpad != null)
+                if (cpad != null && aj.has_attacked)
                 {
                     for (int i = 0; i < cpad.particles_number; i++)
                     {
@@ -82,7 +88,6 @@ public class Destruction_System : FSystem {
                         angle = Mathf.PI * particle.transform.rotation.eulerAngles.z / 180.0f;
                         Rigidbody2D prb = particle.GetComponent<Rigidbody2D>();
                         prb.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * cpad.explosion_force * Random.Range(0.0f, 1.0f));
-
                     }
                 }
                 GameObjectManager.unbind(go);

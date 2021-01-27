@@ -14,6 +14,11 @@ public class Load_Scene_System_wrapper : MonoBehaviour
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Start_Button", amount);
 	}
 
+	public void Password(System.String s)
+	{
+		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Password", s);
+	}
+
 	public void Help_Button(System.Int32 amount)
 	{
 		MainLoop.callAppropriateSystemMethod ("Load_Scene_System", "Help_Button", amount);

@@ -80,11 +80,12 @@ public class Spawn_System : FSystem {
                     // Creation of an enemy
 					GameObject go = UnityEngine.Object.Instantiate<GameObject>(enemies[j]);
 
-                    // we put the enemy in the starting place
-                    go.GetComponent<Can_Move>().spawn_point = new Vector3(go.GetComponent<Can_Move>().spawn_point.x, UnityEngine.Random.Range(-1.0f, 1.0f));
+                    // we set and put the enemy in it's starting place
+                    go.GetComponent<Can_Move>().spawn_point = new Vector3(spawn.lvl_spawn_point.x, spawn.lvl_spawn_point.y + UnityEngine.Random.Range(-1.0f, 1.0f));
 
-                    // we set its target
-                    go.GetComponent<Can_Move>().target = new Vector3(go.GetComponent<Can_Move>().target.x, UnityEngine.Random.Range(-1.0f, 1.0f));
+                    // we set their checkpoints and final target
+                    go.GetComponent<Can_Move>().checkpoints.AddRange(spawn.lvl_checkpoints);
+                    go.GetComponent<Can_Move>().target_final = new Vector3(spawn.lvl_target_final.x, spawn.lvl_target_final.y + UnityEngine.Random.Range(-1.0f, 1.0f)); ;
 
                     // we set its speed
                     go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j] + UnityEngine.Random.Range(0.0f, 0.2f);
@@ -102,8 +103,8 @@ public class Spawn_System : FSystem {
 
                     GameObjectManager.bind(go);
                 }
-                // adding spawn.add so that we have more enemies in later waves
-                float new_spawn = spawn.nb_enemies[j] + spawn.add;
+                // adding spawn.add_enemies so that we have more enemies in later waves
+                float new_spawn = spawn.nb_enemies[j] + spawn.add_enemies[j];
                 _Spawn.First().GetComponent<Spawn>().nb_enemies[j] = new_spawn;
             }
 
