@@ -23,7 +23,7 @@ public class Spawn : MonoBehaviour {
 	public int[] atk_enemies = new int[4] {4, 5, 15, 13};
 
 	// How much speed each type of enemy has in this level.
-	public float[] speed_enemies = new float[4] { 1.7f, 1.5f, 1, 1.2f };
+	public float[] speed_enemies = new float[4] {1.7f, 1.5f, 1, 1.2f};
 
 	// The size of each type of enemy.
 	public float[] size_enemies = new float[4] {0.25f, 0.3f, 0.4f, 0.5f};
@@ -51,7 +51,8 @@ public class Spawn : MonoBehaviour {
 	public float[] add_enemies = new float[4] {0.2f, 0.2f, 0.2f, 0.2f};
 
 	// each level may have different spawn and target points.
-	public Vector3 lvl_spawn_point = new Vector3(-10.5f, 0.5f);
+	public List<Vector3> lvl_spawn_point = new List<Vector3>() {new Vector3(-10.5f, 0.5f), new Vector3(-10.5f, 0.5f)};
+
 
 	public List<Vector3> lvl_checkpoints = new List<Vector3>();
 	public Vector3 lvl_target_final = new Vector3(9.0f, -0.5f);

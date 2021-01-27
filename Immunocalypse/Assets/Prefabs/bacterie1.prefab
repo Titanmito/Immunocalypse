@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a52a6fbb6b19940ae7b800bf86abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_speed: 1
-  spawn_point: {x: -11, y: 0, z: 0}
+  move_speed: 2.5
+  spawn_point: {x: -8.5, y: 0, z: 0}
   target_milieu: {x: 0, y: 0, z: 0}
   target_final: {x: 0, y: 0, z: 0}
   checkpoints: []

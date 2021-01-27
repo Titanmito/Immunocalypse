@@ -322,6 +322,12 @@ public class Load_Scene_System : FSystem {
                             lost = false;
                             text_fin = "Niveau reussi !";
 
+                            if (current_scene == max_scene)
+                            {
+                                text_fin = "Vous avez gagné le jeu !";
+                            }
+
+
                             // Actualizes text_score
                             if (joueur.GetComponent<Score>().max_scores[current_scene - 1] <= joueur.GetComponent<Score>().lvl_score)
                             {

@@ -10,9 +10,7 @@ public class Can_Move : MonoBehaviour {
 	public Vector3 spawn_point = new Vector3(-8.5f, 0.0f);
 
 	// Where the entity is trying to go.
-	public Vector3 target_milieu;
 	public Vector3 target_final;
-
 	public List<Vector3> checkpoints = new List<Vector3>();
 
 	// Whether the entity got to their objective or not. Used to determine if it's time for an entity to attack the player (it only attacks if it got to their objective).

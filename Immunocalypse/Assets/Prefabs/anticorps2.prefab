@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13996a81c8fe30e429fa14f809390682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 10
+  strength: 15
   attack_speed: 5
   last_attack: 5
   range: 1
@@ -119,7 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move_speed: 3.5
   spawn_point: {x: -8.5, y: 0, z: 0}
-  target: {x: 0, y: 0, z: 0}
+  target_final: {x: 0, y: 0, z: 0}
+  checkpoints: []
   arrived: 0
 --- !u!114 &6707135514720285917
 MonoBehaviour:

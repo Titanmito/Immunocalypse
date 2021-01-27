@@ -15,6 +15,7 @@ public class Spawn_System : FSystem {
 
 	private Spawn spawn;
 	private Text spawn_nb;
+    private System.Random rd = new System.Random(); 
 
     // we have four types of enemies now 
     // 0 -> Virus1
@@ -81,11 +82,16 @@ public class Spawn_System : FSystem {
 					GameObject go = UnityEngine.Object.Instantiate<GameObject>(enemies[j]);
 
                     // we set and put the enemy in it's starting place
-                    go.GetComponent<Can_Move>().spawn_point = new Vector3(spawn.lvl_spawn_point.x, spawn.lvl_spawn_point.y + UnityEngine.Random.Range(-1.0f, 1.0f));
+                    int sp = rd.Next(spawn.lvl_spawn_point.Count);
+                    go.GetComponent<Can_Move>().spawn_point = new Vector3(spawn.lvl_spawn_point[sp].x, spawn.lvl_spawn_point[sp].y + UnityEngine.Random.Range(-1.0f, 1.0f));
 
                     // we set their checkpoints and final target
                     go.GetComponent<Can_Move>().checkpoints.AddRange(spawn.lvl_checkpoints);
-                    go.GetComponent<Can_Move>().target_final = new Vector3(spawn.lvl_target_final.x, spawn.lvl_target_final.y + UnityEngine.Random.Range(-1.0f, 1.0f)); ;
+                    for(int k = 0; k < spawn.lvl_checkpoints.Count - 1; k++)
+                    {
+                        go.GetComponent<Can_Move>().checkpoints[k] += new Vector3(UnityEngine.Random.Range(-0.2f, 0.2f), UnityEngine.Random.Range(-0.2f, 0.2f));
+                    }
+                    go.GetComponent<Can_Move>().target_final = new Vector3(spawn.lvl_target_final.x, spawn.lvl_target_final.y + UnityEngine.Random.Range(-1.0f, 1.0f)); 
 
                     // we set its speed
                     go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j] + UnityEngine.Random.Range(0.0f, 0.2f);
@@ -98,7 +104,7 @@ public class Spawn_System : FSystem {
                     go.GetComponent<Attack_J>().strength = spawn.atk_enemies[j];
 
                     // we set its size
-                    float z = +UnityEngine.Random.Range(-0.1f, 0.1f);
+                    float z = +UnityEngine.Random.Range(-0.05f, 0.05f);
                     go.transform.localScale = new Vector3(spawn.size_enemies[j] + z, spawn.size_enemies[j] + z, 1);
 
                     GameObjectManager.bind(go);
