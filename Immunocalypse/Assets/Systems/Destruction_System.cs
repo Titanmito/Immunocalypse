@@ -77,7 +77,7 @@ public class Destruction_System : FSystem {
             if (hh.health <= 0 || aj.has_attacked)
             {
                 // If an enemy has a component Create_Particles_After_Death it means that we must create particles in the place where it dies.
-                if (cpad != null && aj.has_attacked)
+                if (cpad != null && !aj.has_attacked)
                 {
                     for (int i = 0; i < cpad.particles_number; i++)
                     {
