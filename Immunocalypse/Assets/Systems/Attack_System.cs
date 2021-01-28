@@ -15,9 +15,9 @@ public class Attack_System : FSystem
 	private Family _MacrophageGO = FamilyManager.getFamily(new AllOfComponents(typeof(Can_Attack), typeof(Triggered2D)), new NoneOfComponents(typeof(Has_Health)));
 
     private Family _AudioSources = FamilyManager.getFamily(new AllOfComponents(typeof(AudioSource)));
-	private static string antibody1_hit_audio_source_name = "AntibodyHitAudioSource_1", antibody2_hit_audio_source_name = "AntibodyHitAudioSource_2";
+	private static string antibody_hit_audio_source_name = "AntibodyHitAudioSource";
 	private static string macrophage_hit_audio_source_name = "MacrophageHitAudioSource";
-    private string[] audio_source_names = { antibody1_hit_audio_source_name, antibody2_hit_audio_source_name, macrophage_hit_audio_source_name };
+    private string[] audio_source_names = { antibody_hit_audio_source_name, macrophage_hit_audio_source_name };
     private Dictionary<string, AudioSource> audio_sources_dict;
     private Dictionary<string, GameObject> go_s_with_audio_source;
 
@@ -114,8 +114,8 @@ public class Attack_System : FSystem
 
 							// We want to put the anticorps health to zero if it has attacked so it's destroyed just after.
 							hh.health = -1;
-							if (go_s_with_audio_source[antibody1_hit_audio_source_name].activeSelf)
-								audio_sources_dict[antibody1_hit_audio_source_name].Play();
+							if (go_s_with_audio_source[antibody_hit_audio_source_name].activeSelf)
+								audio_sources_dict[antibody_hit_audio_source_name].Play();
 						}
 					}
 					if (type == 2)
@@ -128,8 +128,8 @@ public class Attack_System : FSystem
 
 							// We want to put the anticorps health to zero if it has attacked so it's destroyed just after.
 							hh.health = -1;
-							if (go_s_with_audio_source[antibody2_hit_audio_source_name].activeSelf)
-								audio_sources_dict[antibody2_hit_audio_source_name].Play();
+							if (go_s_with_audio_source[antibody_hit_audio_source_name].activeSelf)
+								audio_sources_dict[antibody_hit_audio_source_name].Play();
 						}
 					}
 				}
