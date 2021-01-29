@@ -1436,34 +1436,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nb_waves: 5
   nb_enemies:
+  - 2
   - -100
   - -100
   - 1
-  - 2.6
-  hp_enemies: 0000000000000000820000006e000000
-  atk_enemies: 0000000000000000190000000f000000
+  hp_enemies: 1e000000000000000000000050000000
+  atk_enemies: 0a00000000000000000000000f000000
   speed_enemies:
+  - 1.3
   - 0
   - 0
-  - 0.8
-  - 1.1
+  - 1
   size_enemies:
+  - 0.25
   - 0
   - 0
-  - 0.26
   - 0.27
   energy_sec: 1
   energy_enemy: 5
-  energy_start: 80
+  energy_start: 100
   score_enemy: 10
   wait_time: 10
   spawn_prog: 10
   energy_prog: 0
   add_enemies:
+  - 2
   - 0
   - 0
-  - 0.75
-  - 0.6
+  - 0.5
   lvl_spawn_point:
   - {x: -9, y: 3.5, z: 0}
   lvl_checkpoints:
@@ -1496,15 +1496,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macro_button: 0
-  lymp1_button: 0
-  lymp2_button: 1
+  lymp1_button: 1
+  lymp2_button: 0
   anti_button: 0
-  vaci_button: 0
-  des_virus1: 0
+  vaci_button: 1
+  des_virus1: 1
   des_virus2: 0
   des_bacterie1: 0
-  des_bacterie2: 0
-  des_cancel: 0
+  des_bacterie2: 1
+  des_cancel: 1
   back_from_lvl_button: 1
   menu_from_lvl_button: 1
   mute_sound_button: 1
@@ -2630,7 +2630,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 8a8c74902b9b840409ececef0f4aab21, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.73777145, b: 0.45752937, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

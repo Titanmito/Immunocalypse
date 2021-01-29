@@ -1434,19 +1434,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f107205d7f54d498b6063511a2ace8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nb_waves: 5
+  nb_waves: 6
   nb_enemies:
   - -100
   - -100
-  - 1
-  - 2.6
-  hp_enemies: 0000000000000000820000006e000000
+  - 1.5
+  - 1.5
+  hp_enemies: 00000000000000006400000050000000
   atk_enemies: 0000000000000000190000000f000000
   speed_enemies:
   - 0
   - 0
-  - 0.8
-  - 1.1
+  - 0.9
+  - 1
   size_enemies:
   - 0
   - 0
@@ -1456,14 +1456,14 @@ MonoBehaviour:
   energy_enemy: 5
   energy_start: 80
   score_enemy: 10
-  wait_time: 10
-  spawn_prog: 10
+  wait_time: 8
+  spawn_prog: 8
   energy_prog: 0
   add_enemies:
   - 0
   - 0
   - 0.75
-  - 0.6
+  - 0.5
   lvl_spawn_point:
   - {x: -9, y: 3.5, z: 0}
   lvl_checkpoints:
@@ -1495,10 +1495,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178e3e197aebccf448b58c039cf63e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  macro_button: 0
-  lymp1_button: 0
+  macro_button: 1
+  lymp1_button: 1
   lymp2_button: 1
-  anti_button: 0
+  anti_button: 1
   vaci_button: 0
   des_virus1: 0
   des_virus2: 0
@@ -2629,7 +2629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 8a8c74902b9b840409ececef0f4aab21, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54d474257be3c844d9ebf0a1250f2849, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

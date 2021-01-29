@@ -4780,6 +4780,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383429867}
   m_CullTransparentMesh: 0
+--- !u!1 &394237449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394237450}
+  - component: {fileID: 394237453}
+  - component: {fileID: 394237452}
+  - component: {fileID: 394237451}
+  m_Layer: 5
+  m_Name: lvl_txt_18
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &394237450
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394237449}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &394237451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394237449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 18
+--- !u!114 &394237452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394237449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Maintenant, vous avez tous les choix pour mieux combattre les microbes
+    : macrophage, lymphocytes, antibiotique et vaccins. Choisissez bien !\r\n\r\nDans
+    la vie, plus que combattre les maladies microbiennes, il vaut surtout mieux \xE9viter
+    de les attraper. Pour cela, l\u2019hygi\xE8ne est fondamentale, notamment le
+    fait de se laver les mains pour \xE9viter d\u2019\xEAtre contamin\xE9. Vos macrophages
+    et lymphocytes vous en seront reconnaissants !\r"
+--- !u!222 &394237453
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394237449}
+  m_CullTransparentMesh: 0
 --- !u!1 &396596284
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,6 +5184,106 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400500404}
+  m_CullTransparentMesh: 0
+--- !u!1 &402135505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402135506}
+  - component: {fileID: 402135509}
+  - component: {fileID: 402135508}
+  - component: {fileID: 402135507}
+  m_Layer: 5
+  m_Name: lvl_txt_8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &402135506
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402135505}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &402135507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402135505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 8
+--- !u!114 &402135508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402135505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Les bact\xE9ries pathog\xE8nes sont celles qui peuvent provoquer des maladies.
+    Elles p\xE9n\xE8trent dans le corps humain par l'air, l'eau ou la nourriture.
+    Une fois \xE0 l'int\xE9rieur, ces bact\xE9ries se fixent ou envahissent des cellules
+    sp\xE9cifiques de notre syst\xE8me respiratoire, du tube digestif ou au tour
+    des blessures.\r\n\r\nL\xE0, elles commencent \xE0 se reproduire et \xE0 se propager
+    tout en utilisant la nourriture et les nutriments du corps pour leur donner de
+    l'\xE9nergie pour les aider \xE0 se reproduire.\r\n\r\nAttention ! Dans ce niveau,
+    le chemin que prendront les microbes n\u2019est pas indiqu\xE9 !\r"
+--- !u!222 &402135509
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402135505}
   m_CullTransparentMesh: 0
 --- !u!1 &404976618
 GameObject:
@@ -7605,6 +7803,104 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &568703900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568703901}
+  - component: {fileID: 568703904}
+  - component: {fileID: 568703903}
+  - component: {fileID: 568703902}
+  m_Layer: 5
+  m_Name: lvl_txt_12
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &568703901
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568703900}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &568703902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568703900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 12
+--- !u!114 &568703903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568703900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Apr\xE8s leur d\xE9couverte, les antibiotiques ont permis en 50 ans d\u2019augmenter
+    l\u2019esp\xE9rance de vie des gens de 10 ans, plus que tout autre traitement
+    ! C\u2019est pour cela que c\u2019est une des plus grandes d\xE9couvertes du
+    20\xE8me si\xE8cle.\r\n\r\nPar contre, ce n\u2019est pas un rem\xE8de universel
+    : les antibiotiques s\u2019attaquent \xE0 des parties sp\xE9cifiques des bact\xE9ries,
+    et donc ils ne tuent pas les autres microbes comme les virus.\r"
+--- !u!222 &568703904
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568703900}
+  m_CullTransparentMesh: 0
 --- !u!1 &573488340
 GameObject:
   m_ObjectHideFlags: 0
@@ -9332,6 +9628,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681104039}
   m_CullTransparentMesh: 0
+--- !u!1 &696605693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 696605694}
+  - component: {fileID: 696605697}
+  - component: {fileID: 696605696}
+  - component: {fileID: 696605695}
+  m_Layer: 5
+  m_Name: lvl_txt_17
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &696605694
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696605693}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &696605695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696605693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 17
+--- !u!114 &696605696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696605693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Le mot \xAB vaccin \xBB provient de \xAB vaccine \xBB, une maladie similaire
+    \xE0 la variole qui affecte les vaches. Cette maladie peut \xEAtre transmise
+    aux humains mais, contrairement \xE0 la variole, elle est plut\xF4t b\xE9nigne
+    et ne tue quasiment aucun humain.\r\n\r\nDans les ann\xE9es 1770, des scientifiques,
+    dont Edward Jenner, ont remarqu\xE9 que les gens qui attrapaient la vaccine n\u2019attrapaient
+    pas ensuite la variole. Jenner a alors eu l\u2019id\xE9e de transmettre la vaccine
+    aux gens pour \xE9viter qu\u2019ils attrapent ensuite la variole, un proc\xE9d\xE9
+    qui a \xE9t\xE9 connu sous le nom de \xAB vaccination \xBB.\r\n\r\nDans ce niveau,
+    vous aurez plusieurs choix de vaccination : choisissez bien pour \xEAtre s\xFBr
+    de le r\xE9ussir !\r"
+--- !u!222 &696605697
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696605693}
+  m_CullTransparentMesh: 0
 --- !u!1 &696713569
 GameObject:
   m_ObjectHideFlags: 0
@@ -9587,7 +9985,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1311828062}
-  m_RootOrder: 9
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10745,6 +11143,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786673457}
   m_CullTransparentMesh: 0
+--- !u!1 &803457380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803457381}
+  - component: {fileID: 803457384}
+  - component: {fileID: 803457383}
+  - component: {fileID: 803457382}
+  m_Layer: 5
+  m_Name: lvl_txt_13
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &803457381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803457380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &803457382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803457380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 13
+--- !u!114 &803457383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803457380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Il y a plusieurs virus qui infectent les humains, mais il y a aussi beaucoup
+    de types de virus qui infectent d\u2019autres \xEAtres vivants. Des chiens, chats,
+    chevaux, mais aussi des invert\xE9br\xE9s comme des abeilles, peuvent tous avoir
+    des maladies provoqu\xE9es par des virus, tout comme des plantes. Il y a m\xEAme
+    des virus qui infectent des bact\xE9ries !\r\n\r\nChez les humains, il y a plusieurs
+    maladies provoqu\xE9es par des virus : poliomy\xE9lite, variole, varicelle, rougeole,
+    grippe, fi\xE8vre jaune, h\xE9patite C, SIDA\u2026 Comme les antibiotiques ne
+    marchent pas contre les virus, il est tr\xE8s difficile de soigner certaines
+    de ces maladies.\r"
+--- !u!222 &803457384
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803457380}
+  m_CullTransparentMesh: 0
 --- !u!1 &824065194
 GameObject:
   m_ObjectHideFlags: 0
@@ -11362,7 +11861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_scene: -1
   unlocked_scene: 1
-  max_scene: 7
+  max_scene: 18
 --- !u!114 &871674073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15884,6 +16383,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201352013}
   m_CullTransparentMesh: 0
+--- !u!1 &1201713691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1201713692}
+  - component: {fileID: 1201713695}
+  - component: {fileID: 1201713694}
+  - component: {fileID: 1201713693}
+  m_Layer: 5
+  m_Name: lvl_txt_11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1201713692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201713691}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1201713693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201713691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 11
+--- !u!114 &1201713694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201713691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "La d\xE9couverte des antibiotiques s\u2019est faite un peu par hasard
+    ! Alexander Fleming \xE9tudiait des bact\xE9ries, son coll\xE8gue au laboratoire
+    \xE9tudiait les champignons Penicillium notatum.\r\n\r\nUn jour, Fleming a remarqu\xE9
+    que les bact\xE9ries qu\u2019il avait laiss\xE9es \xE0 c\xF4t\xE9 des champignons
+    de son coll\xE8gue ne se reproduisaient plus, et il a d\xE9couvert que c\u2019\xE9tait
+    \xE0 cause d\u2019une substance produite par les champignons. C\u2019est comme
+    \xE7a qu\u2019il a d\xE9couvert la p\xE9nicilline !\r\n\r\nDans ce niveau, le
+    chemin que prendront les microbes n\u2019est pas indiqu\xE9 ! N\u2019oubliez
+    pas que les lymphocytes sont sp\xE9cialis\xE9s : le jaune est sp\xE9cialis\xE9
+    contre les bact\xE9ries et le rouge contre les virus !\r"
+--- !u!222 &1201713695
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201713691}
+  m_CullTransparentMesh: 0
 --- !u!1 &1217219421
 GameObject:
   m_ObjectHideFlags: 0
@@ -16568,6 +17169,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246595627}
   m_CullTransparentMesh: 0
+--- !u!1 &1255049651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255049652}
+  - component: {fileID: 1255049655}
+  - component: {fileID: 1255049654}
+  - component: {fileID: 1255049653}
+  m_Layer: 5
+  m_Name: lvl_txt_9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1255049652
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255049651}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1255049653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255049651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 9
+--- !u!114 &1255049654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255049651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Dans ce niveau, vous allez pouvoir lutter contre les bact\xE9ries en utilisant
+    des antibiotiques.\r\n\r\nLes antibiotiques permettent de tuer ou de bloquer
+    la croissance des bact\xE9ries et sont donc tr\xE8s importants pour soigner des
+    maladies caus\xE9es par elles. Ils n\u2019ont cependant aucun impact sur les
+    virus.\r\n\r\nLe premier antibiotique a \xE9t\xE9 d\xE9couvert par Alexander
+    Fleming en 1928, il s\u2019agit de la p\xE9nicilline, qui est extraite d\u2019un
+    champignon.\r"
+--- !u!222 &1255049655
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255049651}
+  m_CullTransparentMesh: 0
 --- !u!1 &1272531796
 GameObject:
   m_ObjectHideFlags: 0
@@ -16794,6 +17494,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282888900}
   m_CullTransparentMesh: 0
+--- !u!1 &1287360429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287360430}
+  - component: {fileID: 1287360433}
+  - component: {fileID: 1287360432}
+  - component: {fileID: 1287360431}
+  m_Layer: 5
+  m_Name: lvl_txt_10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1287360430
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287360429}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1287360431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287360429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 10
+--- !u!114 &1287360432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287360429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Il faut utiliser les antibiotiques avec pr\xE9caution : si on en abuse,
+    on court le risque que la population de bact\xE9ries y deviennent r\xE9sistantes
+    !\r\n\r\nComme tous les \xEAtres vivants, les bact\xE9ries ont parfois des mutations
+    al\xE9atoires dans leur code g\xE9n\xE9tique. Certaines de ces mutations peuvent
+    faire en sorte que la bact\xE9rie aura plus de chance de survivre \xE0 un antibiotique
+    : elle y devient r\xE9sistante.\r\n\r\nSi on utilise trop d\u2019antibiotiques,
+    on va tuer toutes les bact\xE9ries sauf les r\xE9sistantes. Alors les r\xE9sistantes
+    vont pouvoir se reproduire, et l\u2019antibiotique n\u2019aura pas d\u2019effet
+    sur elles. C\u2019est pour \xE7a qu\u2019il faut utiliser les antibiotiques avec
+    pr\xE9caution !\r"
+--- !u!222 &1287360433
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287360429}
+  m_CullTransparentMesh: 0
 --- !u!1 &1302796875
 GameObject:
   m_ObjectHideFlags: 0
@@ -16965,7 +17767,18 @@ RectTransform:
   - {fileID: 1278148663}
   - {fileID: 2016171710}
   - {fileID: 914639735}
+  - {fileID: 402135506}
+  - {fileID: 1255049652}
+  - {fileID: 1287360430}
+  - {fileID: 1201713692}
+  - {fileID: 568703901}
+  - {fileID: 803457381}
+  - {fileID: 1775565260}
+  - {fileID: 1536367807}
+  - {fileID: 1814238323}
   - {fileID: 699742374}
+  - {fileID: 696605694}
+  - {fileID: 394237450}
   m_Father: {fileID: 1316973883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19972,6 +20785,107 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1536367806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536367807}
+  - component: {fileID: 1536367810}
+  - component: {fileID: 1536367809}
+  - component: {fileID: 1536367808}
+  m_Layer: 5
+  m_Name: lvl_txt_15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1536367807
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536367806}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1536367808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536367806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 15
+--- !u!114 &1536367809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536367806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Une fa\xE7on de pr\xE9venir des maladies provoqu\xE9es par des microbes
+    est de prendre un vaccin. Un vaccin permet de pr\xE9senter au corps une forme
+    affaiblie du microbe, pour que le corps puisse s\u2019entra\xEEner \xE0 le combattre.
+    Ainsi, si un jour la personne entre en contact avec le vrai microbe, le corps
+    sera pr\xEAt \xE0 le combattre !\r\n\r\nLes vaccins sont tr\xE8s sp\xE9cifiques
+    : chaque vaccin ne prot\xE8ge que contre un seul type de microbe. Dans ce jeu,
+    vous avez la possibilit\xE9 d\u2019utiliser des vaccins : d\xE8s que vous vaccinez
+    contre un type de microbe, il n\u2019appara\xEEtra plus, mais cela ne tue pas
+    ceux qui sont d\xE9j\xE0 \xE0 l\u2019\xE9cran.\r"
+--- !u!222 &1536367810
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536367806}
+  m_CullTransparentMesh: 0
 --- !u!1 &1540112299
 GameObject:
   m_ObjectHideFlags: 0
@@ -22840,6 +23754,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754048427}
   m_CullTransparentMesh: 0
+--- !u!1 &1775565259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775565260}
+  - component: {fileID: 1775565263}
+  - component: {fileID: 1775565262}
+  - component: {fileID: 1775565261}
+  m_Layer: 5
+  m_Name: lvl_txt_14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1775565260
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775565259}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1775565261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775565259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 14
+--- !u!114 &1775565262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775565259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Dans ce niveau, vous pouvez lutter contre les microbes en utilisant tout
+    ce qui vous a \xE9t\xE9 pr\xE9sent\xE9 jusqu\u2019\xE0 pr\xE9sent : macrophages,
+    les deux types de lymphocytes et les antibiotiques.\r\n\r\nAttention \xE0 bien
+    choisir ce que vous voulez construire en fonction des ennemis ! Les lymphocytes
+    jaunes sont sp\xE9cialis\xE9s contre les bact\xE9ries et les rouges contre les
+    virus, et les antibiotiques ne marchent que contre les bact\xE9ries. Le chemin
+    que prendront les microbes n\u2019est pas indiqu\xE9.\r"
+--- !u!222 &1775565263
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775565259}
+  m_CullTransparentMesh: 0
 --- !u!1 &1776350458
 GameObject:
   m_ObjectHideFlags: 0
@@ -23215,6 +24228,106 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811244875}
+  m_CullTransparentMesh: 0
+--- !u!1 &1814238322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814238323}
+  - component: {fileID: 1814238326}
+  - component: {fileID: 1814238325}
+  - component: {fileID: 1814238324}
+  m_Layer: 5
+  m_Name: lvl_txt_16
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!224 &1814238323
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814238322}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311828062}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 675, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1814238324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814238322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf027e7d54b0fd547b40d2434e71d7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lvl_nb: 16
+--- !u!114 &1814238325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814238322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.99607843, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 19
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Comme les antibiotiques, les vaccins sont des outils fondamentaux pour
+    lutter contre la propagation d\u2019une maladie.\r\n\r\nLa variole, par exemple,
+    \xE9tait une maladie tr\xE8s grave, qui tuait des millions de personnes par an
+    dans le monde dans les ann\xE9es 1950, mais, gr\xE2ce \xE0 la vaccination, elle
+    n\u2019existe plus depuis 1980.\r\n\r\nChaque vaccin est sp\xE9cifique \xE0 un
+    seul type de microbe et, malheureusement, il n\u2019y a pas de vaccin connu pour
+    tous les microbes. Dans le jeu, faites tr\xE8s attention \xE0 contre quel type
+    de microbe vous vaccinez !\r"
+--- !u!222 &1814238326
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814238322}
   m_CullTransparentMesh: 0
 --- !u!1 &1828861477
 GameObject:

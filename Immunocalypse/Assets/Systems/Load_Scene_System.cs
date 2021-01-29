@@ -327,7 +327,6 @@ public class Load_Scene_System : FSystem {
                                 text_fin = "Vous avez gagné le jeu !";
                             }
 
-
                             // Actualizes text_score
                             if (joueur.GetComponent<Score>().max_scores[current_scene - 1] <= joueur.GetComponent<Score>().lvl_score)
                             {
@@ -574,7 +573,6 @@ public class Load_Scene_System : FSystem {
             Button btn = go.GetComponent<Button>();
             btn.onClick.AddListener(delegate { Load_Scene_System.instance.Exit_From_Pause_Button(1); });
         }
-
     }
 
     // We do a callback when both texts at the end scene are created because this is the only way to be sure we can change the text consistently without having a NullReferenceException 

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080403286c79d09409431ea40b1a1085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy_cost: 10
+  energy_cost: 40
 --- !u!114 &1725518508868811732
 MonoBehaviour:
   m_ObjectHideFlags: 0

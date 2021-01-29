@@ -204,7 +204,8 @@ public class Energy_System : FSystem {
 			bank.energy -= anti_price.energy_cost;
 			Family _Respawn = FamilyManager.getFamily(new AnyOfTags("Respawn"), new AllOfComponents(typeof(Has_Health), typeof(Bacterie)));
 			Family _SpeEffectGO = FamilyManager.getFamily(new AnyOfTags("Special"), new AllOfComponents(typeof(Image)));
-			float pourcentage = anti_eff.nb_used / 10.0f;
+			float pourcentage = anti_eff.nb_used / 5.0f;
+			int quant = 0;
 			//Debug.Log("pourcentage = " + pourcentage);
 
 			foreach (GameObject go in _Respawn)
@@ -215,9 +216,13 @@ public class Energy_System : FSystem {
 				if (nb <= 1 - pourcentage)
 				{
 					go.GetComponent<Has_Health>().health = -1;
+					quant++;
 				}
 			}
 			anti_eff.nb_used += 1;
+
+			quant = Math.Max((quant - 5) * spawn.energy_enemy, 0);
+			bank.energy -= quant;
 
 			GameObject anti = _SpeEffectGO.First();
 			Color color = anti.GetComponent<Image>().color;

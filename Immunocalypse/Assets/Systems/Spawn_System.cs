@@ -89,12 +89,12 @@ public class Spawn_System : FSystem {
                     go.GetComponent<Can_Move>().checkpoints.AddRange(spawn.lvl_checkpoints);
                     for(int k = 0; k < spawn.lvl_checkpoints.Count - 1; k++)
                     {
-                        go.GetComponent<Can_Move>().checkpoints[k] += new Vector3(UnityEngine.Random.Range(-0.2f, 0.2f), UnityEngine.Random.Range(-0.2f, 0.2f));
+                        go.GetComponent<Can_Move>().checkpoints[k] += new Vector3(UnityEngine.Random.Range(-0.2f, 0.2f), UnityEngine.Random.Range(-0.3f, 0.3f));
                     }
                     go.GetComponent<Can_Move>().target_final = new Vector3(spawn.lvl_target_final.x, spawn.lvl_target_final.y + UnityEngine.Random.Range(-1.0f, 1.0f)); 
 
                     // we set its speed
-                    go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j] + UnityEngine.Random.Range(0.0f, 0.2f);
+                    go.GetComponent<Can_Move>().move_speed = spawn.speed_enemies[j] + UnityEngine.Random.Range(-0.1f, 0.3f);
 
                     // we set its health
                     go.GetComponent<Has_Health>().max_health = spawn.hp_enemies[j];

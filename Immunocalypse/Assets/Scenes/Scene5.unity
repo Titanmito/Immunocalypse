@@ -1331,7 +1331,7 @@ MonoBehaviour:
   - -100
   - 1
   - -100
-  hp_enemies: 1e000000000000006400000000000000
+  hp_enemies: 28000000000000006400000000000000
   atk_enemies: 0a000000000000001900000000000000
   speed_enemies:
   - 1.4
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   size_enemies:
   - 0.25
   - 0
-  - 0.3
+  - 0.31
   - 0
   energy_sec: 1
   energy_enemy: 5
@@ -1351,14 +1351,14 @@ MonoBehaviour:
   spawn_prog: 10
   energy_prog: 0
   add_enemies:
-  - 0.6
+  - 1
   - 0
-  - 0.3
+  - 0.4
   - 0
   lvl_spawn_point:
   - {x: -9, y: -3, z: 0}
   lvl_checkpoints:
-  - {x: 0, y: 4, z: 0}
+  - {x: 1, y: 4, z: 0}
   - {x: 9, y: -3, z: 0}
   lvl_target_final: {x: 9, y: -3, z: 0}
   virus1_prefab: {fileID: 8149925029586573221, guid: a68f95fa72cefd649813f8e00bf6a2f9, type: 3}
@@ -2301,12 +2301,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 263b49138563473468ae6dffb2b5ffff, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: bd5e5027a1f76b345b3872691a1134a7, type: 3}
+  m_Color: {r: 0.616038, g: 1, b: 0.5981132, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 6}
+  m_Size: {x: 16, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2356,7 +2356,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 16, y: 12}
-    newSize: {x: 8, y: 6}
+    newSize: {x: 16, y: 12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3796,7 +3796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1310938215
 Transform:
   m_ObjectHideFlags: 0
@@ -3824,7 +3824,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 4}
+  m_Offset: {x: 1, y: 4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
