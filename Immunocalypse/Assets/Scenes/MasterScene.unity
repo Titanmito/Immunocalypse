@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Text: "Quand un ennemi meurt il explose et vous gagnez un petit bonus d'energy
     pour am\xE9liorer vos d\xE9fenses.\r\n\r\nChaque ennemi a une quantit\xE9 de
     points de vie et parfois il faut les attaquer \xE0 plusieurs reprises avant qu'ils
-    meurent !  "
+    meurent ! "
 --- !u!222 &67181060
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2373,8 +2373,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bacterie :\nUn ennemi fort mais lent. Si elle arrive \xE0 la fin du niveau
-    \xE0 droite, vous perdez de la vie !"
+  m_Text: "Bact\xE9rie :\r\nUn ennemi fort mais lent. Si elle arrive \xE0 la fin
+    du niveau \xE0 droite, vous perdez de la vie !\r"
 --- !u!222 &162305906
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6056,7 +6056,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1c2bf7d0a5ce74b43bdd58b77c9ab279, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ec289a1af0ff0d4b990702526e9a0d7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6748,8 +6748,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "L'antibiotique tue les bact\xE9ries sur l'\xE9cran. Sa puissance diminue
-    \xE0 chaque fois qu'il est utilis\xE9 alors soyez prudent ou il sera inutile!\n\nPour
-    l'utiliser, appuyez sur le bouton."
+    \xE0 chaque fois qu'il est utilis\xE9 alors soyez prudent ou il sera inutile
+    !\n\nPour l'utiliser, appuyez sur le bouton."
 --- !u!222 &500283416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6991,7 +6991,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Boutons pour pauser et quitter le niveau
+  m_Text: Boutons pour mettre le jeu en pause et quitter le niveau
 --- !u!222 &513517547
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10793,9 +10793,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\nChaque tour a un prix en energy, marqu\xE9 dans leur bouton \xE0 gauche
-    et en bas. Si vous n'avez pas l'\xE9nergy n\xE9cessaire pour acheter une tour,
-    le bouton est gris\xE9."
+  m_Text: "Chaque tour a un prix en energy, marqu\xE9 dans leur bouton \xE0 gauche
+    et en bas. Si vous n'avez pas l'energy n\xE9cessaire pour acheter une tour, le
+    bouton est gris\xE9."
 --- !u!222 &744855589
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12511,8 +12511,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "L'energy est la monnaie du jeu : on peut acheter des tours et des pouvoirs
-    sp\xE9ciaux en l'utilisant.\n\nWave donne un aper\xE7u d'o\xF9 on est dans le
-    niveau : il se termine quand il n'y a plus d'enemis et wave est \xE0 z\xE9ro."
+    sp\xE9ciaux en l'utilisant.\r\n\r\nWave donne un aper\xE7u d'o\xF9 on est dans
+    le niveau : il se termine quand il n'y a plus d'ennemis et wave est \xE0 z\xE9ro.\r"
 --- !u!222 &919275729
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15314,7 +15314,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Barre de vie :\nNiveau perdu si elle est \xE9puis\xE9e"
+  m_Text: "Barre de vie :\r\nNiveau \xE9chou\xE9 si elle est \xE9puis\xE9e\r"
 --- !u!222 &1139459270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15694,11 +15694,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Les bact\xE9ries sont des cellules sans noyau avec un paroi. Elles sont
-    plus grandes que les virus et se divisent pour se r\xE9produire. De nombreuses
-    bact\xE9ries ne font pas mal aux humains, mais certaines sont dangereuses et
-    provoquent des maladies. \n\nLes antibiotiques sont efficaces contre les bact\xE9ries
-    mais faitez attention car elles peuvent y d\xE9venir resistantes !"
+  m_Text: "Les bact\xE9ries sont des cellules sans noyau avec une paroi. Elles sont
+    plus grandes que les virus et se divisent pour se reproduire. De nombreuses bact\xE9ries
+    ne font pas mal aux humains, mais certaines sont dangereuses et provoquent des
+    maladies.\r\n\r\nLes antibiotiques sont efficaces contre les bact\xE9ries mais
+    faites attention car elles peuvent y devenir r\xE9sistantes !\r"
 --- !u!222 &1163213659
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25029,10 +25029,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Pour empecher les ennemis il faut construire des d\xE9fenses qui vont
-    vous prot\xE8ger. Pour acheter et d\xE9placer une tour, touchez le bouton correspondant
-    et d\xE9placez votre souris. Une \"ombre\" de la tour va suivre la souris et
-    la tour est plac\xE9e quand vous cliquez une fois plus."
+  m_Text: "Pour emp\xEAcher les ennemis il faut construire des d\xE9fenses qui vont
+    vous prot\xE9ger. Pour acheter et d\xE9placer une tour, touchez le bouton correspondant
+    et d\xE9placez votre souris. Une  \xABombre\xBB de la tour va suivre la souris
+    et la tour est plac\xE9e quand vous cliquez une fois de plus."
 --- !u!222 &1920020448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25300,7 +25300,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Le macrophage est une tour tr\xE8s puissante mais qui ne peut ataquer
+  m_Text: "Le macrophage est une tour tr\xE8s puissante mais qui ne peut attaquer
     que de tr\xE8s proche. Mettez-le dans le chemin des ennemis !"
 --- !u!222 &1947523690
 CanvasRenderer:

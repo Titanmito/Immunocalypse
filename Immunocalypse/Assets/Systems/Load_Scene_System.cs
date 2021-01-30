@@ -335,7 +335,14 @@ public class Load_Scene_System : FSystem {
                             text_score = "Score du niveau : " + joueur.GetComponent<Score>().lvl_score.ToString() + "\nScore total : " + joueur.GetComponent<Score>().max_scores.Sum().ToString();
 
                             // Actualizes the password text
-                            text_pass = "mot de passe : " + (current_scene + 1).ToString();
+                            if (current_scene < max_scene)
+                            {
+                                text_pass = "mot de passe : " + (current_scene + 1).ToString();
+                            }
+                            else
+                            {
+                                text_pass = "";
+                            }
 
                             if (current_scene == unlocked_scene && unlocked_scene < max_scene)
                             {
